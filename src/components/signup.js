@@ -4,20 +4,20 @@ import { Navbar, Nav, Button, Form, FormControl, Row, Col, Container, Layout } f
 // import { Form,FormControl} from 'bootstrap';
 // const { Header, Footer, Sider, Content } = Layout;
 
-class Login extends Component {
+class Signup extends Component {
     constructor(props) {
         super(props);
-        this.state = { height: props.height };
+        this.state = { height: props.height,width:props.width };
     }
 
     componentWillMount() {
-        this.setState({ height: window.innerHeight });
+        this.setState({ height: window.innerHeight,width:window.innerWidth });
     }
 
 
     render() {
         return (
-            <div style={{ backgroundColor: "#F0F0F0", height: this.state.height }}>
+            <div style={{ backgroundColor: "#F0F0F0", height: this.state.height, }}>
                 <Row style={{ backgroundColor: "#F0F0F0",padding:"1%" }}  className="border-bottom border-1 ">
                     <Col xs={7}>
                         <div style={{ marginLeft: "20%" }}>
@@ -57,26 +57,33 @@ class Login extends Component {
                         webkitBoxShadow: "3px 3px 3px #9E9E9E",
                         mozBoxShadow: "3px 3px 3px #9E9E9E",
                         boxShadow: "3px 3px 3px #9E9E9E",
-                        height: 450
+                        height: 550
 
                     }}>
 
                         <div style={{  }}>
                             <img src={require('../assets/logo2.png')} alt="aaaa" />
                         </div>
-                        <div style={{ fontWeight: "bold",marginTop: 22, }}>
+                        <div style={{ fontWeight: "bold",marginTop: "7%", }}>
 
                             Connect to your patients
                         </div>
 
                         <Form style={{ width: "80%", marginTop: "7%" }}>
+                            <Form.Group >
+                                <Form.Control type="text" placeholder="Name" />
+
+                            </Form.Group>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Control type="email" placeholder="Enter email" />
 
                             </Form.Group>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Control type="password" placeholder="Enter password" />
+                            </Form.Group>
 
                             <Form.Group controlId="formBasicPassword">
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Control type="password" placeholder="Confirm password" />
                             </Form.Group>
 
 
@@ -116,7 +123,7 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default Signup
 
 
 
