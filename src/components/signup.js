@@ -18,7 +18,7 @@ class Signup extends Component {
 
     render() {
         return (
-            <div style={{ backgroundColor: "#F0F0F0", height: this.state.height, }}>
+            <div style={{ backgroundColor: "#F0F0F0",  }}>
                 <AppHeader />
                 <center>
                     <div style={{
