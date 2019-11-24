@@ -11,7 +11,7 @@ import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
 
 // const { Header, Footer, Sider, Content } = Layout;
 
-class Test extends Component {
+class BussinesCatogery extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,7 +42,7 @@ class Test extends Component {
         </center>
         {/* <center> */}
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%",flexWrap:"wrap" }}>
-          <div style={{ flexBasis: "40%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA" }}>
+          <div style={{ flexBasis: "30%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA" }}>
             <div>
               <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
                 Bussines name:
@@ -52,7 +52,7 @@ class Test extends Component {
               </div>
             </div>
           </div>
-          <div style={{ flexBasis: "60%",}}>
+          <div style={{ flexBasis: "70%",}}>
             <div style={{  }}>
               <img width="10%" src={require('../assets/default.png')} />
             </div>
@@ -153,7 +153,7 @@ class Test extends Component {
   }
 }
 
-export default Test
+export default BussinesCatogery
 
 
 

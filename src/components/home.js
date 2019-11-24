@@ -18,8 +18,8 @@ class Home extends Component {
 
     render() {
         return (
-            <div style={{ backgroundColor: "#fff", height: this.state.height, }}>
-                      <AppHeader rout={["Why choose us","How it works","Pricing","Profile"]} />
+            <div style={{ backgroundColor: "#fff", }}>
+                <AppHeader rout={["Why choose us", "How it works", "Pricing", "Profile"]} />
 
                 <center>
                     <div style={{ marginTop: "3%" }}>
@@ -36,54 +36,68 @@ class Home extends Component {
                 }}
                 >
                     <div style={{
-                        width: 360, padding: "1%", marginTop: "7%",
+                       padding: "1%", marginTop: "5%",
                         borderRadius: 10,
                     }} >
 
-                        <Form style={{ width: "100", marginTop: "7%" }}>
-                            <Form.Group >
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="text" placeholder="Name" />
-
+                        <Form style={{}}>
+                            <Form.Group as={Row} controlId="formHorizontalEmail">
+                                <Form.Label column sm={5}>
+                                    Full Name
+                              </Form.Label>
+                                <Col sm={7}>
+                                    <Form.Control type="text" placeholder="  Full Name" />
+                                </Col>
                             </Form.Group>
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Label>Email address</Form.Label>
-
-                                <Form.Control type="email" placeholder="Enter email" />
-
+                            <Form.Group as={Row} controlId="formHorizontalEmail">
+                                <Form.Label column sm={5}>
+                                    Phone
+    </Form.Label>
+                                <Col sm={7}>
+                                    <Form.Control type="number" placeholder="Mobile Number" />
+                                </Col>
                             </Form.Group>
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Label>Email address</Form.Label>
-
-                                <Form.Control type="password" placeholder="Enter password" />
+                            <Form.Group as={Row} controlId="formHorizontalEmail">
+                                <Form.Label column sm={5}>
+                                    Email
+                           </Form.Label>
+                                <Col sm={7}>
+                                    <Form.Control type="email" placeholder="Email" />
+                                </Col>
                             </Form.Group>
-
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Label>Email address</Form.Label>
-
-                                <Form.Control type="password" placeholder="Confirm password" />
+                            <Form.Group as={Row} controlId="formHorizontalEmail">
+                                <Form.Label column sm={5}>
+                                    Current Password
+                          </Form.Label>
+                                <Col sm={7}>
+                                    <Form.Control type="email" placeholder="Email" />
+                                </Col>
                             </Form.Group>
-
-
+                            <Form.Group as={Row} controlId="formHorizontalEmail">
+                                <Form.Label column sm={5}>
+                                    New Password
+                         </Form.Label>
+                                <Col sm={7}>
+                                    <Form.Control type="email" placeholder="Email" />
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row} controlId="formHorizontalEmail">
+                                <Form.Label column sm={5}>
+                                    Confirm Password
+                         </Form.Label>
+                                <Col sm={7}>
+                                    <Form.Control type="email" placeholder="Email" />
+                                </Col>
+                            </Form.Group>
                         </Form>
-
-
-
-                        <div style={{ marginLeft: "80%" }}>
-                            <Button variant="outline-primary"  >Next</Button>
-
-                        </div>
 
                     </div>
                 </div>
-
+                    <div style={{ display:"flex",justifyContent:"flex-end",padding:"5%",paddingRight:"10%" }}>
+                    <Button variant="outline-primary">Save Changes</Button>
+                            <Button variant="outline-primary"  >Next</Button>
+                        </div>
                 {/* </center> */}
-
-
-
-
-
-
 
             </div>
         )

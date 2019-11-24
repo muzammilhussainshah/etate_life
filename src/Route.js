@@ -3,7 +3,9 @@ import { Route, Router } from 'react-router-dom';
 import login from './components/login';
 import signup from './components/signup';
 import home from './components/home';
+import pricing from './components/pricing';
 import test from './components/test';
+import bussinesCatogery from './components/bussinesCatogery';
 import history from './History';
 class Routers extends Component {
     render() {
@@ -11,6 +13,8 @@ class Routers extends Component {
             <Router history={history}>
                 <div>
                     <Route exact path="/" component={test} />
+                    <Route exact path="/bussinesCatogery" component={bussinesCatogery} />
+                    <Route exact path="/pricing" component={pricing} />
                     <Route exact path="/home" component={home} />
                     <Route exact path="/login" component={login} />
                     <Route exact path="/signup" component={signup} />
