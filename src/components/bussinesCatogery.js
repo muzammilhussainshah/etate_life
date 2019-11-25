@@ -1,6 +1,6 @@
 import React, { Component, } from 'react';
 // import { Layout, Menu, Breadcrumb,Row, Col, } from 'antd';
-import { Navbar, Nav, Button, Form, FormControl, Row, Col, Container, Layout, NavDropdown, Card, Jumbotron,DropdownButton,Dropdown } from 'react-bootstrap';
+import { Navbar, Nav, Button, Form, FormControl, Row, Col, Container, Layout, NavDropdown, Card, Jumbotron, DropdownButton, Dropdown } from 'react-bootstrap';
 import AppHeader from './common/AppHeader';
 // import {} from 'bootstrap';
 // import { ButtonToolbar,DropdownButton,Dropdown , Navbar,Nav,NavDropdown} from 'react-bootstrap';
@@ -41,7 +41,7 @@ class BussinesCatogery extends Component {
           </div>
         </center>
         {/* <center> */}
-        <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%",flexWrap:"wrap" }}>
+        <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", flexWrap: "wrap" }}>
           <div style={{ flexBasis: "30%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA" }}>
             <div>
               <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
@@ -52,8 +52,8 @@ class BussinesCatogery extends Component {
               </div>
             </div>
           </div>
-          <div style={{ flexBasis: "70%",}}>
-            <div style={{  }}>
+          <div style={{ flexBasis: "70%", }}>
+            <div style={{}}>
               <img width="10%" src={require('../assets/default.png')} />
             </div>
             <div style={{
@@ -61,7 +61,7 @@ class BussinesCatogery extends Component {
             }}
             >
               <div style={{
-            
+
                 borderRadius: 10,
               }} >
                 <Form style={{}}>
@@ -139,6 +139,11 @@ class BussinesCatogery extends Component {
 
                     </Col>
                   </Form.Group>
+                  {/* <div className="float-right">
+                    <Button variant="primary">Add</Button>
+                    <Button variant="primary">Next</Button>
+                  </div> */}
+
                 </Form>
 
               </div>
@@ -147,7 +152,10 @@ class BussinesCatogery extends Component {
         </div>
 
         {/* </center> */}
-
+        <div className="float-right" style={{justifyContent:"flex-end",display:"flex",padding:"2%"}}>
+                    <Button variant="primary">Add</Button>
+                    <Button variant="primary">Next</Button>
+                  </div>
       </div>
     )
   }

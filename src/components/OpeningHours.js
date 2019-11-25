@@ -14,7 +14,7 @@ import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
 
 // const { Header, Footer, Sider, Content } = Layout;
 
-class Test extends Component {
+class OpeningHours extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -230,7 +230,7 @@ class Test extends Component {
   }
 }
 
-export default Test
+export default OpeningHours
 
 
 
