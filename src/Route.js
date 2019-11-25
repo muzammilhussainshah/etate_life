@@ -8,6 +8,7 @@ import OpeningHours from './components/OpeningHours';
 import test from './components/test';
 import bussinesCatogery from './components/bussinesCatogery';
 import addDoctor from './components/addDoctor';
+import AddBookingAdmin from './components/AddBookingAdmin';
 import history from './History';
 class Routers extends Component {
     render() {
@@ -16,6 +17,7 @@ class Routers extends Component {
                 <div>
                     <Route exact path="/" component={test} />
                     <Route exact path="/bussinesCatogery" component={bussinesCatogery} />
+                    <Route exact path="/AddBookingAdmin" component={AddBookingAdmin} />
                     <Route exact path="/addDoctor" component={addDoctor} />
                     <Route exact path="/OpeningHours" component={OpeningHours} />
                     <Route exact path="/pricing" component={pricing} />
