@@ -59,7 +59,8 @@ class Pricing extends Component {
                 <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
               </Card.Body>
-            </Card><Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%" }}>
+            </Card>
+            <Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%" }}>
               <Card.Body>
                 <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
                 <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
