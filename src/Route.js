@@ -10,6 +10,8 @@ import bussinesCatogery from './components/bussinesCatogery';
 import addDoctor from './components/addDoctor';
 import AddBookingAdmin from './components/AddBookingAdmin';
 import MyClinics from './components/MyClinics';
+import MyDoctors from './components/MyDoctors';
+import LandingPage from './components/LandingPage';
 import history from './History';
 class Routers extends Component {
     render() {
@@ -17,6 +19,8 @@ class Routers extends Component {
             <Router history={history}>
                 <div>
                     <Route exact path="/" component={test} />
+                    <Route exact path="/LandingPage" component={LandingPage} />
+                    <Route exact path="/MyDoctors" component={MyDoctors} />
                     <Route exact path="/MyClinics" component={MyClinics} />
                     <Route exact path="/bussinesCatogery" component={bussinesCatogery} />
                     <Route exact path="/AddBookingAdmin" component={AddBookingAdmin} />
