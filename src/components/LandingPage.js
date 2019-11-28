@@ -43,15 +43,15 @@ class LandingPage extends Component {
                     <center style={{ fontSize: 25, fontWeight: "bold", }}>
                         Why choos us
         </center>
-                    <div style={{ display: "flex", flexBasis: "100%", background: "red", flexWrap: "wrap", justifyContent: "center" }}>
-                        <div style={{ flexBasis: "40%", background: "green", marginTop: "2%", justifyContent: "center", display: "flex" }}>
+                    <div style={{ display: "flex", flexBasis: "100%",  flexWrap: "wrap", justifyContent: "center" }}>
+                        <div style={{ flexBasis: "40%", marginTop: "2%", justifyContent: "center", display: "flex" }}>
 
                             <div style={{ width: 350, }}>
                                 <img style={{ width: 350, }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Bdfui-aGfhBbLlGfc-972JmuQiT4qLC-zWndj1x3RGI-mj9Ypw&s" alt="aaaa" />
                                 {/* </div> */}
                             </div>
                         </div>
-                        <div style={{ flexBasis: "40%", background: "orange", marginTop: "2%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
+                        <div style={{ flexBasis: "40%",  marginTop: "2%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
                             {/* <div style={{  background: "blue",  width: 350, }}>
 
                         <div style={{  background: "pink", }}>
@@ -126,7 +126,7 @@ class LandingPage extends Component {
                   <center>
           <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", alignItems: "center",flexWrap:"wrap" }}>
            
-            <Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%",marginLeft:"2%",marginTop:"2%" }}>
+            <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%",marginLeft:"2%",marginTop:"2%" }}>
               <Card.Body>
                 <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
                 <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
@@ -143,7 +143,7 @@ class LandingPage extends Component {
 
               </Card.Body>
             </Card>
-            <Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%",marginLeft:"2%",marginTop:"2%" }}>
+            <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%",marginLeft:"2%",marginTop:"2%" }}>
               <Card.Body>
                 <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
                 <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
@@ -159,7 +159,7 @@ class LandingPage extends Component {
                 <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
               </Card.Body>
-            </Card><Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%",marginLeft:"2%",marginTop:"2%" }}>
+            </Card><Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%",marginLeft:"2%",marginTop:"2%" }}>
               <Card.Body>
                 <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
                 <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
@@ -175,7 +175,7 @@ class LandingPage extends Component {
                 <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
               </Card.Body>
-            </Card><Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%",marginLeft:"2%",marginTop:"2%" }}>
+            </Card><Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%",marginLeft:"2%",marginTop:"2%" }}>
               <Card.Body>
                 <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
                 <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
