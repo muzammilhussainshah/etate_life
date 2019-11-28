@@ -43,7 +43,6 @@ class MyDoctors extends Component {
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", }}>
           <div style={{ flexBasis: "40%",  justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA", }}>
             {/* <div  style={{ flexDirection:"r"}}>
-
             </div> */}
             <div style={{ background: "#F0F0F0", height: '520px', padding: "3%" }}>
               <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
