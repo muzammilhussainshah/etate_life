@@ -4,6 +4,8 @@ import AppHeader from './common/AppHeader';
 import BreadCrum from './common/BreadCrum';
 import LargeList from './common/largeList';
 import Input from './common/input';
+import DisplayHours from './DisplayHours';
+import AddHours from './AddHours';
 import { MDBIcon, } from 'mdbreact';
 
 class BussinesCatogery extends Component {
@@ -23,10 +25,10 @@ class BussinesCatogery extends Component {
   render() {
     let inputs = [
       { label: "Etat ID", type: "text", placeholder: "Etat ID", },
-      { label: "Bussines name", type: "text", placeholder:"Bussines name" },
-      { label: "Bussines registration number", type: "text", placeholder:"Bussines registration number" },
-      { label: "Bussines addres", type: "text", placeholder:"Bussines addres" },
-      { label: " Mobile number", type:"number", placeholder:"Mobile number" },
+      { label: "Bussines name", type: "text", placeholder: "Bussines name" },
+      { label: "Bussines registration number", type: "text", placeholder: "Bussines registration number" },
+      { label: "Bussines addres", type: "text", placeholder: "Bussines addres" },
+      { label: " Mobile number", type: "number", placeholder: "Mobile number" },
     ]
     return (
       <div style={{ backgroundColor: "#fff", }}>
@@ -52,16 +54,15 @@ class BussinesCatogery extends Component {
                               </Form.Label>
                   <Col sm={7}>
                     <Button variant="outline-primary" style={{}} >Browse</Button>
-
                   </Col>
                 </Form.Group>
-            
-                <Input label="Etat ID" type="text" placeholder="Etat ID"  />
-                <Input label= "Bussines name" type= "text" placeholder="Bussines name"  />
-                <Input label="Bussines registration number" type="text" placeholder="Bussines registration number"  />
-                <Input label="Bussines addres" type="text" placeholder="Bussines addres"  />
-                <Input label="Mobile number" type="number" placeholder="Mobile number"  />
-            
+
+                <Input label="Etat ID" type="text" placeholder="Etat ID" />
+                <Input label="Bussines name" type="text" placeholder="Bussines name" />
+                <Input label="Bussines registration number" type="text" placeholder="Bussines registration number" />
+                <Input label="Bussines addres" type="text" placeholder="Bussines addres" />
+                <Input label="Mobile number" type="number" placeholder="Mobile number" />
+
                 <Form.Group as={Row} controlId="formHorizontalEmail">
                   <Form.Label column sm={5}>
                     Bussines catogery
@@ -71,121 +72,17 @@ class BussinesCatogery extends Component {
                       title={"Catogery"}
                       variant={"Secondary"}
                       id={`dropdown-variants-Secondary`}
-                      key={"Secondary"}
-                    >
+                      key={"Secondary"}>
                       <Dropdown.Item eventKey="1">Action</Dropdown.Item>
                       <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                      <Dropdown.Item eventKey="3" active>
-                        Active Item
-                     </Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
                     </DropdownButton>
                   </Col>
                 </Form.Group>
-                {/* <div className="float-right">
-                    <Button variant="primary">Add</Button>
-                    <Button variant="primary">Next</Button>
-                  </div> */}
-
-              </Form>
-
-            </div>
-            <div style={{ flexBasis: "100%", flexDirection: "row", display: "flex", padding: "1%", flexWrap: "wrap", borderBottom: "2px solid #F0F0F0" }}>
-              <div style={{ width: 200, flexBasis: "30%", justifyContent: "center", display: "flex", alignItems: "center", fontWeight: "bold" }}>
-                Opening hours:
-            </div>
-              <div style={{ padding: "1%", flexBasis: "70%", }}>
-                <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
-                  <div style={{ width: 100, padding: "1%", alignItems: "center", display: "flex", color: "#C2BDBD" }}>
-                    Morning
-              </div>
-                  <div style={{ margin: 2, color: "#C2BDBD", width: 220, padding: "1%", border: "2px solid", borderColor: "#D9D6D6", alignItems: "center", display: "flex", }}>
-                    From 9:00
-              </div>
-                  <div style={{ margin: 2, color: "#C2BDBD", width: 220, padding: "1%", border: "2px solid", borderColor: "#D9D6D6", alignItems: "center", display: "flex", }}>
-                    To 9:00
-              </div>
-                </div>
-                <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
-                  <div style={{ width: 100, padding: "1%", alignItems: "center", display: "flex", color: "#C2BDBD" }}>
-                    Afternoon
-              </div>
-                  <div style={{ margin: 2, color: "#C2BDBD", width: 220, padding: "1%", border: "2px solid", borderColor: "#D9D6D6", alignItems: "center", display: "flex", }}>
-                    From 9:00
-              </div>
-                  <div style={{ margin: 2, color: "#C2BDBD", width: 220, padding: "1%", border: "2px solid", borderColor: "#D9D6D6", alignItems: "center", display: "flex", }}>
-                    To 9:00
-              </div>
-                </div>
-                <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
-                  <div style={{ width: 100, padding: "1%", alignItems: "center", display: "flex", color: "#C2BDBD" }}>
-                    Evening
-              </div>
-                  <div style={{ margin: 2, color: "#C2BDBD", width: 220, padding: "1%", border: "2px solid", borderColor: "#D9D6D6", alignItems: "center", display: "flex", }}>
-                    From 9:00
-              </div>
-                  <div style={{ margin: 2, color: "#C2BDBD", width: 220, padding: "1%", border: "2px solid", borderColor: "#D9D6D6", alignItems: "center", display: "flex", }}>
-                    To 9:00
-              </div>
-                </div>
-              </div>
-            </div>
-            {/* <div style={{  width:275, background:"yellow"}}>
-              <img width="50%" src={require('../assets/default.png')} />
-            </div> */}
-            <div style={{ display: "flex", justifyContent: "center", margin: "2% " }}>
-              <Form style={{}} >
-                <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={4} style={{ alignItems: "center", display: "flex", color: "#C2BDBD", }}>
-                    Timing
-                         </Form.Label>
-                  <Col sm={8}>
-
-                    <DropdownButton
-                      title={"Morning"}
-                      variant={"Secondary"}
-                      id={`dropdown-variants-Secondary`}
-                      key={"Secondary"}
-                    >
-                      <Dropdown.Item eventKey="1">Morning</Dropdown.Item>
-                      <Dropdown.Item eventKey="2">Afternoon</Dropdown.Item>
-                      <Dropdown.Item eventKey="2">Evening</Dropdown.Item>
-
-                    </DropdownButton>
-
-
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={4} style={{ alignItems: "center", display: "flex", color: "#C2BDBD", }}>
-                    From
-                         </Form.Label>
-                  <Col sm={8}>
-                    <Form.Control type="text" placeholder="From" />
-                    {/* <Form.Control type="text" placeholder="Bussines addres" /> */}
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={4} style={{ alignItems: "center", display: "flex", color: "#C2BDBD", }}>
-                    To
-                         </Form.Label>
-                  <Col sm={8}>
-                    <Form.Control type="number" placeholder="to" />
-                  </Col>
-                </Form.Group>
-                <div style={{ alignItems: "center", display: "flex", justifyContent: "center" }}>
-                  <Button variant="primary" type="submit" size="lg" block>
-                    Add
-                    </Button>
-                </div>
               </Form>
             </div>
-
-
-
-
-
+            {/* opening hours */}
+            <DisplayHours />
+            <AddHours/>
 
             <div style={{ display: "flex", justifyContent: "center", margin: "2%", flexWrap: "wrap" }}>
               <div style={{ width: 220, height: 220, margin: "2%", color: "#C2BDBD", }}>
