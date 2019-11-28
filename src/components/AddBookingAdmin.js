@@ -182,7 +182,7 @@ class AddBookingAdmin extends Component {
               {/* <div  style={{ flexDirection:"r"}}>
 
             </div> */}
-              <div style={{ background: "#F0F0F0", height: '320px', padding: "3%" }}>
+              <div style={{ background: "#F0F0F0", height: '260px', padding: "1%" }}>
                 <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
                   Doctors name:
               </h3>

@@ -34,7 +34,7 @@ class Login extends Component {
                     }}>
 
                         <div style={{  }}>
-                            <img src={require('../assets/logo2.png')} alt="aaaa" />
+                            <img src={require('../assets/updatedLogo.png')} alt="aaaa" />
                         </div>
                         <div style={{ fontWeight: "bold",marginTop: 22, }}>
 

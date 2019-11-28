@@ -23,7 +23,7 @@ class AppHeader extends Component {
             <Navbar style={{}} expand="lg">
             <Navbar.Brand href="#home">
             <div style={{ marginLeft: "15%", }}>
-                        <img style={{ width: "100%", }} src={require('../../assets/logo2.png')} alt="aaaa" />
+                        <img style={{ width: "100%", }} src={require('../../assets/updatedLogo.png')} alt="aaaa" />
                     </div>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
