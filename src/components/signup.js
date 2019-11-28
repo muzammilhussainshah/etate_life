@@ -18,9 +18,11 @@ class Signup extends Component {
 
     render() {
         return (
-            <div style={{ backgroundColor: "#F0F0F0",  }}>
-                <AppHeader login={true} button="Signup"/>
+            <div style={{ backgroundColor: "#F0F0F0", height: window.innerHeight }}>
+                <AppHeader login={true} button="Signup" />
+                {/* header */}
                 <center>
+                    {/* signup form */}
                     <div style={{
                         backgroundColor: "#fff", width: 360, padding: "1%", marginTop: "3%",
                         borderRadius: 10,
@@ -28,7 +30,6 @@ class Signup extends Component {
                         mozBoxShadow: "3px 3px 3px #9E9E9E",
                         boxShadow: "3px 3px 3px #9E9E9E",
                         height: 550
-
                     }}>
                         <div style={{}}>
                             <img src={require('../assets/updatedLogo.png')} alt="aaaa" />
@@ -50,9 +51,7 @@ class Signup extends Component {
                                 <Form.Control type="password" placeholder="Confirm password" />
                             </Form.Group>
                         </Form>
-                        <Button style={{ fontSize: 11, marginTop: "3%" }} variant="secondary" size="lg" disabled>
-                            Send verification code
-                         </Button>
+                        <Button style={{ width: 250, fontSize: 11, marginTop: "3%" }} variant="primary" > Send verification code</Button>
                         <Row style={{ marginTop: "7%" }} >
                             <Col>
                                 <Form.Check type="checkbox" label="Remember me" />

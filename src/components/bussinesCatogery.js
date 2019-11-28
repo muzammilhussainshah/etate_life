@@ -1,18 +1,10 @@
 import React, { Component, } from 'react';
-// import { Layout, Menu, Breadcrumb,Row, Col, } from 'antd';
-import {
-  Navbar, Nav, Button, Form, FormControl, Row, Col, Container, Layout, NavDropdown,
-  Card, ListGroup, Jumbotron, DropdownButton, Dropdown
-} from 'react-bootstrap';
+import { Button, Form, Row, Col, ListGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import AppHeader from './common/AppHeader';
-// import {} from 'bootstrap';
-// import { ButtonToolbar,DropdownButton,Dropdown , Navbar,Nav,NavDropdown} from 'react-bootstrap';
-import styles from './style.css';
-import { FaLevelUpAlt, FaAngleDoubleRight, FaMapMarkerAlt, FaPhone, } from 'react-icons/fa';
-import { MdMailOutline } from 'react-icons/md';
-import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
-
-// const { Header, Footer, Sider, Content } = Layout;
+import BreadCrum from './common/BreadCrum';
+import LargeList from './common/largeList';
+import Input from './common/input';
+import { MDBIcon, } from 'mdbreact';
 
 class BussinesCatogery extends Component {
   constructor(props) {
@@ -22,7 +14,6 @@ class BussinesCatogery extends Component {
     };
   }
 
-
   handleSwitchChange = nr => () => {
     let switchNumber = `switch${nr}`;
     this.setState({
@@ -30,68 +21,21 @@ class BussinesCatogery extends Component {
     });
   }
   render() {
+    let inputs = [
+      { label: "Etat ID", type: "text", placeholder: "Etat ID", },
+      { label: "Bussines name", type: "text", placeholder:"Bussines name" },
+      { label: "Bussines registration number", type: "text", placeholder:"Bussines registration number" },
+      { label: "Bussines addres", type: "text", placeholder:"Bussines addres" },
+      { label: " Mobile number", type:"number", placeholder:"Mobile number" },
+    ]
     return (
       <div style={{ backgroundColor: "#fff", }}>
         <AppHeader />
-
-        <center>
-          <div style={{ marginTop: "3%" }}>
-            <a href={"#"}>   <span style={{ fontWeight: "bold", color: "black" }}>1. Account details</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business address</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>3. Opening hours</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>4. Doctors</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Booking administrator</span></a>
-          </div>
-        </center>
-        {/* <bodyddddd> */}
+        <BreadCrum />
+        {/* <body> */}
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", flexWrap: "wrap", justifyContent: "center" }}>
           <div style={{ flexBasis: "40%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA", }}>
-            {/* <div  style={{ flexDirection:"r"}}>
-            </div> */}
-            <div style={{ background: "#F0F0F0", height: '520px', padding: "3%" }}>
-              <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
-                Doctors name:
-              </h3>
-              <div style={{ height: '400px', background: "#F0F0F0", overflowX: 'scroll', }} >
-                <ListGroup>
-                  {[0, 1, 2, 3, 4, 5, 6, 7, 8,].map((v, i) => {
-                    return (
-                      <a>
-                        <ListGroup.Item style={{
-                          webkitBoxShadow: "3px 3px 3px #9E9E9E",
-                          mozBoxShadow: "3px 3px 3px #9E9E9E",
-                          boxShadow: "3px 3px 3px #9E9E9E", flexDirection: "row", display: "flex", width: 300, alignItems: "center"
-                        }}>
-
-                          <div style={{ display: "flex", alignItems: "center" }}>
-                            <img style={{ width: 50, }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg9fHPgpYtCP2Z16KQVpbekDDtcIazrx_0QgXwrwDIFb7Pplhx&s" alt="aaaa" />
-                          </div>
-                          <div style={{ marginLeft: 10 }}>
-                            <div style={{ fontWeight: "bold", color: "#8C8888" }}>
-                              Imam clinic
-                        </div>
-                            <div style={{ fontSize: 11, color: "#8C8888" }}>
-                              R-592 sector 8,north karachi
-                        </div>
-                          </div>
-                          <div style={{ justifyContent: "flex-end", display: "flex", position: "absolute", right: 10 }}>
-                            <MDBIcon far icon="eye" />
-                          </div>
-
-                        </ListGroup.Item>
-                      </a>
-                    )
-                  })}
-
-
-                </ListGroup>
-
-              </div>
-              <div className style={{}}>
-                <Button variant="link">Back</Button>
-              </div>
-            </div>
-
+            <LargeList />
           </div>
           <div style={{ flexBasis: "60%", }}>
             <div style={{}}>
@@ -111,53 +55,18 @@ class BussinesCatogery extends Component {
 
                   </Col>
                 </Form.Group>
-                <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={5}>
-                    Etat ID
-    </Form.Label>
-                  <Col sm={7}>
-                    <Form.Control type="text" placeholder="Etat ID" />
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={5}>
-                    Bussines name
-                           </Form.Label>
-                  <Col sm={7}>
-                    <Form.Control type="text" placeholder="Bussines name" />
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={5}>
-                    Bussines registration number
-                          </Form.Label>
-                  <Col sm={7}>
-                    <Form.Control type="text" placeholder="Bussines registration number" />
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={5}>
-                    Bussines addres
-                         </Form.Label>
-                  <Col sm={7}>
-                    <Form.Control type="text" placeholder="Bussines addres" />
-                    {/* <Form.Control type="text" placeholder="Bussines addres" /> */}
-                  </Col>
-                </Form.Group>
-                <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={5}>
-                    Mobile number
-                         </Form.Label>
-                  <Col sm={7}>
-                    <Form.Control type="number" placeholder="Mobile number" />
-                  </Col>
-                </Form.Group>
+            
+                <Input label="Etat ID" type="text" placeholder="Etat ID"  />
+                <Input label= "Bussines name" type= "text" placeholder="Bussines name"  />
+                <Input label="Bussines registration number" type="text" placeholder="Bussines registration number"  />
+                <Input label="Bussines addres" type="text" placeholder="Bussines addres"  />
+                <Input label="Mobile number" type="number" placeholder="Mobile number"  />
+            
                 <Form.Group as={Row} controlId="formHorizontalEmail">
                   <Form.Label column sm={5}>
                     Bussines catogery
                          </Form.Label>
                   <Col sm={7}>
-
                     <DropdownButton
                       title={"Catogery"}
                       variant={"Secondary"}
@@ -172,8 +81,6 @@ class BussinesCatogery extends Component {
                       <Dropdown.Divider />
                       <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
                     </DropdownButton>
-
-
                   </Col>
                 </Form.Group>
                 {/* <div className="float-right">
