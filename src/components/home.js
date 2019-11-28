@@ -46,7 +46,7 @@ class Home extends Component {
                                     Full Name
                               </Form.Label>
                                 <Col sm={7}>
-                                    <Form.Control type="text" placeholder="  Full Name" />
+                                    <Form.Control type="text" placeholder="  Full Name" defaultValue="Muzammil Shah" />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -54,7 +54,7 @@ class Home extends Component {
                                     Phone
     </Form.Label>
                                 <Col sm={7}>
-                                    <Form.Control type="number" placeholder="Mobile Number" />
+                                    <Form.Control type="number" placeholder="Mobile Number" defaultValue="034555482153" />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -62,7 +62,7 @@ class Home extends Component {
                                     Email
                            </Form.Label>
                                 <Col sm={7}>
-                                    <Form.Control type="email" placeholder="Email" />
+                                    <Form.Control type="email" placeholder="Email" defaultValue="abc@gmail.com"/>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -70,7 +70,7 @@ class Home extends Component {
                                     Current Password
                           </Form.Label>
                                 <Col sm={7}>
-                                    <Form.Control type="email" placeholder="Email" />
+                                    <Form.Control type="password" placeholder="Current Password" />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -78,7 +78,7 @@ class Home extends Component {
                                     New Password
                          </Form.Label>
                                 <Col sm={7}>
-                                    <Form.Control type="email" placeholder="Email" />
+                                    <Form.Control type="password" placeholder="New Password" />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -86,7 +86,7 @@ class Home extends Component {
                                     Confirm Password
                          </Form.Label>
                                 <Col sm={7}>
-                                    <Form.Control type="email" placeholder="Email" />
+                                    <Form.Control type="password" placeholder="Confirm Password" />
                                 </Col>
                             </Form.Group>
                         </Form>

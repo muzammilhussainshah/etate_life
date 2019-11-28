@@ -109,10 +109,10 @@ class BussinesCatogery extends Component {
                   </Form.Group>
                   <Form.Group as={Row} controlId="formHorizontalEmail">
                     <Form.Label column sm={5}>
-                      Telephone
+                      Mobile number
                          </Form.Label>
                     <Col sm={7}>
-                      <Form.Control type="number" placeholder="Telephone" />
+                      <Form.Control type="number" placeholder="Mobile number" />
                     </Col>
                   </Form.Group>
                   <Form.Group as={Row} controlId="formHorizontalEmail">

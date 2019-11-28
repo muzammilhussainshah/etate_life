@@ -70,7 +70,7 @@ class AddDoctor extends Component {
                       Upload a photo of the doctor
                               </Form.Label>
                     <Col sm={7}>
-                      <Button variant="outline-primary" style={{}} >Brows</Button>
+                      <Button variant="outline-primary" style={{}} >Browse</Button>
 
                     </Col>
                   </Form.Group>

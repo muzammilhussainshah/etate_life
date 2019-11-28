@@ -127,7 +127,7 @@ class OpeningHours extends Component {
                     From
                          </Form.Label>
                   <Col sm={8}>
-                    <Form.Control type="text" placeholder="Bussines addres" />
+                    <Form.Control type="text" placeholder="From" />
                     {/* <Form.Control type="text" placeholder="Bussines addres" /> */}
                   </Col>
                 </Form.Group>
@@ -136,7 +136,7 @@ class OpeningHours extends Component {
                     To
                          </Form.Label>
                   <Col sm={8}>
-                    <Form.Control type="number" placeholder="Telephone" />
+                    <Form.Control type="number" placeholder="to" />
                   </Col>
                 </Form.Group>
                 <div style={{ alignItems: "center", display: "flex", justifyContent: "center" }}>
