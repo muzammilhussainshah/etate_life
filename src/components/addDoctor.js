@@ -29,15 +29,15 @@ class AddDoctor extends Component {
   render() {
     return (
       <div style={{ backgroundColor: "#fff", }}>
-        <AppHeader rout={["Why choose us", "How it works", "Pricing", "Profile"]} />
+        <AppHeader  />
 
         <center>
           <div style={{ marginTop: "3%" }}>
             <a href={"#"}>   <span style={{ fontWeight: "bold", color: "black" }}>1. Account details</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business addres</span></a>
+            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business address</span></a>
             <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>3. Opening hours</span></a>
             <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>4. Doctors</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Booking Admin</span></a>
+            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Booking administrator</span></a>
           </div>
         </center>
         {/* <center> */}
@@ -45,7 +45,7 @@ class AddDoctor extends Component {
           <div style={{ flexBasis: "30%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA" }}>
             <div>
               <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
-                Bussines name:
+                Doctors name:
         </h3>
               <div >
                 <Button variant="outline-primary"  >Remove</Button>
@@ -100,10 +100,10 @@ class AddDoctor extends Component {
                   </Form.Group>
                   <Form.Group as={Row} controlId="formHorizontalEmail">
                     <Form.Label column sm={5}>
-                      Telephone
+                      Phone number
                          </Form.Label>
                     <Col sm={7}>
-                      <Form.Control type="number" placeholder="Telephone" />
+                      <Form.Control type="number" placeholder="Phone number" />
                     </Col>
                   </Form.Group>
                   <Form.Group as={Row} controlId="formHorizontalEmail">

@@ -18,7 +18,8 @@ class Login extends Component {
     render() {
         return (
             <div style={{ backgroundColor: "#F0F0F0", }}>
-                <AppHeader rout={["Why choose us","How it works","Pricing","Login"] } button="Signup" />
+                              <AppHeader login={true} button="Signup"/>
+
 
                 <center>
 
@@ -57,7 +58,7 @@ class Login extends Component {
                          </Button>
                         <Row style={{ marginTop: "7%" }} >
                             <Col>
-                                <Form.Check type="checkbox" label="remember me" />
+                                <Form.Check type="checkbox" label="Remember me" />
                             </Col>
                             <Col>
                                 <span>Forget password</span>
@@ -68,7 +69,7 @@ class Login extends Component {
                         <hr />
 
                         <div>
-                            <span>not a member yer? Join now</span>
+                            <span>not a member yet? Join now</span>
                         </div>
 
                     </div>

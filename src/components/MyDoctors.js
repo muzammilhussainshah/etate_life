@@ -29,14 +29,14 @@ class MyDoctors extends Component {
   render() {
     return (
       <div style={{ backgroundColor: "#fff", }}>
-        <AppHeader rout={["Why choose us", "How it works", "Pricing", "Profile"]} />
+        <AppHeader  />
         <center>
           <div style={{ marginTop: "3%" }}>
             <a href={"#"}>   <span style={{ fontWeight: "bold", color: "black" }}>1. Account details</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business addres</span></a>
+            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business address</span></a>
             <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>3. Opening hours</span></a>
             <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>4. Doctors</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Booking Admin</span></a>
+            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Booking administrator</span></a>
           </div>
         </center>
         {/* <center> */}
@@ -47,7 +47,7 @@ class MyDoctors extends Component {
             </div> */}
             <div style={{ background: "#F0F0F0", height: '520px', padding: "3%" }}>
               <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
-                Clinic names:
+                Doctors name:
               </h3>
               <div style={{ height: '400px', background: "#F0F0F0", overflowX: 'scroll', }} >
                 <ListGroup>

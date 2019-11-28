@@ -29,7 +29,7 @@ class AddBookingAdmin extends Component {
   render() {
     return (
       <div style={{ backgroundColor: "#fff", }}>
-        <AppHeader rout={["Why choose us", "How it works", "Pricing", "Profile"]} />
+        <AppHeader />
 
         <center>
           <div style={{ marginTop: "3%" }}>
@@ -37,7 +37,7 @@ class AddBookingAdmin extends Component {
             <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business addres</span></a>
             <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>3. Opening hours</span></a>
             <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>4. Doctors</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Booking Admin</span></a>
+            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Booking administrator</span></a>
           </div>
         </center>
         {/* <center> */}
@@ -45,7 +45,7 @@ class AddBookingAdmin extends Component {
           <div style={{ flexBasis: "30%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA" }}>
             <div>
               <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
-                Bussines name:
+                Doctors name:
         </h3>
               <div >
                 <Button variant="outline-primary"  >Remove</Button>
@@ -74,10 +74,10 @@ class AddBookingAdmin extends Component {
                  
                   <Form.Group as={Row} controlId="formHorizontalEmail">
                     <Form.Label column sm={5}>
-                      Telephone
+                      Mobile number
                          </Form.Label>
                     <Col sm={7}>
-                      <Form.Control type="number" placeholder="Telephone" />
+                      <Form.Control type="number" placeholder="Mobile number" />
                     </Col>
                   </Form.Group>
                   <Form.Group as={Row} controlId="formHorizontalEmail">
@@ -90,6 +90,16 @@ class AddBookingAdmin extends Component {
                   </Form.Group>
                   <Form.Group as={Row} controlId="formHorizontalEmail">
                     <Form.Label column sm={5}>
+                      <a>
+                    <MDBIcon icon="plus" style={{color:"#3D69B2"}} />
+                      </a>
+                           </Form.Label>
+                    <Col sm={7}>
+                      <Form.Control type="text" placeholder="Docter name" />
+                    </Col>
+                  </Form.Group>
+                  <Form.Group as={Row} controlId="formHorizontalEmail">
+                    <Form.Label column sm={5}>
                      Password
                            </Form.Label>
                     <Col sm={7}>
@@ -97,12 +107,11 @@ class AddBookingAdmin extends Component {
                     </Col>
                   </Form.Group>
                   
-                  <Form.Group as={Row} controlId="formHorizontalEmail">
+                  {/* <Form.Group as={Row} controlId="formHorizontalEmail">
                     <Form.Label column sm={5}>
                      Specialist
                          </Form.Label>
                     <Col sm={7}>
-
                       <DropdownButton
                         title={"Catogery"}
                         variant={"Secondary"}
@@ -111,28 +120,17 @@ class AddBookingAdmin extends Component {
                       >
                         <Dropdown.Item eventKey="1">Action</Dropdown.Item>
                         <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                       
                       </DropdownButton>
-
-
                     </Col>
-                  </Form.Group>
-                  {/* <div className="float-right">
-                    <Button variant="primary">Add</Button>
-                    <Button variant="primary">Next</Button>
-                  </div> */}
-
+                  </Form.Group> */}
                 </Form>
-
               </div>
-              
             </div>
             <div style={{alignItems:"center",justifyContent:"center",display:"flex"}}>
-
             <div style={{ width: 250, height: 250, margin: "2%", color: "#C2BDBD", }}>
                 <div style={{ fontSize: 25 }}>
 
-                  Evening
+                Doctors name
                </div>
                 <div style={{
                   border: "2px solid", borderColor: "#D9D6D6", width: 250, height: 250,

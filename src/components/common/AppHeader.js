@@ -16,7 +16,7 @@ class AppHeader extends Component {
 
 
     render() {
-        const { rout, button } = this.props
+        const { login, button } = this.props
         return (
             <div style={{}}>
 
@@ -43,7 +43,7 @@ class AppHeader extends Component {
                 <Nav.Link href="#"style={{color:"black",fontWeight:"bold"}}>Why choose us</Nav.Link>
                 <Nav.Link href="#"style={{color:"black",fontWeight:"bold"}}>How it works</Nav.Link>
                 <Nav.Link href="#"style={{color:"black",fontWeight:"bold"}}>Pricing</Nav.Link>
-                <Nav.Link href="#" style={{color:"blue",fontWeight:"bold"}}>Login</Nav.Link>
+                <Nav.Link href="#" style={{color:"blue",fontWeight:"bold"}}>{login?"Login":"Profile"}</Nav.Link>
                 {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -53,7 +53,7 @@ class AppHeader extends Component {
                 </NavDropdown> */}
               </Nav>
                 {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-                <Button variant="outline-primary">Signup</Button>
+                {button&&<Button variant="outline-primary">{button}</Button>}
 
               </Form>
             </Navbar.Collapse>

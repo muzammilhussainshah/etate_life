@@ -19,7 +19,7 @@ class Signup extends Component {
     render() {
         return (
             <div style={{ backgroundColor: "#F0F0F0",  }}>
-                <AppHeader />
+                <AppHeader login={true} button="Signup"/>
                 <center>
                     <div style={{
                         backgroundColor: "#fff", width: 360, padding: "1%", marginTop: "3%",
@@ -55,7 +55,7 @@ class Signup extends Component {
                          </Button>
                         <Row style={{ marginTop: "7%" }} >
                             <Col>
-                                <Form.Check type="checkbox" label="remember me" />
+                                <Form.Check type="checkbox" label="Remember me" />
                             </Col>
                             <Col>
                                 <span>Forget password</span>
@@ -65,7 +65,7 @@ class Signup extends Component {
                         </Row>
                         <hr />
                         <div>
-                            <span>not a member yer? Join now</span>
+                            <span>not a member yet? Join now</span>
                         </div>
                     </div>
                 </center>

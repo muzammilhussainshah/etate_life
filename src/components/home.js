@@ -19,12 +19,12 @@ class Home extends Component {
     render() {
         return (
             <div style={{ backgroundColor: "#fff", }}>
-                <AppHeader rout={["Why choose us", "How it works", "Pricing", "Profile"]} />
+                <AppHeader  />
 
                 <center>
                     <div style={{ marginTop: "3%" }}>
                         <a href={"#"}>   <span style={{ fontWeight: "bold", color: "black" }}>1. Account details</span></a>
-                        <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business addres</span></a>
+                        <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business address</span></a>
                         <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>3. Opening hours</span></a>
                         <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>4. Doctors</span></a>
                         <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Doctors</span></a>
