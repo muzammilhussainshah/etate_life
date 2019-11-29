@@ -1,14 +1,14 @@
 import React, { Component, } from 'react';
-// import { Layout, Menu, Breadcrumb,Row, Col, } from 'antd';
 import { Navbar, Nav, Button, Form, FormControl, Row, Col, Container, Layout } from 'react-bootstrap';
-// import { Form,FormControl} from 'bootstrap';
-// const { Header, Footer, Sider, Content } = Layout;
 import AppHeader from './common/AppHeader';
+import ActivityIndicator from './common/ActivityIndicator';
+import { signUpAction } from '../store/action/action';
+import { connect } from "react-redux";
 
 class Signup extends Component {
     constructor(props) {
         super(props);
-        this.state = { height: props.height, width: props.width };
+        this.state = { fullName: "", email: "", password: "", confirmPassword: "" };
     }
 
     componentWillMount() {
@@ -17,6 +17,9 @@ class Signup extends Component {
 
 
     render() {
+        const { fullName, email, password, confirmPassword } = this.state
+        const { isLoader, isError, errorMessage } = this.props
+        let user = { fullName, email, password, confirmPassword,status:false }
         return (
             <div style={{ backgroundColor: "#F0F0F0", height: window.innerHeight }}>
                 <AppHeader login={true} button="Signup" />
@@ -39,19 +42,28 @@ class Signup extends Component {
                         </div>
                         <Form style={{ width: "80%", marginTop: "7%" }}>
                             <Form.Group >
-                                <Form.Control type="text" placeholder="Name" />
+                                <Form.Control defaultValue={fullName} onChange={(e) => { this.setState({ fullName: e.target.value }) }}
+                                    type="text" placeholder="Full name" />
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
-                                <Form.Control type="email" placeholder="Enter email" />
+                                <Form.Control defaultValue={email} onChange={(e) => { this.setState({ email: e.target.value }) }} 
+                                type="email" placeholder="Enter email" />
                             </Form.Group>
                             <Form.Group controlId="formBasicPassword">
-                                <Form.Control type="password" placeholder="Enter password" />
+                                <Form.Control defaultValue={password} onChange={(e) => { this.setState({ password: e.target.value }) }} 
+                                type="password" placeholder="Enter password" />
                             </Form.Group>
                             <Form.Group controlId="formBasicPassword">
-                                <Form.Control type="password" placeholder="Confirm password" />
+                                <Form.Control defaultValue={confirmPassword} onChange={(e) => { this.setState({ confirmPassword: e.target.value }) }}  
+                                type="password" placeholder="Confirm password" />
                             </Form.Group>
                         </Form>
-                        <Button style={{ width: 250, fontSize: 11, marginTop: "3%" }} variant="primary" > Send verification code</Button>
+                        {isLoader ?
+                            <Button style={{ width: 255, fontSize: 11, marginTop: "3%" }} variant="primary" disabled={true}>
+                                <ActivityIndicator />
+                            </Button> :
+                            <Button onClick={() => { this.props.signUpAction(user) }} style={{ width: 255, fontSize: 11, marginTop: "3%" }} variant="primary" > Signup</Button>
+                        }
                         <Row style={{ marginTop: "7%" }} >
                             <Col>
                                 <Form.Check type="checkbox" label="Remember me" />
@@ -64,16 +76,30 @@ class Signup extends Component {
                         </Row>
                         <hr />
                         <div>
-                            <span>not a member yet? Join now</span>
+                            <span>Already hav an account? </span>
                         </div>
+                        {isError && <div><span style={{color:"red",fontSize:13}}>{errorMessage}</span></div>}
                     </div>
                 </center>
             </div>
         )
     }
 }
+let mapStateToProps = state => {
+    return {
+        isLoader: state.root.isLoader,
+        isError: state.root.isError,
+        errorMessage: state.root.errorMessage,
+        //   errorInStore: state.root.error,
+    };
+};
+function mapDispatchToProps(dispatch) {
+    return ({
+        signUpAction: (user) => {
+            dispatch(signUpAction(user))
+        },
+    })
+}
 
-export default Signup
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
 

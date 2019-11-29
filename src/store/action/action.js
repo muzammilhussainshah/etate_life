@@ -3,6 +3,8 @@ import ActionTypes from '../constant/constant';
 import history from '../../History';
 import firebase from 'firebase';
 import { userInfo } from 'os';
+import axios from 'axios';
+
 // import createBrowserHistory from 'history/createBrowserHistory';
 // const history = createBrowserHistory()
 
@@ -17,15 +19,118 @@ var config = {
     measurementId: "G-XM0SFJKWTT"
 };
 firebase.initializeApp(config);
+var db = firebase.firestore();
 
 export function loaderCall() {
     return dispatch => {
         dispatch({ type: ActionTypes.LOADER })
     }
 }
+export function errorCall(errorMessage) {
+    return dispatch => {
+        // var errorMessage = error.message;
+        console.log(errorMessage);
+        dispatch({ type: ActionTypes.SHOWERROR, payload: errorMessage })
+        setTimeout(() => {
+            dispatch({ type: ActionTypes.HIDEERROR })
+        }, 3000)
+    }
+}
+export function UserActivation(verifyCodeObj) {
+    console.log(verifyCodeObj, "verifyCodeObj")
+    return dispatch => {
+        let startTimeStamp = verifyCodeObj.againstVerifyCode.timeStamp
+        let currentUserUid = firebase.auth().currentUser.uid;
+        let lastTimeStamp = Date.now()
+        let expiry = lastTimeStamp - startTimeStamp
+        console.log("ifff",verifyCodeObj,startTimeStamp,currentUserUid,lastTimeStamp,expiry)
+        if (verifyCodeObj.againstVerifyCode.code === verifyCodeObj.verifyCode && expiry < 400000) {
+            console.log("ifff")
+            db.collection("users").doc(currentUserUid).update({status:true})
+                .then(function () {
+                    history.push('/home' );
+                })
+                .catch(function (error) {
+                    dispatch({ type: ActionTypes.LOADER })
+
+                    console.error("Error writing document: ", error);
+                });
+
+        }
 
 
+    }
+}
 
+export function signUpAction(user) {
+    // alert("wok")
+    console.log(user)
+    return dispatch => {
+        dispatch({ type: ActionTypes.LOADER })
+        let validate = true
+        for (var key in user) {
+            if ((user[key] === "")) {
+                dispatch(errorCall(key + " is required"))
+                validate = false
+                break
+            }
+            else if(user.password!==user.confirmPassword){
+                validate = false
+                break
+
+            }
+        }
+        validate &&
+            firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+                .then((userData) => {
+
+                    console.log("user signed in", userData)
+                    let currentUserUid = firebase.auth().currentUser.uid;
+                    let userClone = user
+                    userClone.uid = currentUserUid
+                    // db.collection("cities").doc("LA").set({
+                    db.collection("users").doc(currentUserUid).set(userClone)
+                        .then(function () {
+                            // dispatch({ type: ActionTypes.LOADER })
+
+                            console.log("Document successfully written!");
+                            axios.post('http://localhost:5000/sendVerificationEmail', {
+                                email: userClone.email,
+                            })
+                                .then(function (response) {
+                                    dispatch({ type: ActionTypes.LOADER })
+
+                                    console.log("response", response.data);
+                                    history.push({ pathname: '/Verify', state: response.data });
+                                })
+                                .catch(function (error) {
+                                    dispatch({ type: ActionTypes.LOADER })
+
+                                    console.log("error", error);
+                                });
+
+                        })
+                        .catch(function (error) {
+                            dispatch({ type: ActionTypes.LOADER })
+
+                            console.error("Error writing document: ", error);
+                        });
+                    // dispatch({ type: ActionTypes.LOADER })
+                })
+                // .then((signedinUser) => {
+                //     let currentUserUid = firebase.auth().currentUser.uid;
+                //     firebase.database().ref('users/' + currentUserUid).once('value')
+                // })
+                .catch((error) => {
+                    var errorMessage = error.message;
+                    console.log(errorMessage, "errorMessage");
+                    dispatch({ type: ActionTypes.SHOWERROR, payload: errorMessage })
+                    setTimeout(() => {
+                        dispatch({ type: ActionTypes.HIDEERROR })
+                    }, 3000)
+                })
+    }
+}
 export function signinAction(user) {
     console.log(user)
     return dispatch => {
@@ -44,7 +149,7 @@ export function signinAction(user) {
             .catch((error) => {
                 var errorMessage = error.message;
                 if (errorMessage === "There is no user record corresponding to this identifier. The user may have been deleted.") {
-                    errorMessage="There is no user record"
+                    errorMessage = "There is no user record"
                 }
                 console.log(errorMessage);
                 dispatch({ type: ActionTypes.SHOWERROR, payload: errorMessage })

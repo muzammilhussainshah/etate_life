@@ -11,6 +11,7 @@ import addDoctor from './components/addDoctor';
 import AddBookingAdmin from './components/AddBookingAdmin';
 import MyClinics from './components/MyClinics';
 import MyDoctors from './components/MyDoctors';
+import Verify from './components/Verify';
 import LandingPage from './components/LandingPage';
 import history from './History';
 class Routers extends Component {
@@ -25,6 +26,7 @@ class Routers extends Component {
 
                     {/* <Route exact path="/" component={test} /> */}
                     <Route exact path="/LandingPage" component={LandingPage} />
+                    <Route exact path="/Verify" component={Verify} />
                     <Route exact path="/MyDoctors" component={MyDoctors} />
                     <Route exact path="/MyClinics" component={MyClinics} />
                     <Route exact path="/bussinesCatogery" component={bussinesCatogery} />
