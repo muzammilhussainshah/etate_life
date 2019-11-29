@@ -1,7 +1,6 @@
 
 import ActionTypes from '../constant/constant';
 import history from '../../History';
-
 import firebase from 'firebase';
 import { userInfo } from 'os';
 // import createBrowserHistory from 'history/createBrowserHistory';
@@ -28,28 +27,27 @@ export function loaderCall() {
 
 
 export function signinAction(user) {
-    alert("wordsss")
+    console.log(user)
     return dispatch => {
         dispatch({ type: ActionTypes.LOADER })
-        firebase.auth().createUserWithEmailAndPassword("momo@gmail.com", "123456")
-
+        firebase.auth().signInWithEmailAndPassword(user.email, user.password)
             .then((userData) => {
-
                 console.log("user signed in")
-                // history.push('/');
-                // dispatch({ type: ActionTypes.LOADER })
+                history.push('/');
+                dispatch({ type: ActionTypes.LOADER })
 
             })
             // .then((signedinUser) => {
             //     let currentUserUid = firebase.auth().currentUser.uid;
             //     firebase.database().ref('users/' + currentUserUid).once('value')
-
-
             // })
             .catch((error) => {
                 var errorMessage = error.message;
+                if (errorMessage === "There is no user record corresponding to this identifier. The user may have been deleted.") {
+                    errorMessage="There is no user record"
+                }
                 console.log(errorMessage);
-                // dispatch({ type: ActionTypes.SHOWERROR, payload: errorMessage })
+                dispatch({ type: ActionTypes.SHOWERROR, payload: errorMessage })
                 setTimeout(() => {
                     dispatch({ type: ActionTypes.HIDEERROR })
                 }, 3000)

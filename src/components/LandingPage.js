@@ -29,21 +29,22 @@ class LandingPage extends Component {
     render() {
         return (
             <div style={{ backgroundColor: "#fff", }}>
-                <AppHeader />
+                                         <AppHeader login={true} button="Signup"/>
+
                 {/* <div style={{ background: "#F0F3F1", }}>
           <hr />
         </div> */}
-                <div >
+                {/* <div > */}
                     <div style={{}}>
                         <img style={{ width: "100%", }} src={require('../assets/image1.jpg')} alt="aaaa" />
                     </div>
-                </div>
+                {/* </div> */}
                 {/* Why choose us*/}
                 <div style={{ background: "#EEF5FF", padding: "2%" }} >
-                    <center style={{ fontSize: 25, fontWeight: "bold", }}>
-                        Why choos us
+                    <center style={{ fontSize: 25, fontWeight: "bold", }} id="whyChooseUs">
+                        Why choose us
                      </center>
-                    <div style={{ display: "flex", flexBasis: "100%",  flexWrap: "wrap", justifyContent: "center" }}>
+                    <div style={{ display: "flex", flexBasis: "100%",  flexWrap: "wrap", justifyContent: "center" }} >
                         <div style={{ flexBasis: "40%", marginTop: "2%", justifyContent: "center", display: "flex" }}>
 
                             <div style={{ width: 350, }}>
@@ -67,10 +68,10 @@ class LandingPage extends Component {
                         </div>
                     </div>
                     {/* How it works*/}
-                    <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }}>
+                    <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }} id="HowItWorks">
                         How it works
                   </center>
-                    <div style={{ display: "flex", flexBasis: "100%", flexWrap: "wrap", justifyContent: "center", color: "#6D6D6D" }}>
+                    <div style={{ display: "flex", flexBasis: "100%", flexWrap: "wrap", justifyContent: "center", color: "#6D6D6D" }} >
                         <div style={{ flexBasis: "40%", marginTop: "2%", justifyContent: "flex-end", display: "flex" }}>
                             <div style={{ width: 400, flexDirection: "row", display: "flex", justifyContent: "space-between" }}>
                                 <div >
@@ -120,7 +121,7 @@ class LandingPage extends Component {
                     </div>
 
                     {/* pricing */}
-                    <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }}>
+                    <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }} id="pPricingi">
                         Pricing
                   </center>
                   <center>
