@@ -18,7 +18,12 @@ class Routers extends Component {
         return (
             <Router history={history}>
                 <div>
-                    <Route exact path="/" component={test} />
+                    {/* <Route exact path="/" component={test} /> */}
+                    {/* <Route exact path="/" component={login} /> */}
+                    <Route exact path="/" component={LandingPage} />
+
+
+                    {/* <Route exact path="/" component={test} /> */}
                     <Route exact path="/LandingPage" component={LandingPage} />
                     <Route exact path="/MyDoctors" component={MyDoctors} />
                     <Route exact path="/MyClinics" component={MyClinics} />

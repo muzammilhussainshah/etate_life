@@ -1,13 +1,15 @@
 import React, { Component, } from 'react';
 import { Button, Form, Row, Col, } from 'react-bootstrap';
 import AppHeader from './common/AppHeader';
+import {signinAction} from '../store/action/action';
+import { connect } from "react-redux";
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = { height: props.height };
     }
     componentWillMount() {
-        this.setState({ height: window.innerHeight });
+        this.props.signinAction();
     }
     render() {
         return (
@@ -58,7 +60,23 @@ class Login extends Component {
     }
 }
 
-export default Login
+// export default Login
 
 
+let mapStateToProps = state => {
+    return {
+    //   loader: state.root.loader,
+    //   errorInStore: state.root.error,
+    };
+  };
+  function mapDispatchToProps(dispatch) {
+    return ({
+      signinAction: (obj) => {
+        dispatch(signinAction(obj))
+      },
+    })
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Login);
+  
 

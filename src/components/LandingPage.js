@@ -39,10 +39,10 @@ class LandingPage extends Component {
                     </div>
                 </div>
                 {/* Why choose us*/}
-                <div style={{ background: "#EEF5FF", padding: "2%" }}>
+                <div style={{ background: "#EEF5FF", padding: "2%" }} >
                     <center style={{ fontSize: 25, fontWeight: "bold", }}>
                         Why choos us
-        </center>
+                     </center>
                     <div style={{ display: "flex", flexBasis: "100%",  flexWrap: "wrap", justifyContent: "center" }}>
                         <div style={{ flexBasis: "40%", marginTop: "2%", justifyContent: "center", display: "flex" }}>
 
@@ -124,7 +124,7 @@ class LandingPage extends Component {
                         Pricing
                   </center>
                   <center>
-          <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", alignItems: "center",flexWrap:"wrap" }}>
+          <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", alignItems: "center",flexWrap:"wrap" }} id="2">
            
             <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%",marginLeft:"2%",marginTop:"2%" }}>
               <Card.Body>
