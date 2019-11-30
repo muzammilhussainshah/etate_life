@@ -5,6 +5,7 @@ import {
   Layout, NavDropdown, Card, Jumbotron, ListGroup, Dropdown,DropdownButton
 } from 'react-bootstrap';
 import AppHeader from './common/AppHeader';
+import BreadCrum from './common/BreadCrum';
 // import {} from 'bootstrap';
 // import { ButtonToolbar,DropdownButton,Dropdown , Navbar,Nav,NavDropdown} from 'react-bootstrap';
 import styles from './style.css';
@@ -33,16 +34,9 @@ class AddBookingAdmin extends Component {
     return (
       <div style={{ backgroundColor: "#fff", }}>
         <AppHeader />
+        <BreadCrum />
 
-        <center>
-          <div style={{ marginTop: "3%" }}>
-            <a href={"#"}>   <span style={{ fontWeight: "bold", color: "black" }}>1. Account details</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business addres</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>3. Opening hours</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>4. Doctors</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Booking administrator</span></a>
-          </div>
-        </center>
+      
         {/* <center> */}
         {/* </body> */}
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", }}>

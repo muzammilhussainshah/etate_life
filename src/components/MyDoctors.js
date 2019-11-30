@@ -5,6 +5,7 @@ import {
   ListGroup,
 } from 'react-bootstrap';
 import AppHeader from './common/AppHeader';
+import BreadCrum from './common/BreadCrum';
 // import {} from 'bootstrap';
 // import { ButtonToolbar,DropdownButton,Dropdown , Navbar,Nav,NavDropdown} from 'react-bootstrap';
 import styles from './style.css';
@@ -30,15 +31,8 @@ class MyDoctors extends Component {
     return (
       <div style={{ backgroundColor: "#fff", }}>
         <AppHeader  />
-        <center>
-          <div style={{ marginTop: "3%" }}>
-            <a href={"#"}>   <span style={{ fontWeight: "bold", color: "black" }}>1. Account details</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>2. Business address</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>3. Opening hours</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>4. Doctors</span></a>
-            <a href={"#"}>   <span style={{ marginLeft: "5%", fontWeight: "bold", color: "black" }}>5. Booking administrator</span></a>
-          </div>
-        </center>
+        <BreadCrum  />
+        
         {/* <center> */}
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", }}>
           <div style={{ flexBasis: "40%",  justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA", }}>

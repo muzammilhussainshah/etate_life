@@ -8,11 +8,11 @@ class LargeList extends Component {
         this.state = {};
     }
     render() {
-        const { } = this.props
+        const { heading} = this.props
         return (
             <div style={{ background: "#F0F0F0", height: '520px', padding: "3%" }}>
             <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
-              Doctors name:
+        {heading}:
             </h3>
             <div style={{ height: '400px', background: "#F0F0F0", overflowX: 'scroll', }} >
               <ListGroup>

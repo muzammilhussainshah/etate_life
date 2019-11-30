@@ -32,9 +32,9 @@ class AppHeader extends Component {
             </Nav>
             <Form inline>
               <Nav className="mr-auto" >
-                <Nav.Link href="#whyChooseUs" style={{ color: "black", fontWeight: "bold" }}>Why choose us</Nav.Link>
-                <Nav.Link href="#HowItWorks" style={{ color: "black", fontWeight: "bold" }}>How it works</Nav.Link>
-                <Nav.Link href="#" style={{ color: "black", fontWeight: "bold" }}>Pricing</Nav.Link>
+                <Nav.Link href="landingPage#whyChooseUs" style={{ color: "black", fontWeight: "bold" }}>Why choose us</Nav.Link>
+                <Nav.Link href="landingPage#HowItWorks" style={{ color: "black", fontWeight: "bold" }}>How it works</Nav.Link>
+                <Nav.Link href="landingPage#Pricing" style={{ color: "black", fontWeight: "bold" }}>Pricing</Nav.Link>
                 <Nav.Link href={login ? "Login" : "/"} style={{ color: "blue", fontWeight: "bold" }}>{login ? "Login" : "Profile"}</Nav.Link>
               </Nav>
               {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}

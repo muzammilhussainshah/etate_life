@@ -121,7 +121,7 @@ class LandingPage extends Component {
                     </div>
 
                     {/* pricing */}
-                    <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }} id="pPricingi">
+                    <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }} id="Pricing">
                         Pricing
                   </center>
                   <center>

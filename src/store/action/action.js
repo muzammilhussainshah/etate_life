@@ -39,26 +39,32 @@ export function errorCall(errorMessage) {
 export function UserActivation(verifyCodeObj) {
     console.log(verifyCodeObj, "verifyCodeObj")
     return dispatch => {
-        let startTimeStamp = verifyCodeObj.againstVerifyCode.timeStamp
-        let currentUserUid = firebase.auth().currentUser.uid;
-        let lastTimeStamp = Date.now()
-        let expiry = lastTimeStamp - startTimeStamp
-        console.log("ifff",verifyCodeObj,startTimeStamp,currentUserUid,lastTimeStamp,expiry)
-        if (verifyCodeObj.againstVerifyCode.code === verifyCodeObj.verifyCode && expiry < 400000) {
-            console.log("ifff")
-            db.collection("users").doc(currentUserUid).update({status:true})
-                .then(function () {
-                    history.push('/home' );
-                })
-                .catch(function (error) {
-                    dispatch({ type: ActionTypes.LOADER })
-
-                    console.error("Error writing document: ", error);
-                });
-
+        dispatch({ type: ActionTypes.LOADER })
+        if (verifyCodeObj && verifyCodeObj.againstVerifyCode) {
+            let startTimeStamp = verifyCodeObj.againstVerifyCode.timeStamp
+            let currentUserUid = firebase.auth().currentUser.uid;
+            let lastTimeStamp = Date.now()
+            let expiry = lastTimeStamp - startTimeStamp
+            console.log("ifff", verifyCodeObj, startTimeStamp, currentUserUid, lastTimeStamp, expiry)
+            if (verifyCodeObj.againstVerifyCode.code === verifyCodeObj.verifyCode && expiry < 400000) {
+                console.log("ifff")
+                db.collection("users").doc(currentUserUid).update({ status: true })
+                    .then(function () {
+                        dispatch({ type: ActionTypes.LOADER })
+                        history.push('/home');
+                    })
+                    .catch(function (error) {
+                        dispatch({ type: ActionTypes.LOADER })
+                        console.error("Error writing document: ", error);
+                    });
+            }
+            else {
+                dispatch(errorCall("Invalid code or expired"))
+            }
         }
-
-
+        else {
+            dispatch(errorCall("Invalid code or expired"))
+        }
     }
 }
 
@@ -74,7 +80,7 @@ export function signUpAction(user) {
                 validate = false
                 break
             }
-            else if(user.password!==user.confirmPassword){
+            else if (user.password !== user.confirmPassword) {
                 validate = false
                 break
 
@@ -94,20 +100,21 @@ export function signUpAction(user) {
                             // dispatch({ type: ActionTypes.LOADER })
 
                             console.log("Document successfully written!");
-                            axios.post('http://localhost:5000/sendVerificationEmail', {
-                                email: userClone.email,
-                            })
-                                .then(function (response) {
-                                    dispatch({ type: ActionTypes.LOADER })
+                            // axios.post('http://localhost:5000/sendVerificationEmail', {
+                            //     email: userClone.email,
+                            // })
+                            //     .then(function (response) {
+                            //         dispatch({ type: ActionTypes.LOADER })
 
-                                    console.log("response", response.data);
-                                    history.push({ pathname: '/Verify', state: response.data });
-                                })
-                                .catch(function (error) {
-                                    dispatch({ type: ActionTypes.LOADER })
+                            //         console.log("response", response.data);
+                            //         history.push({ pathname: '/Verify', state: response.data });
+                            //     })
+                            //     .catch(function (error) {
+                            //         dispatch({ type: ActionTypes.LOADER })
 
-                                    console.log("error", error);
-                                });
+                            //         console.log("error", error);
+                            //     });
+                            dispatch(emailVerify(userClone.email))
 
                         })
                         .catch(function (error) {
@@ -115,7 +122,6 @@ export function signUpAction(user) {
 
                             console.error("Error writing document: ", error);
                         });
-                    // dispatch({ type: ActionTypes.LOADER })
                 })
                 // .then((signedinUser) => {
                 //     let currentUserUid = firebase.auth().currentUser.uid;
@@ -131,21 +137,53 @@ export function signUpAction(user) {
                 })
     }
 }
+export function emailVerify(email) {
+    return dispatch => {
+        axios.post('http://localhost:5000/sendVerificationEmail', {
+            email: email
+        })
+            .then(function (response) {
+                dispatch({ type: ActionTypes.LOADER })
+
+                console.log("response", response.data);
+                history.push({ pathname: '/Verify', state: response.data });
+            })
+            .catch(function (error) {
+                dispatch({ type: ActionTypes.LOADER })
+
+                console.log("error", error);
+            });
+    }
+}
 export function signinAction(user) {
-    console.log(user)
     return dispatch => {
         dispatch({ type: ActionTypes.LOADER })
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
             .then((userData) => {
-                console.log("user signed in")
-                history.push('/');
-                dispatch({ type: ActionTypes.LOADER })
+                db.collection("users").where("uid", "==", userData.user.uid).get()
+                    .then(function (querySnapshot) {
+                        querySnapshot.forEach(function (doc) {
+                            let currentUser = doc.data()
+                            if (currentUser.status === true) {
+                                dispatch({ type: ActionTypes.LOADER })
+                                history.push('/home');
+                            }
+                            else {
+                                dispatch(emailVerify(user.email))
+                            }
 
+                        });
+                    })
+                    .catch(function (error) {
+                        dispatch(errorCall("Error getting documents: ", error))
+
+                        // console.log("Error getting documents: ", error);
+                    });
+
+
+                // history.push('/home');
+                // dispatch({ type: ActionTypes.LOADER })
             })
-            // .then((signedinUser) => {
-            //     let currentUserUid = firebase.auth().currentUser.uid;
-            //     firebase.database().ref('users/' + currentUserUid).once('value')
-            // })
             .catch((error) => {
                 var errorMessage = error.message;
                 if (errorMessage === "There is no user record corresponding to this identifier. The user may have been deleted.") {
