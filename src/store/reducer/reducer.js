@@ -1,7 +1,7 @@
 import ActionTypes from '../constant/constant';
 
 const INITIAL_STATE = {
-    folderName:[],
+    currentUser:{},
     data: [],
     isLoader: false,
     isError: false,
@@ -20,6 +20,11 @@ export default (state = INITIAL_STATE, action) => {
             return ({
                 ...state,
                 folderName: action.payload
+            })
+        case ActionTypes.CURRENTUSER:
+            return ({
+                ...state,
+                currentUser: action.payload
             })
 
         case ActionTypes.LOADER:

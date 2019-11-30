@@ -13,15 +13,44 @@ import MyClinics from './components/MyClinics';
 import MyDoctors from './components/MyDoctors';
 import Verify from './components/Verify';
 import LandingPage from './components/LandingPage';
+import { UserDataGet, loaderCall } from './store/action/action';
+import { connect } from "react-redux";
+import *as firebase from 'firebase';
+
+
 import history from './History';
 class Routers extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { initialRoute:"" };
+    }
+    componentWillMount() {
+        
+        const { UserDataGet, loaderCall } = this.props
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // alert("s")
+                loaderCall()
+                // User is signed in.
+                console.log(user, "user in route")
+                UserDataGet(user.uid, user.email)
+                this.setState({
+                    initialRoute:home
+                })
+            } else {
+                // this.setState({
+                //     initialRout:<LandingPage/>
+                // })
+            }
+        });
+    }
     render() {
         return (
             <Router history={history}>
                 <div>
                     {/* <Route exact path="/" component={test} /> */}
                     {/* <Route exact path="/" component={login} /> */}
-                    <Route exact path="/" component={LandingPage} />
+                    <Route exact path="/" component={this.state.initialRoute} />
 
 
                     {/* <Route exact path="/" component={test} /> */}
@@ -48,7 +77,26 @@ class Routers extends Component {
     }
 }
 
-export default Routers;
+let mapStateToProps = state => {
+    return {
+        isLoader: state.root.isLoader,
+        isError: state.root.isError,
+        errorMessage: state.root.errorMessage,
+        //   errorInStore: state.root.error,
+    };
+};
+function mapDispatchToProps(dispatch) {
+    return ({
+        UserDataGet: (uid) => {
+            dispatch(UserDataGet(uid))
+        },
+        loaderCall: () => {
+            dispatch(loaderCall())
+        },
+    })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Routers);
 
 
 

@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 class Signup extends Component {
     constructor(props) {
         super(props);
-        this.state = { fullName: "", email: "", password: "", confirmPassword: "" };
+        this.state = { fullName: "", email: "", password: "", confirmPassword: "",phone:"" };
     }
 
     componentWillMount() {
@@ -17,9 +17,9 @@ class Signup extends Component {
 
 
     render() {
-        const { fullName, email, password, confirmPassword } = this.state
+        const { fullName, email, password, confirmPassword,phone } = this.state
         const { isLoader, isError, errorMessage } = this.props
-        let user = { fullName, email, password, confirmPassword,status:false }
+        let user = { fullName, email,phone, password, confirmPassword,status:false }
         return (
             <div style={{ backgroundColor: "#F0F0F0", height: window.innerHeight }}>
                 <AppHeader login={true} button="Signup" />
@@ -32,7 +32,7 @@ class Signup extends Component {
                         webkitBoxShadow: "3px 3px 3px #9E9E9E",
                         mozBoxShadow: "3px 3px 3px #9E9E9E",
                         boxShadow: "3px 3px 3px #9E9E9E",
-                        height: 550
+                        height: 600
                     }}>
                         <div style={{}}>
                             <img src={require('../assets/updatedLogo.png')} alt="aaaa" />
@@ -48,6 +48,10 @@ class Signup extends Component {
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Control defaultValue={email} onChange={(e) => { this.setState({ email: e.target.value }) }} 
                                 type="email" placeholder="Enter email" />
+                            </Form.Group>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Control defaultValue={phone} onChange={(e) => { this.setState({ phone: e.target.value }) }} 
+                                type="number" placeholder="Enter phone" />
                             </Form.Group>
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Control defaultValue={password} onChange={(e) => { this.setState({ password: e.target.value }) }} 

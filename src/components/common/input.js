@@ -6,14 +6,14 @@ class Input extends Component {
         this.state = {};
     }
     render() {
-        const {label,type,placeholder,defaultValue } = this.props
+        const {label,type,placeholder,defaultValue,func,disable } = this.props
         return (
             <Form.Group as={Row} controlId="formHorizontalEmail">
                 <Form.Label column sm={5}>
                     {label}
                 </Form.Label>
                 <Col sm={7}>
-                    <Form.Control type={type} placeholder={placeholder} defaultValue={defaultValue} />
+                    <Form.Control disabled={disable}  type={type} placeholder={placeholder} defaultValue={defaultValue} onChange={(e) => { func(e.target.value)}} />
                 </Col>
             </Form.Group>
         )

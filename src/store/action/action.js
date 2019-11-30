@@ -1,13 +1,11 @@
 
 import ActionTypes from '../constant/constant';
 import history from '../../History';
-import firebase from 'firebase';
+import *as firebase from 'firebase';
 import { userInfo } from 'os';
 import axios from 'axios';
-
 // import createBrowserHistory from 'history/createBrowserHistory';
 // const history = createBrowserHistory()
-
 var config = {
     apiKey: "AIzaSyCqeckiLP7FD5y-xQ7OCtntkch3VJ5EWiU",
     authDomain: "etate-life.firebaseapp.com",
@@ -20,7 +18,6 @@ var config = {
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
-
 export function loaderCall() {
     return dispatch => {
         dispatch({ type: ActionTypes.LOADER })
@@ -28,7 +25,6 @@ export function loaderCall() {
 }
 export function errorCall(errorMessage) {
     return dispatch => {
-        // var errorMessage = error.message;
         console.log(errorMessage);
         dispatch({ type: ActionTypes.SHOWERROR, payload: errorMessage })
         setTimeout(() => {
@@ -51,7 +47,7 @@ export function UserActivation(verifyCodeObj) {
                 db.collection("users").doc(currentUserUid).update({ status: true })
                     .then(function () {
                         dispatch({ type: ActionTypes.LOADER })
-                        history.push('/home');
+                        history.push('/login');
                     })
                     .catch(function (error) {
                         dispatch({ type: ActionTypes.LOADER })
@@ -67,7 +63,22 @@ export function UserActivation(verifyCodeObj) {
         }
     }
 }
-
+export function emailVerify(email) {
+    return dispatch => {
+        axios.post('http://localhost:5000/sendVerificationEmail', {
+            email: email
+        })
+            .then(function (response) {
+                dispatch({ type: ActionTypes.LOADER })
+                console.log("response", response.data);
+                history.push({ pathname: '/Verify', state: response.data });
+            })
+            .catch(function (error) {
+                dispatch({ type: ActionTypes.LOADER })
+                console.log("error", error);
+            });
+    }
+}
 export function signUpAction(user) {
     // alert("wok")
     console.log(user)
@@ -81,9 +92,9 @@ export function signUpAction(user) {
                 break
             }
             else if (user.password !== user.confirmPassword) {
+                dispatch(errorCall("Password does not match"))
                 validate = false
                 break
-
             }
         }
         validate &&
@@ -97,25 +108,8 @@ export function signUpAction(user) {
                     // db.collection("cities").doc("LA").set({
                     db.collection("users").doc(currentUserUid).set(userClone)
                         .then(function () {
-                            // dispatch({ type: ActionTypes.LOADER })
-
                             console.log("Document successfully written!");
-                            // axios.post('http://localhost:5000/sendVerificationEmail', {
-                            //     email: userClone.email,
-                            // })
-                            //     .then(function (response) {
-                            //         dispatch({ type: ActionTypes.LOADER })
-
-                            //         console.log("response", response.data);
-                            //         history.push({ pathname: '/Verify', state: response.data });
-                            //     })
-                            //     .catch(function (error) {
-                            //         dispatch({ type: ActionTypes.LOADER })
-
-                            //         console.log("error", error);
-                            //     });
                             dispatch(emailVerify(userClone.email))
-
                         })
                         .catch(function (error) {
                             dispatch({ type: ActionTypes.LOADER })
@@ -123,10 +117,6 @@ export function signUpAction(user) {
                             console.error("Error writing document: ", error);
                         });
                 })
-                // .then((signedinUser) => {
-                //     let currentUserUid = firebase.auth().currentUser.uid;
-                //     firebase.database().ref('users/' + currentUserUid).once('value')
-                // })
                 .catch((error) => {
                     var errorMessage = error.message;
                     console.log(errorMessage, "errorMessage");
@@ -137,48 +127,13 @@ export function signUpAction(user) {
                 })
     }
 }
-export function emailVerify(email) {
-    return dispatch => {
-        axios.post('http://localhost:5000/sendVerificationEmail', {
-            email: email
-        })
-            .then(function (response) {
-                dispatch({ type: ActionTypes.LOADER })
 
-                console.log("response", response.data);
-                history.push({ pathname: '/Verify', state: response.data });
-            })
-            .catch(function (error) {
-                dispatch({ type: ActionTypes.LOADER })
-
-                console.log("error", error);
-            });
-    }
-}
 export function signinAction(user) {
     return dispatch => {
         dispatch({ type: ActionTypes.LOADER })
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
             .then((userData) => {
-                db.collection("users").where("uid", "==", userData.user.uid).get()
-                    .then(function (querySnapshot) {
-                        querySnapshot.forEach(function (doc) {
-                            let currentUser = doc.data()
-                            if (currentUser.status === true) {
-                                dispatch({ type: ActionTypes.LOADER })
-                                history.push('/home');
-                            }
-                            else {
-                                dispatch(emailVerify(user.email))
-                            }
-
-                        });
-                    })
-                    .catch(function (error) {
-                        dispatch(errorCall("Error getting documents: ", error))
-
-                        // console.log("Error getting documents: ", error);
-                    });
+                dispatch(UserDataGet(userData.user.uid,user.email,"/home"))
 
 
                 // history.push('/home');
@@ -198,7 +153,41 @@ export function signinAction(user) {
     }
 }
 
+export function UserDataGet(uid,email,route) {
+    console.log(uid,email,"uid,email",route)
+    return dispatch => {
+        db.collection("users").where("uid", "==", uid).get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    let currentUser = doc.data()
+                    dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
+                    if (currentUser.status === true) {
+                        dispatch({ type: ActionTypes.LOADER })
+                        
+                        history.push(route);
+                    }
+                    else {
+                        dispatch(emailVerify(email))
+                    }
 
+                });
+            })
+            .catch(function (error) {
+                dispatch(errorCall("Error getting documents: ", error))
+
+                // console.log("Error getting documents: ", error);
+            });
+    }
+}
+export function userUpdate(user) {
+    return dispatch => {
+      console.log(user,"userUpdate")
+      if(!user.phone||!user.fullName){
+          alert("Name & Phone are required")
+
+      }
+    }
+}
 
 
 
