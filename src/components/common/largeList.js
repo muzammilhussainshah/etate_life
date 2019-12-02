@@ -45,7 +45,7 @@ class LargeList extends Component {
               </ListGroup>
             </div>
             <div className style={{}}>
-              <Button variant="link">Back</Button>
+              <a href="/home"><Button variant="link">Back</Button></a>
             </div>
           </div>
         )

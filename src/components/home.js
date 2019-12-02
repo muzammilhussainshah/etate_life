@@ -66,7 +66,7 @@ class Home extends Component {
                 </div>
                 <div style={{ display: "flex", justifyContent: "flex-end", padding: "5%", paddingRight: "10%" }}>
                     <Button variant="outline-primary" onClick={() => { userUpdate(user) }} >Save Changes</Button>
-                    <Button variant="outline-primary"  >Next</Button>
+                    <a href="/bussinesCatogery"><Button variant="outline-primary"  >Next</Button></a>
                 </div>
             </div>
         )

@@ -41,7 +41,7 @@ class BussinesCatogery extends Component {
           </div>
           <div style={{ flexBasis: "60%", }}>
             <div style={{}}>
-              <img width="10%" style={{ minWidth: 100 }} src={require('../assets/default.png')} />
+              <img width="10%" style={{ minWidth: 150 }} src={require('../assets/default.png')} />
             </div>
             <div style={{
               display: "flex", justifyContent: "center", borderBottom: "2px solid #F0F0F0",
