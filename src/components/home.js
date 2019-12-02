@@ -13,22 +13,23 @@ class Home extends Component {
 
     componentWillReceiveProps(nextProps) {
         const { currentUser } = this.props
-        console.log(nextProps, "componentWillMount",)
+        console.log(nextProps, "componentWillMount")
         this.setState({
             fullName: currentUser.fullName,
             email: currentUser.email,
             phone: currentUser.phone,
-            currentPassword: currentUser.currentPassword,
-            password: currentUser.password,
-            confirmPassword: currentUser.confirmPassword,
+            // currentPassword: "",
+            CheckCurrPass: currentUser.password,
+            // password: "",
+            // confirmPassword: "",
         })
     }
     render() {
         const { isLoader, isError, errorMessage, currentUser, userUpdate } = this.props
-        const { fullName, email, password, confirmPassword, phone, currentPassword } = this.state
-        let user = { fullName, email, password, confirmPassword, phone, currentPassword }
+        const { fullName, email, password, confirmPassword, phone, currentPassword, CheckCurrPass } = this.state
+        let user = { fullName, email, password, confirmPassword, phone, currentPassword, CheckCurrPass }
 
-        console.log(currentUser, "cccc",this.state)
+        console.log(currentUser, "cccc", this.state)
         let inputs = [
             { state: "fullName", label: "Full Name", type: "text", placeholder: "Full Name", defaultValue: fullName },
             { state: "phone", label: "Phone", type: "number", placeholder: "Mobile Number", defaultValue: phone },
@@ -58,6 +59,8 @@ class Home extends Component {
                                         func={(text) => this.setState({ [v.state]: text })} />
                                 )
                             })}
+                            {isError && <div><span style={{ color: "red", fontSize: 13 }}>{errorMessage}</span></div>}
+
                         </Form>
                     </div>
                 </div>

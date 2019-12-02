@@ -133,7 +133,7 @@ export function signinAction(user) {
         dispatch({ type: ActionTypes.LOADER })
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
             .then((userData) => {
-                dispatch(UserDataGet(userData.user.uid,user.email,"/home"))
+                dispatch(UserDataGet(userData.user.uid, user.email, "/home"))
 
 
                 // history.push('/home');
@@ -153,8 +153,8 @@ export function signinAction(user) {
     }
 }
 
-export function UserDataGet(uid,email,route) {
-    console.log(uid,email,"uid,email",route)
+export function UserDataGet(uid, email, route) {
+    console.log(uid, email, "uid,email", route)
     return dispatch => {
         db.collection("users").where("uid", "==", uid).get()
             .then(function (querySnapshot) {
@@ -163,7 +163,7 @@ export function UserDataGet(uid,email,route) {
                     dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
                     if (currentUser.status === true) {
                         dispatch({ type: ActionTypes.LOADER })
-                        
+
                         history.push(route);
                     }
                     else {
@@ -181,11 +181,54 @@ export function UserDataGet(uid,email,route) {
 }
 export function userUpdate(user) {
     return dispatch => {
-      console.log(user,"userUpdate")
-      if(!user.phone||!user.fullName){
-          alert("Name & Phone are required")
+        dispatch({ type: ActionTypes.LOADER })
+        let currentUserUid = firebase.auth().currentUser;
+        console.log(user, "userUpdate", currentUserUid)
+        if (!user.phone || !user.fullName) {
+            dispatch(errorCall("Name & Phone number are required"))
 
-      }
+        }
+        else {
+            if ((user.CheckCurrPass === user.currentPassword) &&
+                (user.password === user.confirmPassword) && (user.password !== "")) {
+                currentUserUid.updatePassword(user.password).then(function () {
+                    console.log("succes")
+                    db.collection("users").doc(currentUserUid.uid).update({ fullName: user.fullName, phone: user.phone, password: user.password })
+                        .then(function () {
+                            window.location.reload();
+                            dispatch({ type: ActionTypes.LOADER })
+
+                        })
+                        .catch(function (error) {
+                            console.error("Error writing document: ", error);
+                            dispatch({ type: ActionTypes.LOADER })
+
+                        });
+                }).catch(function (error) {
+                    console.log("errrrrrrrrr", error.message)
+                    dispatch(errorCall(error.message))
+                    // alert(error.message)
+                });
+                console.log("work", user)
+            }
+            else if (user.confirmPassword !== "" || user.currentPassword !== "" || user.password !== "") {
+                dispatch(errorCall("authentication failed"))
+            }
+            else {
+                db.collection("users").doc(currentUserUid.uid).update({ fullName: user.fullName, phone: user.phone })
+                    .then(function () {
+                        dispatch({ type: ActionTypes.LOADER })
+                        window.location.reload();
+                    })
+                    .catch(function (error) {
+                        dispatch({ type: ActionTypes.LOADER })
+                        console.error("Error writing document: ", error);
+                    });
+            }
+
+
+
+        }
     }
 }
 

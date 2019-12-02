@@ -22,7 +22,7 @@ import history from './History';
 class Routers extends Component {
     constructor(props) {
         super(props);
-        this.state = { initialRoute:"" };
+        this.state = { initialRoute:LandingPage };
     }
     componentWillMount() {
         
