@@ -16,8 +16,6 @@ import LandingPage from './components/LandingPage';
 import { UserDataGet, loaderCall } from './store/action/action';
 import { connect } from "react-redux";
 import *as firebase from 'firebase';
-
-
 import history from './History';
 class Routers extends Component {
     constructor(props) {
@@ -25,7 +23,6 @@ class Routers extends Component {
         this.state = { initialRoute:LandingPage };
     }
     componentWillMount() {
-        
         const { UserDataGet, loaderCall } = this.props
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -51,8 +48,6 @@ class Routers extends Component {
                     {/* <Route exact path="/" component={test} /> */}
                     {/* <Route exact path="/" component={login} /> */}
                     <Route exact path="/" component={this.state.initialRoute} />
-
-
                     {/* <Route exact path="/" component={test} /> */}
                     <Route exact path="/LandingPage" component={LandingPage} />
                     <Route exact path="/Verify" component={Verify} />

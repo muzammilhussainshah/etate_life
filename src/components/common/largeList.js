@@ -1,61 +1,95 @@
 import React, { Component, } from 'react';
-import { Button, Form, Row, Col, ListGroup,  DropdownButton, Dropdown} from 'react-bootstrap';
-import { MDBIcon,  } from 'mdbreact';
+import { Button, Form, Row, Col, ListGroup, DropdownButton, Dropdown } from 'react-bootstrap';
+import { MDBIcon, } from 'mdbreact';
+import { connect } from "react-redux";
+import { errorCall,loaderCall, createClinic,deleteClinic } from '../../store/action/action';
 
 class LargeList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-    render() {
-        const { heading,data} = this.props
-        console.log(data,"ddddddd")
-        return (
-            <div style={{ background: "#F0F0F0", height: '520px', padding: "3%" }}>
-            <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
-        {heading}:
+  constructor(props) {
+    super(props);
+    this.state = { selectedList: 0 };
+  }
+  render() {
+    const { heading, data, func, deleteIcon,deleteClinic } = this.props
+    const { selectedList } = this.state
+    console.log(data, "ddddddd")
+    return (
+      <div style={{ background: "#F0F0F0", height: '520px', padding: "3%" }}>
+        <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
+          {heading}:
             </h3>
-            <div style={{ height: '400px', background: "#F0F0F0", overflowX: 'scroll', }} >
-              <ListGroup>
-                {data&&data.map((v, i) => {
-                  console.log(v,"vvvvvvvvvv")
-                  return (
-                    <a>
-                      <ListGroup.Item style={{
-                        webkitBoxShadow: "3px 3px 3px #9E9E9E",
-                        mozBoxShadow: "3px 3px 3px #9E9E9E",
-                        boxShadow: "3px 3px 3px #9E9E9E", flexDirection: "row", display: "flex", width: 300, alignItems: "center"
-                      }}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <img style={{ width: 50, }} src={v.ClinicImage} />
-                        </div>
-                        <div style={{ marginLeft: 10 }}>
-                          <div style={{ fontWeight: "bold", color: "#8C8888" }}>
-                    {v.BussinesName}
-                      </div>
-                          <div style={{ fontSize: 11, color: "#8C8888" }}>
-                          {v.BussinesAddres}
+        <div style={{ height: '400px', background: "#F0F0F0", overflowX: 'scroll', }} >
+          <ListGroup>
+            {data && data.map((v, i) => {
+              console.log(v, "vvvvvvvvvv")
+              return (
+                <ListGroup.Item style={{
+                  webkitBoxShadow: "3px 3px 3px #9E9E9E",
+                  mozBoxShadow: "3px 3px 3px #9E9E9E",
+                  boxShadow: "3px 3px 3px #9E9E9E", flexDirection: "row", display: "flex", width: 300, alignItems: "center"
+                }}
+                  onClick={() => {
+                    if(func){
+                      this.setState({ selectedList: i })
+                      func(v)
+                    }
 
-                      </div>
-                        </div>
-                        <div style={{ justifyContent: "flex-end", display: "flex", position: "absolute", right: 10 }}>
-                          <MDBIcon far icon="eye" />
-                        </div>
-                      </ListGroup.Item>
-                    </a>
-                  )
-                })}
-              </ListGroup>
-            </div>
-            <div className style={{}}>
-              <a href="/home"><Button variant="link">Back</Button></a>
-            </div>
-          </div>
-        )
-    }
+                  }}>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img style={{ width: 50, }} src={v.ClinicImage} />
+                  </div>
+                  <div style={{ marginLeft: 10 }}>
+                    <div style={{ fontWeight: "bold", color: "#8C8888" }}>
+                      {v.BussinesName}
+                    </div>
+                    <div style={{ fontSize: 11, color: "#8C8888" }}>
+                      {v.BussinesAddres}
+
+                    </div>
+                  </div>
+                  <div style={{ justifyContent: "flex-end", display: "flex", position: "absolute", right: 10 }}>
+                    {selectedList === i ?
+                      <MDBIcon far icon={deleteIcon ? deleteIcon : "eye"} style={{ color:deleteIcon?"red": "green" }}
+                      onClick={()=>deleteIcon&&deleteClinic(v.clinicId)}
+                      /> :
+                      <MDBIcon far icon={deleteIcon ? deleteIcon : "eye"} style={{ color:deleteIcon?"red": null }}
+                      onClick={()=>deleteIcon&&deleteClinic(v.clinicId)}
+                       />
+                    }
+                  </div>
+                </ListGroup.Item>
+              )
+            })}
+          </ListGroup>
+        </div>
+        <div className style={{}}>
+          <a href="/home"><Button variant="link">Back</Button></a>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default LargeList
+let mapStateToProps = state => {
+  return {
+    isLoader: state.root.isLoader,
+    isError: state.root.isError,
+    errorMessage: state.root.errorMessage,
+    myClinics: state.root.myClinics,
+  };
+};
+function mapDispatchToProps(dispatch) {
+  return ({
+    deleteClinic: (clinicId) => {
+      dispatch(deleteClinic(clinicId)
+      )
+    },
+  
+  })
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LargeList);
+
+
 
 
 

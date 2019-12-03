@@ -180,8 +180,9 @@ export function UserDataGet(uid, email, route) {
                 let myClinics = []
                 querySnapshot.forEach(function (doc) {
                     let myClinicsObj = doc.data()
+                    myClinicsObj.clinicId=doc.id
                     myClinics.push(myClinicsObj)
-                    console.log(myClinicsObj, "-----------",myClinics)
+                    console.log(myClinicsObj, "-----------",doc.id)
                 });
                 dispatch({ type: ActionTypes.MYCLINICS, payload: myClinics })
             })
@@ -271,7 +272,18 @@ export function createClinic(clinic) {
 
     }
 }
+export function deleteClinic(cliniCId) {
+    return dispatch => {
+        console.log(cliniCId,"cliniCId")
+        db.collection("clinics").doc(cliniCId).delete().then(function() {
+            window.location.reload();
+            console.log("Document successfully deleted!");
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
 
+    }
+}
 
 // export function save(data) {
 //     return dispatch => {

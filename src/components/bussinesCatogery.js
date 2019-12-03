@@ -91,10 +91,6 @@ class BussinesCatogery extends Component {
 
   }
   componentWillReceiveProps(nextProps){
-    // const { isLoader, isError, errorMessage,myClinics } = this.props
-
-    console.log( nextProps,"inwill")
-
     this.setState({
       myClinicsInComponent:nextProps.myClinics
     })
@@ -112,7 +108,7 @@ class BussinesCatogery extends Component {
 
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", flexWrap: "wrap", justifyContent: "center" }}>
           <div style={{ flexBasis: "40%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA", }}>
-            <LargeList heading="Clinics name" data={myClinicsInComponent}/>
+            <LargeList heading="Clinics name" data={myClinicsInComponent} deleteIcon="trash-alt"/>
           </div>
           <div style={{ flexBasis: "60%", }}>
             <div style={{}}>
