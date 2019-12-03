@@ -108,7 +108,7 @@ class BussinesCatogery extends Component {
 
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", flexWrap: "wrap", justifyContent: "center" }}>
           <div style={{ flexBasis: "40%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA", }}>
-            <LargeList heading="Clinics name" data={myClinicsInComponent} deleteIcon="trash-alt"/>
+            <LargeList heading="Clinics name" data={myClinicsInComponent} deleteIcon="trash-alt" collection="clinics"/>
           </div>
           <div style={{ flexBasis: "60%", }}>
             <div style={{}}>
@@ -122,7 +122,7 @@ class BussinesCatogery extends Component {
               display: "flex", justifyContent: "center", borderBottom: "2px solid #F0F0F0",
             }}>
 
-              <Form style={{}}>
+              <Form style={{width:400}}>
                 <Form.Group as={Row} controlId="formHorizontalEmail" style={{ padding: 15 }}>
                   <div className="custom-file" >
                     <input
@@ -309,57 +309,7 @@ class BussinesCatogery extends Component {
                     </ListGroup>
                   </div>
                 </div>
-
               </div>
-
-
-
-
-              {/* <div style={{ width: 220, height: 220, margin: "2%", color: "#C2BDBD", }}>
-                <div style={{ fontSize: 25 }}>
-                  Afternoon
-               </div>
-                <div style={{
-                  border: "2px solid", borderColor: "#D9D6D6", width: 220, height: 190,
-                  borderRadius: 10,
-                  webkitBoxShadow: "3px 3px 3px #9E9E9E",
-                  mozBoxShadow: "3px 3px 3px #9E9E9E",
-                  boxShadow: "3px 3px 3px #9E9E9E",
-                }}>
-                  <div style={{ padding: 10, }}>
-                    9:00 to 12:00  <span><MDBIcon far icon="trash-alt" className="float-right" /></span>
-                  </div>
-                  <div style={{ padding: 10, }}>
-                    9:00 to 12:00<span><MDBIcon far icon="trash-alt" className="float-right" /></span>
-                  </div>
-                  <div style={{ padding: 10, }}>
-                    9:00 to 12:00<span><MDBIcon far icon="trash-alt" className="float-right" /></span>
-                  </div>
-                </div>
-              </div> */}
-              {/* <div style={{ width: 220, height: 220, margin: "2%", color: "#C2BDBD", }}>
-                <div style={{ fontSize: 25 }}>
-
-                  Evening
-               </div>
-                <div style={{
-                  border: "2px solid", borderColor: "#D9D6D6", width: 220, height: 190,
-                  borderRadius: 10,
-                  webkitBoxShadow: "3px 3px 3px #9E9E9E",
-                  mozBoxShadow: "3px 3px 3px #9E9E9E",
-                  boxShadow: "3px 3px 3px #9E9E9E",
-                }}>
-                  <div style={{ padding: 10, }}>
-                    9:00 to 12:00  <span><MDBIcon far icon="trash-alt" className="float-right" /></span>
-                  </div>
-                  <div style={{ padding: 10, }}>
-                    9:00 to 12:00<span><MDBIcon far icon="trash-alt" className="float-right" /></span>
-                  </div>
-                  <div style={{ padding: 10, }}>
-                    9:00 to 12:00<span><MDBIcon far icon="trash-alt" className="float-right" /></span>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -368,7 +318,7 @@ class BussinesCatogery extends Component {
         <div className="float-right" style={{ justifyContent: "flex-end", display: "flex", padding: "5%" }}>
           {isError && <div><span style={{ color: "red", fontSize: 13 }}>{errorMessage}</span></div>}
           {isLoader ?
-            <Button onClick={() => this.createClinic()} variant="primary">
+            <Button  variant="primary">
               <ActivityIndicator />
             </Button> :
             <Button onClick={() => this.createClinic()} variant="primary">Add</Button>

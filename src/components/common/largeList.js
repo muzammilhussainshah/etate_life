@@ -2,7 +2,7 @@ import React, { Component, } from 'react';
 import { Button, Form, Row, Col, ListGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import { MDBIcon, } from 'mdbreact';
 import { connect } from "react-redux";
-import { errorCall,loaderCall, createClinic,deleteClinic } from '../../store/action/action';
+import { errorCall,loaderCall, createClinic,deleteClinicOrDoc, } from '../../store/action/action';
 
 class LargeList extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class LargeList extends Component {
     this.state = { selectedList: 0 };
   }
   render() {
-    const { heading, data, func, deleteIcon,deleteClinic } = this.props
+    const { heading, data, func, deleteIcon,deleteClinicOrDoc,collection } = this.props
     const { selectedList } = this.state
     console.log(data, "ddddddd")
     return (
@@ -36,24 +36,24 @@ class LargeList extends Component {
 
                   }}>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <img style={{ width: 50, }} src={v.ClinicImage} />
+                    <img style={{ width: 50, }} src={v.ClinicImage||v.doctorImage} />
                   </div>
                   <div style={{ marginLeft: 10 }}>
                     <div style={{ fontWeight: "bold", color: "#8C8888" }}>
-                      {v.BussinesName}
+                      {v.BussinesName||v.fullName}
                     </div>
                     <div style={{ fontSize: 11, color: "#8C8888" }}>
-                      {v.BussinesAddres}
+                      {v.BussinesAddres||v.bussinesAddress}
 
                     </div>
                   </div>
                   <div style={{ justifyContent: "flex-end", display: "flex", position: "absolute", right: 10 }}>
                     {selectedList === i ?
                       <MDBIcon far icon={deleteIcon ? deleteIcon : "eye"} style={{ color:deleteIcon?"red": "green" }}
-                      onClick={()=>deleteIcon&&deleteClinic(v.clinicId)}
+                      onClick={()=>deleteIcon&&deleteClinicOrDoc(v.clinicId||v.DoctorId,collection)}
                       /> :
                       <MDBIcon far icon={deleteIcon ? deleteIcon : "eye"} style={{ color:deleteIcon?"red": null }}
-                      onClick={()=>deleteIcon&&deleteClinic(v.clinicId)}
+                      onClick={()=>deleteIcon&&deleteClinicOrDoc(v.clinicId||v.DoctorId,collection)}
                        />
                     }
                   </div>
@@ -80,8 +80,8 @@ let mapStateToProps = state => {
 };
 function mapDispatchToProps(dispatch) {
   return ({
-    deleteClinic: (clinicId) => {
-      dispatch(deleteClinic(clinicId)
+    deleteClinicOrDoc: (clinicId,collection) => {
+      dispatch(deleteClinicOrDoc(clinicId,collection)
       )
     },
   
