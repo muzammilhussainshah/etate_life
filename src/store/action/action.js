@@ -156,6 +156,7 @@ export function signinAction(user) {
 export function UserDataGet(uid, email, route) {
     console.log(uid, email, "uid,email", route)
     return dispatch => {
+        // for user data
         db.collection("users").where("uid", "==", uid).get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
@@ -163,20 +164,37 @@ export function UserDataGet(uid, email, route) {
                     dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
                     if (currentUser.status === true) {
                         dispatch({ type: ActionTypes.LOADER })
-
                         history.push(route);
                     }
                     else {
                         dispatch(emailVerify(email))
                     }
-
                 });
             })
             .catch(function (error) {
                 dispatch(errorCall("Error getting documents: ", error))
-
-                // console.log("Error getting documents: ", error);
             });
+        // for clininc data
+        db.collection("clinics").where("uid", "==", uid).get()
+            .then(function (querySnapshot) {
+                let myClinics = []
+                querySnapshot.forEach(function (doc) {
+                    let myClinicsObj = doc.data()
+                    myClinics.push(myClinicsObj)
+                    console.log(myClinicsObj, "-----------",myClinics)
+                });
+                dispatch({ type: ActionTypes.MYCLINICS, payload: myClinics })
+            })
+            .catch(function (error) {
+                dispatch(errorCall("Error getting documents: ", error))
+            });
+
+
+
+
+
+
+
     }
 }
 export function userUpdate(user) {
@@ -232,6 +250,27 @@ export function userUpdate(user) {
     }
 }
 
+export function createClinic(clinic) {
+    return dispatch => {
+        let currentUserUid = firebase.auth().currentUser.uid;
+
+        dispatch({ type: ActionTypes.LOADER })
+        let clinicClone = clinic
+        clinicClone.uid = currentUserUid
+        console.log(clinicClone, "clinicclinicclinic")
+        db.collection("clinics").add(clinicClone)
+            .then(function () {
+                console.log("Document successfully written!");
+                window.location.reload();
+                dispatch({ type: ActionTypes.LOADER })
+            })
+            .catch(function (error) {
+                dispatch(errorCall("Error writing document: " + error))
+                console.error("Error writing document: ", error);
+            });
+
+    }
+}
 
 
 // export function save(data) {

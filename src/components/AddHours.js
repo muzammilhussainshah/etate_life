@@ -1,12 +1,24 @@
 import React, { Component, } from 'react';
 import { Button, Form, Row, Col, ListGroup, DropdownButton, Dropdown } from 'react-bootstrap';
+import Select from 'react-select';
+
+
+const options = [
+    { value: 'Morning', label: 'Morning' },
+    { value: 'Afternoon', label: 'Afternoon' },
+    { value: 'Evening', label: 'Evening' },
+  ];
+  
 class AddHours extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+                addHours:{ value: 'Morning', label: 'Morning'}
+        }
     }
     render() {
-        const { } = this.props
+        const {func } = this.props
+        const {addHours,timeFrom,timeTo,} = this.state
         return (
             <div style={{ display: "flex", justifyContent: "center", margin: "2% " }}>
                 <Form style={{}} >
@@ -15,15 +27,12 @@ class AddHours extends Component {
                             Timing
                          </Form.Label>
                         <Col sm={8}>
-                            <DropdownButton
-                                title={"Morning"}
-                                variant={"Secondary"}
-                                id={`dropdown-variants-Secondary`}
-                                key={"Secondary"}>
-                                <Dropdown.Item eventKey="1">Morning</Dropdown.Item>
-                                <Dropdown.Item eventKey="2">Afternoon</Dropdown.Item>
-                                <Dropdown.Item eventKey="2">Evening</Dropdown.Item>
-                            </DropdownButton>
+                        <Select
+                        defaultInputValue={addHours.value}
+                      value={addHours}
+                      onChange={(value) => this.setState({ addHours: value })}
+                      options={options}
+                    />
 
                         </Col>
                     </Form.Group>
@@ -32,7 +41,7 @@ class AddHours extends Component {
                             From
                          </Form.Label>
                         <Col sm={8}>
-                            <Form.Control type="text" placeholder="From" />
+                            <Form.Control onChange={(v)=>this.setState({timeFrom:v.target.value})} type="number" placeholder="From" />
                             {/* <Form.Control type="text" placeholder="Bussines addres" /> */}
                         </Col>
                     </Form.Group>
@@ -41,11 +50,15 @@ class AddHours extends Component {
                             To
                          </Form.Label>
                         <Col sm={8}>
-                            <Form.Control type="number" placeholder="to" />
+                            <Form.Control onChange={(v)=>this.setState({timeTo:v.target.value})} type="number" placeholder="to" />
                         </Col>
                     </Form.Group>
                     <div style={{ alignItems: "center", display: "flex", justifyContent: "center" }}>
-                        <Button variant="primary" type="submit" size="lg" block>
+                        <Button 
+                        onClick={()=>{
+                            timeFrom&&timeTo&&
+                            func({addHours:addHours.value,timeFrom,timeTo})}}
+                        variant="primary"  size="lg" block>
                             Add
                     </Button>
                     </div>

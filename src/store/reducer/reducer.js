@@ -2,6 +2,7 @@ import ActionTypes from '../constant/constant';
 
 const INITIAL_STATE = {
     currentUser:{},
+    myClinics:[],
     data: [],
     isLoader: false,
     isError: false,
@@ -16,6 +17,11 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 data: action.payload
             })
+            case ActionTypes.MYCLINICS:
+                return ({
+                    ...state,
+                    myClinics: action.payload
+                })
         case ActionTypes.FOLDERNAME:
             return ({
                 ...state,

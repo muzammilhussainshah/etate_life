@@ -1,5 +1,6 @@
  const ActionTypes = {
     CURRENTUSER:'CURRENTUSER',
+    MYCLINICS:'MYCLINICS',
     DATA:'DATA',
     LOADER:'LOADER',
     SHOWERROR: 'SHOWERROR',
