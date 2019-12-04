@@ -25,6 +25,7 @@ class Routers extends Component {
     componentWillMount() {
         const { UserDataGet, loaderCall } = this.props
         firebase.auth().onAuthStateChanged((user) => {
+            console.log(user,"uuuuuuuu")
             if (user) {
                 // alert("s")
                 loaderCall()
@@ -47,8 +48,10 @@ class Routers extends Component {
                 <div>
                     {/* <Route exact path="/" component={test} /> */}
                     {/* <Route exact path="/" component={login} /> */}
-                    {/* <Route exact path="/" component={this.state.initialRoute} /> */}
-                    <Route exact path="/" component={test} />
+                    <Route exact path="/" component={this.state.initialRoute} />
+                    {/* <Route exact path="/" component={test} /> */}
+
+
                     <Route exact path="/LandingPage" component={LandingPage} />
                     <Route exact path="/Verify" component={Verify} />
                     <Route exact path="/MyDoctors" component={MyDoctors} />

@@ -151,7 +151,10 @@ class AddDoctor extends Component {
             </Button> :
             <Button onClick={() => this.createDoctor()} variant="primary">Add</Button>
           }
-          <Button variant="primary">Next</Button>
+     <a href="/AddBookingAdmin">
+
+<Button variant="primary">Next</Button>
+ </a>
         </div>
       </div>
     )

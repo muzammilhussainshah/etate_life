@@ -1,7 +1,7 @@
 import ActionTypes from '../constant/constant';
 
 const INITIAL_STATE = {
-    currentUser:{},
+    currentUser:undefined,
     myClinics:[],
     myDoctors:[],
     myAdmininstrators:[],

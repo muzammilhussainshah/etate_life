@@ -32,6 +32,19 @@ export function errorCall(errorMessage) {
         }, 3000)
     }
 }
+export function logout() {
+    return dispatch => {
+        firebase.auth().signOut().then(function(e) {
+            console.log("signout succes",e)
+            dispatch({ type: ActionTypes.CURRENTUSER, payload: undefined })
+            history.push('/LandingPage');
+
+            
+          }, function(error) {
+            // An error happened.
+          });
+    }
+}
 export function UserActivation(verifyCodeObj) {
     console.log(verifyCodeObj, "verifyCodeObj")
     return dispatch => {

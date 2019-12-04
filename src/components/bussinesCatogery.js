@@ -323,7 +323,10 @@ class BussinesCatogery extends Component {
             </Button> :
             <Button onClick={() => this.createClinic()} variant="primary">Add</Button>
           }
+           <a href="/addDoctor">
+
           <Button variant="primary">Next</Button>
+           </a>
         </div>
       </div>
     )

@@ -60,7 +60,17 @@ _update() {
 
   render() {
     return (
-      <QRCode value="nabeel chonay wala" />
+      <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Dropdown Button
+      </Dropdown.Toggle>
+    
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={(e)=>console.log("action")} href="#/action-1">Action</Dropdown.Item>
+        <Dropdown.Item onClick={(e)=>console.log("Another")}>Another action</Dropdown.Item>
+        <Dropdown.Item onClick={(e)=>console.log("Something")}>Something else</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
     )
   }
 }
