@@ -12,6 +12,7 @@ import AddBookingAdmin from './components/AddBookingAdmin';
 import MyClinics from './components/MyClinics';
 import MyDoctors from './components/MyDoctors';
 import Verify from './components/Verify';
+import ForgetPassword from './components/forgetPassword';
 import LandingPage from './components/LandingPage';
 import { UserDataGet, loaderCall } from './store/action/action';
 import { connect } from "react-redux";
@@ -64,6 +65,7 @@ class Routers extends Component {
                     <Route exact path="/home" component={home} />
                     <Route exact path="/login" component={login} />
                     <Route exact path="/signup" component={signup} />
+                    <Route exact path="/forgetPassword" component={ForgetPassword} />
                     {/* <Route exact path="/courseName" component={CourseName} />
                     <Route exact path="/ViewData" component={ViewData} />
                     <Route exact path="/signin" component={Signin} /> */}

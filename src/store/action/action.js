@@ -45,6 +45,24 @@ export function logout() {
           });
     }
 }
+export function forgetPassword(email) {
+    console.log(email,"ererreee")
+    return dispatch => {
+        dispatch({ type: ActionTypes.LOADER })
+        firebase.auth().sendPasswordResetEmail(email)
+        .then(function (user) {
+           console.log(user,"*/*/*/")
+          alert("check you email we send yout the link")
+           dispatch({ type: ActionTypes.LOADER })
+
+        })
+        .catch((error) => {
+            console.log(error,"ererreee")
+            dispatch(errorCall(error.message))
+
+        });
+    }
+}
 export function UserActivation(verifyCodeObj) {
     console.log(verifyCodeObj, "verifyCodeObj")
     return dispatch => {
