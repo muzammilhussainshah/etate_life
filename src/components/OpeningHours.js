@@ -48,7 +48,7 @@ class OpeningHours extends Component {
           <div style={{ flexBasis: "40%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA" }}>
             <div>
               <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
-                Bussines name:
+                Business name:
         </h3>
               <div >
                 <Button variant="outline-primary"  >Remove</Button>

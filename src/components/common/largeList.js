@@ -35,25 +35,25 @@ class LargeList extends Component {
                     }
 
                   }}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  {(v.ClinicImage||v.doctorImage)&&<div style={{ display: "flex", alignItems: "center" }}>
                     <img style={{ width: 50, }} src={v.ClinicImage||v.doctorImage} />
-                  </div>
+                  </div>}
                   <div style={{ marginLeft: 10 }}>
                     <div style={{ fontWeight: "bold", color: "#8C8888" }}>
                       {v.BussinesName||v.fullName}
                     </div>
                     <div style={{ fontSize: 11, color: "#8C8888" }}>
-                      {v.BussinesAddres||v.bussinesAddress}
+                      {v.BussinesAddres||v.bussinesAddress||v.MobileNumber}
 
                     </div>
                   </div>
                   <div style={{ justifyContent: "flex-end", display: "flex", position: "absolute", right: 10 }}>
                     {selectedList === i ?
                       <MDBIcon far icon={deleteIcon ? deleteIcon : "eye"} style={{ color:deleteIcon?"red": "green" }}
-                      onClick={()=>deleteIcon&&deleteClinicOrDoc(v.clinicId||v.DoctorId,collection)}
+                      onClick={()=>deleteIcon&&deleteClinicOrDoc(v.AdmininstratorId||v.clinicId||v.DoctorId,collection)}
                       /> :
                       <MDBIcon far icon={deleteIcon ? deleteIcon : "eye"} style={{ color:deleteIcon?"red": null }}
-                      onClick={()=>deleteIcon&&deleteClinicOrDoc(v.clinicId||v.DoctorId,collection)}
+                      onClick={()=>deleteIcon&&deleteClinicOrDoc(v.AdmininstratorId||v.clinicId||v.DoctorId,collection)}
                        />
                     }
                   </div>

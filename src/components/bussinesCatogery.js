@@ -139,9 +139,9 @@ class BussinesCatogery extends Component {
                 </Form.Group>
 
                 <Input label="Etat ID" type="text" placeholder="Etat ID" func={(v) => { this.setState({ etateId: v }) }} />
-                <Input label="Bussines name" type="text" placeholder="Bussines name" func={(v) => { this.setState({ BussinesName: v }) }} />
-                <Input label="Bussines registration number" type="text" placeholder="Bussines registration number" func={(v) => { this.setState({ registrationNumber: v }) }} />
-                <Input label="Bussines addres" type="text" placeholder="Bussines addres" func={(v) => { this.setState({ BussinesAddres: v }) }} />
+                <Input label="Business name" type="text" placeholder="Business name" func={(v) => { this.setState({ BussinesName: v }) }} />
+                <Input label="Business registration number" type="text" placeholder="Business registration number" func={(v) => { this.setState({ registrationNumber: v }) }} />
+                <Input label="Business address" type="text" placeholder="Business address" func={(v) => { this.setState({ BussinesAddres: v }) }} />
                 <Input label="Mobile number" type="number" placeholder="Mobile number" func={(v) => { this.setState({ MobileNumber: v }) }} />
 
                 <Form.Group as={Row} controlId="formHorizontalEmail">

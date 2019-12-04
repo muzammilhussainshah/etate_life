@@ -204,7 +204,21 @@ export function UserDataGet(uid, email, route) {
             .catch(function (error) {
                 dispatch(errorCall("Error getting documents: ", error))
             });
-
+        // for doctors data
+        db.collection("admininstrators").where("uid", "==", uid).get()
+            .then(function (querySnapshot) {
+                let myAdmininstrators = []
+                querySnapshot.forEach(function (doc) {
+                    let myAdmininstratorsObj = doc.data()
+                    myAdmininstratorsObj.AdmininstratorId = doc.id
+                    myAdmininstrators.push(myAdmininstratorsObj)
+                    console.log(myAdmininstratorsObj, "-----------", doc.id)
+                });
+                dispatch({ type: ActionTypes.MYADMINISTRATORS, payload: myAdmininstrators })
+            })
+            .catch(function (error) {
+                dispatch(errorCall("Error getting documents: ", error))
+            });
 
 
 
@@ -306,10 +320,29 @@ export function createDoctor(doctors) {
             });
     }
 }
-export function deleteClinicOrDoc(clinicOrDocId,collection) {
+export function createAdmininstrator(Admininstrator) {
+    return dispatch => {
+        let currentUserUid = firebase.auth().currentUser.uid;
+        dispatch({ type: ActionTypes.LOADER })
+        let AdmininstratorClone = Admininstrator
+        AdmininstratorClone.uid = currentUserUid
+        console.log(AdmininstratorClone, "doctorsdoctorsdoctors")
+        db.collection("admininstrators").add(AdmininstratorClone)
+            .then(function () {
+                console.log("Document successfully written!");
+                window.location.reload();
+                dispatch({ type: ActionTypes.LOADER })
+            })
+            .catch(function (error) {
+                dispatch(errorCall("Error writing document: " + error))
+                console.error("Error writing document: ", error);
+            });
+    }
+}
+export function deleteClinicOrDoc(clinicOrDocId, collection) {
 
     return dispatch => {
-        console.log(clinicOrDocId, "clinicOrDocId",collection)
+        console.log(clinicOrDocId, "clinicOrDocId", collection)
         db.collection(collection).doc(clinicOrDocId).delete().then(function () {
             window.location.reload();
             console.log("Document successfully deleted!");
@@ -319,7 +352,7 @@ export function deleteClinicOrDoc(clinicOrDocId,collection) {
 
     }
 }
-
+// firebase.storage().ref(`pictures/${payload.file.name}`).put(payload.file).then((res) => {})
 // export function save(data) {
 //     return dispatch => {
 //         let courseNameAndBatchName = data.courseName + " " + data.batchNumber

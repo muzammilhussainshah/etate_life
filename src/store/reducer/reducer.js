@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     currentUser:{},
     myClinics:[],
     myDoctors:[],
-    data: [],
+    myAdmininstrators:[],
     isLoader: false,
     isError: false,
     errorMessage: '',
@@ -13,11 +13,12 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case ActionTypes.DATA:
-            return ({
-                ...state,
-                data: action.payload
-            })
+     
+            case ActionTypes.MYADMINISTRATORS:
+                return ({
+                    ...state,
+                    myAdmininstrators: action.payload
+                })
             case ActionTypes.MYCLINICS:
                 return ({
                     ...state,
