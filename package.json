@@ -9,6 +9,7 @@
     "filepond": "^4.7.4",
     "firebase": "^7.5.0",
     "mdbreact": "^4.22.1",
+    "qrcode.react": "^1.0.0",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",

@@ -47,8 +47,8 @@ class Routers extends Component {
                 <div>
                     {/* <Route exact path="/" component={test} /> */}
                     {/* <Route exact path="/" component={login} /> */}
-                    <Route exact path="/" component={this.state.initialRoute} />
-                    {/* <Route exact path="/" component={test} /> */}
+                    {/* <Route exact path="/" component={this.state.initialRoute} /> */}
+                    <Route exact path="/" component={test} />
                     <Route exact path="/LandingPage" component={LandingPage} />
                     <Route exact path="/Verify" component={Verify} />
                     <Route exact path="/MyDoctors" component={MyDoctors} />

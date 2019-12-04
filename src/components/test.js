@@ -13,7 +13,8 @@ import { MdMailOutline } from 'react-icons/md';
 import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
-
+// var React = require('react');
+var QRCode = require('qrcode.react');
 // Import FilePond styles
 // import "filepond/dist/filepond.min.css";
 
@@ -59,18 +60,7 @@ _update() {
 
   render() {
     return (
-      <div className="App">
-        {/* Pass FilePond properties as attributes */}
-        <FilePond
-                            allowMultiple={false}
-                            // onremovefile={(file) => this.removeFile(file)}
-                            onaddfile={(err, file) => this.myFile(err, file)}
-                            maxFiles={1}
-
-                        // beforeAddFile={(file) => this.beforeAddFile(file)}
-                        // onwarning={(err, file) => this.onwarning(err, file)}
-                        />
-      </div>
+      <QRCode value="nabeel chonay wala" />
     )
   }
 }
