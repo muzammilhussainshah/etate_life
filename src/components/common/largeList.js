@@ -47,7 +47,7 @@ class LargeList extends Component {
 
                     </div>
                   </div>
-                  <div style={{ justifyContent: "flex-end", display: "flex", position: "absolute", right: 10 }}>
+                  <div style={{ justifyContent: "flex-end", display: "flex", position: "absolute", right: 5 }}>
                     {selectedList === i ?
                       <MDBIcon far icon={deleteIcon ? deleteIcon : "eye"} style={{ color:deleteIcon?"red": "green" }}
                       onClick={()=>deleteIcon&&deleteClinicOrDoc(v.AdmininstratorId||v.clinicId||v.DoctorId,collection)}

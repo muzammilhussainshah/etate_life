@@ -40,14 +40,14 @@ class LandingPage extends Component {
                     {!currentUser &&
                         <div style={{
                             position: "absolute",
-                            top: 0,
+                            top: 20,
                             left: 1000,
-                            width: "100%",
+                            // width: "100%",
                         }}>
                             {/* signup form */}
                             <div style={{
                                 backgroundColor: "#fff", width: 360, padding: "1%", marginTop: "3%",
-                                borderRadius: 10,
+                                // borderRadius: 10,
                                 webkitBoxShadow: "3px 3px 3px #9E9E9E",
                                 mozBoxShadow: "3px 3px 3px #9E9E9E",
                                 boxShadow: "3px 3px 3px #9E9E9E",
@@ -86,8 +86,11 @@ class LandingPage extends Component {
                                         <Button onClick={() => { this.props.signUpAction(user) }} style={{ width: 255, fontSize: 11, marginTop: "3%" }} variant="primary" > Create your account</Button>
                                     }
                                     <div>
-                                        <a href="/login"> <span>Already hav an account?</span></a>
-
+                                    or<a href="/login"> <span> login?</span></a>
+                                        {/* <span>Already hav an account? </span> */}
+                                    </div>
+                                    <div style={{fontSize:12}}>
+                                    By signing up you agree to the<a href="#"> <span> Terms of services</span></a>
                                         {/* <span>Already hav an account? </span> */}
                                     </div>
                                     {isError && <div><span style={{ color: "red", fontSize: 13 }}>{errorMessage}</span></div>}
@@ -114,7 +117,7 @@ class LandingPage extends Component {
                         <div style={{ flexBasis: "40%", marginTop: "2%", justifyContent: "center", display: "flex" }}>
 
                             <div style={{ width: 350, }}>
-                                <img style={{ width: 350, }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Bdfui-aGfhBbLlGfc-972JmuQiT4qLC-zWndj1x3RGI-mj9Ypw&s" alt="aaaa" />
+                                <img style={{ width: 350, }} src={require("../assets/whychooseus.png")} alt="aaaa" />
                                 {/* </div> */}
                             </div>
                         </div>
@@ -129,6 +132,7 @@ class LandingPage extends Component {
                                     Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
                                     Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
                             </div>
+                            <Button variant="outline-primary">Read More</Button>
                                 {/* </div> */}
                             </div>
                         </div>
@@ -142,7 +146,7 @@ class LandingPage extends Component {
                             <div style={{ width: 400, flexDirection: "row", display: "flex", justifyContent: "space-between" }}>
                                 <div >
                                     <div>
-                                        <img style={{ width: 170, }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Bdfui-aGfhBbLlGfc-972JmuQiT4qLC-zWndj1x3RGI-mj9Ypw&s" alt="aaaa" />
+                                        <img style={{ width: 170, }} src={require("../assets/patientregister.png")} alt="aaaa" />
                                     </div>
                                     <div >
                                         Step 1
@@ -151,7 +155,7 @@ class LandingPage extends Component {
                                 </div>
                                 <div>
                                     <div>
-                                        <img style={{ width: 170, }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Bdfui-aGfhBbLlGfc-972JmuQiT4qLC-zWndj1x3RGI-mj9Ypw&s" alt="aaaa" />
+                                        <img style={{ width: 170, }} src={require("../assets/qrcode.png")}  alt="aaaa" />
                                     </div>
                                     <div>
                                         Step 2
@@ -165,7 +169,7 @@ class LandingPage extends Component {
                             <div style={{ width: 400, flexDirection: "row", display: "flex", justifyContent: "space-between" }}>
                                 <div style={{}}>
                                     <div>
-                                        <img style={{ width: 170, }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Bdfui-aGfhBbLlGfc-972JmuQiT4qLC-zWndj1x3RGI-mj9Ypw&s" alt="aaaa" />
+                                        <img style={{ width: 170, }} src={require("../assets/bookatime.png")} alt="aaaa" />
                                     </div>
                                     <div >
                                         Step 3
@@ -174,7 +178,7 @@ class LandingPage extends Component {
                                 </div>
                                 <div>
                                     <div>
-                                        <img style={{ width: 170, }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2Bdfui-aGfhBbLlGfc-972JmuQiT4qLC-zWndj1x3RGI-mj9Ypw&s" alt="aaaa" />
+                                        <img style={{ width: 170, }} src={require("../assets/reminders.png")} alt="aaaa" />
                                     </div>
                                     <div>
                                         Step 4
