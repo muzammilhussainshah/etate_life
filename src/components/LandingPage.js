@@ -54,11 +54,9 @@ class LandingPage extends Component {
                                 height: 440
                             }}>
                                 <center>
-
-
                                     <div style={{ fontWeight: "bold", }}>
                                         Register in second
-                        </div>
+                                    </div>
                                     <Form style={{ width: "80%", marginTop: "2%" }}>
                                         <Form.Group >
                                             <Form.Control defaultValue={fullName} onChange={(e) => { this.setState({ fullName: e.target.value }) }}

@@ -128,7 +128,7 @@ class AddBookingAdmin extends Component {
     return (
       <div style={{ backgroundColor: "#fff", }}>
         <AppHeader />
-        <BreadCrum />
+        <BreadCrum color="Booking administrator"/>
 
 
         {/* <center> */}

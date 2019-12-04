@@ -75,7 +75,7 @@ class AddDoctor extends Component {
     return (
       <div>
         <AppHeader />
-        <BreadCrum />
+        <BreadCrum color="Doctors"/>
 
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", flexWrap: "wrap", justifyContent: "center" }}>
           <div style={{ flexBasis: "40%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA", }}>

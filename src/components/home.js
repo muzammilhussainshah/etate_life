@@ -48,7 +48,7 @@ class Home extends Component {
                 {/* header */}
                 <AppHeader />
                 {/* routes */}
-                <BreadCrum />
+                <BreadCrum color="Account details"/>
                 <div style={{
                     display: "flex", justifyContent: "center"
                 }}>

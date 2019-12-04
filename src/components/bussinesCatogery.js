@@ -104,7 +104,7 @@ class BussinesCatogery extends Component {
     return (
       <div style={{ backgroundColor: "#fff", }}>
         <AppHeader />
-        <BreadCrum />
+        <BreadCrum color="Clinic address"/>
 
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", flexWrap: "wrap", justifyContent: "center" }}>
           <div style={{ flexBasis: "40%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA", }}>
