@@ -247,7 +247,7 @@ class AddBookingAdmin extends Component {
             </Button> :
             <Button onClick={() => this.createAdmininstrator()} variant="primary">Add</Button>
           }
-          <Button variant="primary">Next</Button>
+        <a href="/pricing"><Button variant="primary">Next</Button></a>
         </div>
       </div>
     )

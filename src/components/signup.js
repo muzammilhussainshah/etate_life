@@ -73,14 +73,16 @@ class Signup extends Component {
                                 <Form.Check type="checkbox" label="Remember me" />
                             </Col>
                             <Col>
-                                <span>Forget password</span>
+                            <a href="/ForgetPassword"> <span>Forget password</span></a>
                             </Col>
                             {/* <Form.Group controlId="formBasicCheckbox"> */}
                             {/* </Form.Group> */}
                         </Row>
                         <hr />
                         <div>
-                            <span>Already hav an account? </span>
+                   <a href="/login"> <span>Already hav an account?</span></a>
+
+                            {/* <span>Already hav an account? </span> */}
                         </div>
                         {isError && <div><span style={{color:"red",fontSize:13}}>{errorMessage}</span></div>}
                     </div>

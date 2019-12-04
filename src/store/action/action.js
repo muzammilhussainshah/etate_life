@@ -32,35 +32,63 @@ export function errorCall(errorMessage) {
         }, 3000)
     }
 }
+export function payment(obj) {
+    return dispatch => {
+        dispatch({ type: ActionTypes.LOADER })
+
+        let currentUserUid = firebase.auth().currentUser.uid;
+        let objClone = obj
+        objClone.uid = currentUserUid
+        db.collection("payment").add(objClone)
+            .then(function () {
+                dispatch({ type: ActionTypes.LOADER })
+                alert("payment succesfully sent")
+                history.push("/home")
+                console.log("Document successfully written!");
+            })
+            .catch(function (error) {
+                dispatch({ type: ActionTypes.LOADER })
+                console.error("Error writing document: ", error);
+            });
+    }
+}
+export function buyPackage(cart) {
+    return dispatch => {
+        console.log(cart, "9999999999");
+        history.push({ pathname: '/test', state: cart });
+
+
+    }
+}
 export function logout() {
     return dispatch => {
-        firebase.auth().signOut().then(function(e) {
-            console.log("signout succes",e)
+        firebase.auth().signOut().then(function (e) {
+            console.log("signout succes", e)
             dispatch({ type: ActionTypes.CURRENTUSER, payload: undefined })
             history.push('/LandingPage');
 
-            
-          }, function(error) {
+
+        }, function (error) {
             // An error happened.
-          });
+        });
     }
 }
 export function forgetPassword(email) {
-    console.log(email,"ererreee")
+    console.log(email, "ererreee")
     return dispatch => {
         dispatch({ type: ActionTypes.LOADER })
         firebase.auth().sendPasswordResetEmail(email)
-        .then(function (user) {
-           console.log(user,"*/*/*/")
-          alert("check you email we send yout the link")
-           dispatch({ type: ActionTypes.LOADER })
+            .then(function (user) {
+                console.log(user, "*/*/*/")
+                alert("check you email we send yout the link")
+                dispatch({ type: ActionTypes.LOADER })
 
-        })
-        .catch((error) => {
-            console.log(error,"ererreee")
-            dispatch(errorCall(error.message))
+            })
+            .catch((error) => {
+                console.log(error, "ererreee")
+                dispatch(errorCall(error.message))
 
-        });
+            });
     }
 }
 export function UserActivation(verifyCodeObj) {
@@ -96,7 +124,8 @@ export function UserActivation(verifyCodeObj) {
 }
 export function emailVerify(email) {
     return dispatch => {
-        axios.post('http://localhost:5000/sendVerificationEmail', {
+        // axios.post('http://localhost:5000/sendVerificationEmail', {
+        axios.post('https://etate-life.herokuapp.com/sendVerificationEmail', {
             email: email
         })
             .then(function (response) {

@@ -52,9 +52,10 @@ class Routers extends Component {
                     <Route exact path="/" component={this.state.initialRoute} />
                     {/* <Route exact path="/" component={test} /> */}
 
-
                     <Route exact path="/LandingPage" component={LandingPage} />
                     <Route exact path="/Verify" component={Verify} />
+                    <Route exact path="/test" component={test} />
+
                     <Route exact path="/MyDoctors" component={MyDoctors} />
                     <Route exact path="/MyClinics" component={MyClinics} />
                     <Route exact path="/bussinesCatogery" component={bussinesCatogery} />
@@ -82,6 +83,8 @@ let mapStateToProps = state => {
         isLoader: state.root.isLoader,
         isError: state.root.isError,
         errorMessage: state.root.errorMessage,
+        currentUser: state.root.currentUser,
+        
         //   errorInStore: state.root.error,
     };
 };

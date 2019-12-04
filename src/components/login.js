@@ -62,7 +62,7 @@ class Login extends Component {
                         </Row>
                         <hr />
                         <div>
-                            <span>not a member yet? Join now</span>
+                            <span>not a member yet? <a href="/signup"> <span>Join now</span></a></span>
                         </div>
                     {isError && <div><span style={{color:"red",fontSize:13}}>{errorMessage}</span></div>}
 

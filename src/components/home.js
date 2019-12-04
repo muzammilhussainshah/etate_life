@@ -14,6 +14,8 @@ class Home extends Component {
     componentWillReceiveProps(nextProps) {
         const { currentUser } = this.props
         console.log(nextProps, "componentWillMount")
+     if(currentUser){
+
         this.setState({
             fullName: currentUser.fullName,
             email: currentUser.email,
@@ -23,6 +25,8 @@ class Home extends Component {
             // password: "",
             // confirmPassword: "",
         })
+    }
+
     }
     render() {
         const { isLoader, isError, errorMessage, currentUser, userUpdate } = this.props

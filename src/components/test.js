@@ -1,81 +1,46 @@
-import React, { Component, } from 'react';
-// import { Layout, Menu, Breadcrumb,Row, Col, } from 'antd';
-import {
-  Navbar, Nav, Button, Form, FormControl, Row, Col, Container, Layout, NavDropdown, Card, Jumbotron, DropdownButton, Dropdown,
-  ListGroup,
-} from 'react-bootstrap';
-import AppHeader from './common/AppHeader';
-// import {} from 'bootstrap';
-// import { ButtonToolbar,DropdownButton,Dropdown , Navbar,Nav,NavDropdown} from 'react-bootstrap';
-import styles from './style.css';
-import { FaLevelUpAlt, FaAngleDoubleRight, FaMapMarkerAlt, FaPhone, } from 'react-icons/fa';
-import { MdMailOutline } from 'react-icons/md';
-import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
-// Import React FilePond
-import { FilePond, registerPlugin } from "react-filepond";
-// var React = require('react');
-var QRCode = require('qrcode.react');
-// Import FilePond styles
-// import "filepond/dist/filepond.min.css";
+import React, { Component } from 'react';
+import { Elements, StripeProvider } from 'react-stripe-elements';
+import CheckoutForm from './CheckoutForm';
 
-// Import the Image EXIF Orientation and Image Preview plugins
-// Note: These need to be installed separately
-// import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
-// import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-// import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-// const { Header, Footer, Sider, Content } = Layout;
-// registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
-
-class Test extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      switch1: true,
+    cart:""
     };
   }
-
-  myFile(err, item) {
-    console.log(item.file, 'file')
-    this.setState({ images: item.file }, () => {
-        console.log(this._update(), 'updated image')
+  componentWillMount() {
+    this.setState({
+      cart: this.props.history.location.state
     })
-
-}
-_update() {
-  const { images } = this.state;
-  // var arr = [];
-  var file = images;
-  var reader = new FileReader();
-
-  reader.onloadend = () => {
-      this.setState({ ProductImages: reader.result })
-      console.log(reader.result, 'result here')
+    console.log(this.props.history.location.state, "++++++++++++++")
   }
-  if (file) {
-      reader.readAsDataURL(file);
-  }
-
-
-}
-
   render() {
+    const { cart} = this.state
+    console.log(cart, "555555555")
     return (
-      <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Dropdown Button
-      </Dropdown.Toggle>
-    
-      <Dropdown.Menu>
-        <Dropdown.Item onClick={(e)=>console.log("action")} href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item onClick={(e)=>console.log("Another")}>Another action</Dropdown.Item>
-        <Dropdown.Item onClick={(e)=>console.log("Something")}>Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-    )
+      <div style={{ display: "flex", justifyContent: "center", background: "#F0F0F0", height: window.innerHeight }}>
+        <StripeProvider apiKey="pk_test_U9uY7QRX0EXNK498S9xXMdLq00lZFZLU1g">
+          <div className="example" style={{
+            width: 550, height: 300, border: "0.1px solid #F2F5F3", padding: 15, marginTop: "2%",
+            background: "#fff",
+            borderRadius: 10,
+            webkitBoxShadow: "3px 3px 3px #9E9E9E",
+            mozBoxShadow: "3px 3px 3px #9E9E9E",
+            boxShadow: "3px 3px 3px #9E9E9E",
+          }}>
+            <h1>{cart && cart.package}</h1>
+            <h4>price : {cart && cart.price}</h4>
+            <h4>duration : {cart && cart.duration}</h4>
+            <Elements>
+              <CheckoutForm data={cart} />
+            </Elements>
+          </div>
+        </StripeProvider>
+      </div>
+
+    );
   }
 }
 
-export default Test
-
-
-
+export default App;
