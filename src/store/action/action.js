@@ -42,7 +42,7 @@ export function payment(obj) {
         db.collection("payment").add(objClone)
             .then(function () {
                 dispatch({ type: ActionTypes.LOADER })
-                alert("payment succesfully sent")
+                alert("your package is activated")
                 history.push("/home")
                 console.log("Document successfully written!");
             })

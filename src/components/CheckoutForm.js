@@ -31,7 +31,8 @@ class CheckoutForm extends Component {
     //   body: {amount:250,id:token.id}
     // }).then((res)=>console.log(res,"resresresres",))
     if (data) {
-      axios.post("http://localhost:5000/charge", {
+      // axios.post("http://localhost:5000/charge", {
+      axios.post("https://etate-life.herokuapp.com/charge", {
         amount: data.price, id: token.id, title: data.package, email: this.props.currentUser.email
       }).then((res) => {
         // window.location.reload()

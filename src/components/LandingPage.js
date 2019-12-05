@@ -35,18 +35,18 @@ class LandingPage extends Component {
             <div style={{ backgroundColor: "#fff", }}>
                 <AppHeader login={true} button="Signup" />
 
-                <div style={{ background: "red", position: "relative" }}>
-                    <img style={{ width: "100%", height: 500, background: "green" }} src={require('../assets/image1.jpg')} alt="aaaa" />
+                <div style={{ position: "relative" }}>
+                    <img style={{ width: "100%", height: 550, }} src={require('../assets/image1a.jpg')} alt="aaaa" />
                     {!currentUser &&
                         <div style={{
                             position: "absolute",
-                            top: 20,
-                            left: 1000,
+                            top: 45,
+                            right: 100,
                             // width: "100%",
                         }}>
                             {/* signup form */}
                             <div style={{
-                                backgroundColor: "#fff", width: 360, padding: "1%", marginTop: "3%",
+                                backgroundColor: "#fff", width: 340, padding: "5%", marginTop: "3%",
                                 // borderRadius: 10,
                                 webkitBoxShadow: "3px 3px 3px #9E9E9E",
                                 mozBoxShadow: "3px 3px 3px #9E9E9E",
@@ -54,30 +54,20 @@ class LandingPage extends Component {
                                 height: 440
                             }}>
                                 <center>
-                                    <div style={{ fontWeight: "bold", }}>
+                                    <div style={{ fontWeight: "bold", marginTop: 10 }}>
                                         Register in second
                                     </div>
                                     <Form style={{ width: "80%", marginTop: "2%" }}>
-                                        <Form.Group >
-                                            <Form.Control defaultValue={fullName} onChange={(e) => { this.setState({ fullName: e.target.value }) }}
-                                                type="text" placeholder="Full name" />
-                                        </Form.Group>
-                                        <Form.Group controlId="formBasicEmail">
-                                            <Form.Control defaultValue={email} onChange={(e) => { this.setState({ email: e.target.value }) }}
-                                                type="email" placeholder="Enter email" />
-                                        </Form.Group>
-                                        <Form.Group controlId="formBasicEmail">
-                                            <Form.Control defaultValue={phone} onChange={(e) => { this.setState({ phone: e.target.value }) }}
-                                                type="number" placeholder="Enter phone" />
-                                        </Form.Group>
-                                        <Form.Group controlId="formBasicPassword">
-                                            <Form.Control defaultValue={password} onChange={(e) => { this.setState({ password: e.target.value }) }}
-                                                type="password" placeholder="Enter password" />
-                                        </Form.Group>
-                                        <Form.Group controlId="formBasicPassword">
-                                            <Form.Control defaultValue={confirmPassword} onChange={(e) => { this.setState({ confirmPassword: e.target.value }) }}
-                                                type="password" placeholder="Confirm password" />
-                                        </Form.Group>
+                                        <Form.Control style={{ marginTop: 10 }} defaultValue={fullName} onChange={(e) => { this.setState({ fullName: e.target.value }) }}
+                                            type="text" placeholder="Full name" />
+                                        <Form.Control style={{ marginTop: 10 }} defaultValue={email} onChange={(e) => { this.setState({ email: e.target.value }) }}
+                                            type="email" placeholder="Enter email" />
+                                        <Form.Control style={{ marginTop: 10 }} defaultValue={phone} onChange={(e) => { this.setState({ phone: e.target.value }) }}
+                                            type="number" placeholder="Enter phone" />
+                                        <Form.Control style={{ marginTop: 10 }} defaultValue={password} onChange={(e) => { this.setState({ password: e.target.value }) }}
+                                            type="password" placeholder="Enter password" />
+                                        <Form.Control style={{ marginTop: 10 }} defaultValue={confirmPassword} onChange={(e) => { this.setState({ confirmPassword: e.target.value }) }}
+                                            type="password" placeholder="Confirm password" />
                                     </Form>
                                     {isLoader ?
                                         <Button style={{ width: 255, fontSize: 11, marginTop: "3%" }} variant="primary" disabled={true}>
@@ -86,11 +76,11 @@ class LandingPage extends Component {
                                         <Button onClick={() => { this.props.signUpAction(user) }} style={{ width: 255, fontSize: 11, marginTop: "3%" }} variant="primary" > Create your account</Button>
                                     }
                                     <div>
-                                    or<a href="/login"> <span> login?</span></a>
+                                        or<a href="/login"> <span> login?</span></a>
                                         {/* <span>Already hav an account? </span> */}
                                     </div>
-                                    <div style={{fontSize:12}}>
-                                    By signing up you agree to the<a href="#"> <span> Terms of services</span></a>
+                                    <div style={{ fontSize: 12 }}>
+                                        By signing up you agree to the<a href="#"> <span> Terms of services</span></a>
                                         {/* <span>Already hav an account? </span> */}
                                     </div>
                                     {isError && <div><span style={{ color: "red", fontSize: 13 }}>{errorMessage}</span></div>}
@@ -132,7 +122,7 @@ class LandingPage extends Component {
                                     Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
                                     Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
                             </div>
-                            <Button variant="outline-primary">Read More</Button>
+                                <Button variant="outline-primary">Read More</Button>
                                 {/* </div> */}
                             </div>
                         </div>
@@ -155,7 +145,7 @@ class LandingPage extends Component {
                                 </div>
                                 <div>
                                     <div>
-                                        <img style={{ width: 170, }} src={require("../assets/qrcode.png")}  alt="aaaa" />
+                                        <img style={{ width: 170, }} src={require("../assets/qrcode.png")} alt="aaaa" />
                                     </div>
                                     <div>
                                         Step 2
@@ -199,18 +189,18 @@ class LandingPage extends Component {
 
                             <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <Card.Body>
-                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
-                                    <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
+                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>2 months free</Card.Title>
+                                    <Card.Title style={{ color: "blue", fontSize: 17 }}>if you paid anually</Card.Title>
                                     <Card.Text style={{ marginTop: "10%" }}>
-                                        60 days
+                                    free trial
             </Card.Text>
                                     <Card.Text style={{ marginTop: "5%" }}>
-                                        60 days
+                                    50% discount
             </Card.Text>
                                     <Card.Text style={{ marginTop: "5%" }}>
-                                        1
+                                    number of doctors
             </Card.Text>
-                                    <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                    <Button style={{ background: "#3C6AB3",borderRadius:250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
                                 </Card.Body>
                             </Card>
@@ -227,45 +217,94 @@ class LandingPage extends Component {
                                     <Card.Text style={{ marginTop: "5%" }}>
                                         1
             </Card.Text>
-                                    <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                    <Button style={{ background: "#3C6AB3",borderRadius:250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
                                 </Card.Body>
                             </Card><Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <Card.Body>
-                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
-                                    <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
+                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>Single Clinic</Card.Title>
+                                    <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 99 / month</Card.Title>
                                     <Card.Text style={{ marginTop: "10%" }}>
-                                        60 days
+                                        30 days
             </Card.Text>
                                     <Card.Text style={{ marginTop: "5%" }}>
-                                        60 days
+                                        30 days
             </Card.Text>
                                     <Card.Text style={{ marginTop: "5%" }}>
-                                        1
+                                    4
             </Card.Text>
-                                    <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                    <Button style={{ background: "#3C6AB3", borderRadius:250,borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
                                 </Card.Body>
                             </Card><Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <Card.Body>
-                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
+                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>Multi Clinic</Card.Title>
                                     <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
                                     <Card.Text style={{ marginTop: "10%" }}>
-                                        60 days
+                                    30 days
             </Card.Text>
                                     <Card.Text style={{ marginTop: "5%" }}>
-                                        60 days
+                                        0 days
             </Card.Text>
                                     <Card.Text style={{ marginTop: "5%" }}>
-                                        1
+                                        12
             </Card.Text>
-                                    <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                    <Button style={{ background: "#3C6AB3",borderRadius:250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
                                 </Card.Body>
                             </Card>
                         </div>
+
                     </center>
+                    <div style={{ marginLeft: "12%", color: "#3C6AB3", marginTop: "2%", fontSize: 13, display: "flex", justifyContent: "center" }} >
+                        You save 17 %
+        </div>
+                    <div style={{ marginTop: "1%", display: "flex", justifyContent: "center" }}>
+                        <div style={{ marginRight: "1%", fontWeight: "bold" }} >
+                            Month
+        </div>
+                        <div className='custom-control custom-switch'>
+                            {/* <span >
+            Year
+        </span> */}
+                            <input
+                                type='checkbox'
+                                className='custom-control-input'
+                                id='customSwitches'
+                                checked={this.state.switch1}
+                                onChange={this.handleSwitchChange(1)}
+                                readOnly
+                            />
+                            <label className='custom-control-label' htmlFor='customSwitches'>
+                                Year <FaLevelUpAlt style={{ color: "#3C6AB3", fontSize: 22 }} />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <center  style={{background:"#EEF5FF"}}>
+
+                    <Button style={{ background: "#3C6AB3",borderRadius:250, borderColor: "#3C6AB3", marginTop: "3%" }} variant="primary" size="lg">Start free trial now!</Button>
+                    <div style={{ color: "grey", fontSize: 11, marginTop: "1%" }}>
+                        No credit card needed!
+</div>
+                </center>
+                {/* schedule jomtron */}
+                <div style={{ background: "#EEF5FF", padding: "3%" }}>
+                    <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", }}>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <div>
+
+                                Do you need an <span style={{ color: "#3C6AB3" }}>Enterprise solution?</span>
+                            </div>
+                        </div>
+                        <div style={{ marginLeft: "3%" }}>
+                            <Button style={{ borderColor: "#3C6AB3", }} variant="outline-primary" size="lg">Schedule a Meeting</Button>
+                        </div>
+                    </div>
                 </div>
                 {/* footer jomtron */}
+
+                {/* footer jomtron */}
+
                 <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", background: "#1B1B1B" }}>
                     <div style={{ flexBasis: "20%", padding: "2%" }}>
                         <h6 style={{ color: "#fff", fontWeight: "bold" }}>

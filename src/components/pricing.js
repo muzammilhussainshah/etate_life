@@ -8,7 +8,7 @@ import styles from './style.css';
 import { FaLevelUpAlt, FaAngleDoubleRight,FaMapMarkerAlt,FaPhone,} from 'react-icons/fa';
 import { MdMailOutline} from 'react-icons/md';
 import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
-import { buyPackage } from '../store/action/action';
+import { buyPackage,payment } from '../store/action/action';
 import { connect } from "react-redux";
 
 // const { Header, Footer, Sider, Content } = Layout;
@@ -50,7 +50,7 @@ class Pricing extends Component {
           Pricing
         </center>
         <center>
-          <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", marginTop: "3%", alignItems: "center", }}>
+          <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
             <Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%" }}>
               <Card.Body>
                 <Card.Title style={{ color: "blue", fontSize: 25 }}>2 months free </Card.Title>
@@ -64,7 +64,7 @@ class Pricing extends Component {
                 <Card.Text style={{ marginTop: "5%" }}>
                  number of doctors
             </Card.Text>
-                <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                <Button onClick={()=>{this.props.payment({package:"2 months free", price:"0", duration :"60"})}} style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
               </Card.Body>
             </Card>
@@ -97,7 +97,7 @@ class Pricing extends Component {
                 <Card.Text style={{ marginTop: "5%" }}>
                   4
             </Card.Text>
-                <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                <Button onClick={()=>{this.buy({package:"Single Clinic", price:"99", duration :"30"})}}  style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
               </Card.Body>
             </Card><Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%" }}>
@@ -113,17 +113,17 @@ class Pricing extends Component {
                 <Card.Text style={{ marginTop: "5%" }}>
                   12
             </Card.Text>
-                <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                <Button onClick={()=>{this.buy({package:"Multi Clinic", price:"75", duration :"30"})}} style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
               </Card.Body>
             </Card>
           </div>
         </center>
         {/* switch */}
-        {/* <div style={{ marginLeft: "12%", color: "#3C6AB3", marginTop: "2%", fontSize: 13, display: "flex", justifyContent: "center" }} >
+        <div style={{ marginLeft: "12%", color: "#3C6AB3", marginTop: "2%", fontSize: 13, display: "flex", justifyContent: "center" }} >
           You save 17 %
-        </div> */}
-        {/* <div style={{ marginTop: "1%", display: "flex", justifyContent: "center" }}>
+        </div>
+        <div style={{ marginTop: "1%", display: "flex", justifyContent: "center" }}>
           <div style={{ marginRight: "1%", fontWeight: "bold" }} >
             Month
              </div>
@@ -142,25 +142,25 @@ class Pricing extends Component {
             </label>
           </div>
 
-        </div> */}
-        {/* <center >
+        </div>
+        <center >
 
           <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "3%" }} variant="primary" size="lg">Start free trial now!</Button>
           <div style={{ color: "grey", fontSize: 11, marginTop: "1%" }}>
             No credit card needed!
       </div>
-        </center> */}
+        </center>
         {/* schedule jomtron */}
         <div style={{ background: "#EEF5FF", padding: "3%" }}>
           <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", }}>
             <div style={{ display: "flex", alignItems: "center" }}>
               <div>
 
-                {/* Do you need an <span style={{ color: "#3C6AB3" }}>Enterprise solution?</span> */}
+                Do you need an <span style={{ color: "#3C6AB3" }}>Enterprise solution?</span>
               </div>
             </div>
             <div style={{ marginLeft: "3%" }}>
-              {/* <Button style={{ borderColor: "#3C6AB3", }} variant="outline-primary" size="lg">Schedule a Meeting</Button> */}
+              <Button style={{ borderColor: "#3C6AB3", }} variant="outline-primary" size="lg">Schedule a Meeting</Button>
             </div>
           </div>
         </div>
@@ -290,7 +290,9 @@ function mapDispatchToProps(dispatch) {
   return ({
       buyPackage: (cart) => {
           dispatch(buyPackage(cart))
-      },
+      },payment: (obj) => {
+        dispatch(payment(obj))
+    },
      
   })
 }
