@@ -11,7 +11,13 @@ import { MDBIcon, MDBFileInput } from 'mdbreact';
 import Select from 'react-select';
 import { errorCall,loaderCall, createClinic } from '../store/action/action';
 import ActivityIndicator from './common/ActivityIndicator';
-
+import *as firebase from 'firebase';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 const options = [
   { value: 'action', label: 'action' },
   { value: 'another action', label: 'another action' },
@@ -38,22 +44,57 @@ class BussinesCatogery extends Component {
   }
   image(file) {
     // console.log(file[0], "555")
-
-    var reader = new FileReader();
-
-    reader.onloadend = () => {
-      this.setState({ ClinicImage: reader.result })
-      console.log(reader.result, 'result here')
+    if(file){
+      firebase.storage().ref(`pictures/${file.name}`).put(file).then((res) => {
+        console.log(res, "-------")
+        firebase.storage().ref(`pictures/${file.name}`).getDownloadURL().then((res) => {
+          console.log(res, "9999")
+          this.setState({
+            ClinicImage:res
+          })
+        })
+      })
     }
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+
+    // var reader = new FileReader();
+
+    // reader.onloadend = () => {
+    //   this.setState({ ClinicImage: reader.result,file:file })
+    //   console.log(reader.result, 'result here')
+    // }
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
 
   }
   createClinic() {
     const { ClinicImage, etateId, BussinesName, registrationNumber, BussinesAddres, MobileNumber,
       bussinesCatogery, addHours, arrayOfMorning, arrayOfAfternoon, arrayOfEvening,
     } = this.state
+  // console.log(file, "filefilefile", file.name)
+    // firebase.storage().ref(`pictures/${file.name}`).put(file).then((res) => {
+    //   console.log(res, "-------")
+    //   firebase.storage().ref(`pictures/${file.name}`).getDownloadURL().then((res) => {
+    //     console.log(res, "9999")
+    //     this.setState({
+    //       ClinicImage:res
+    //     })
+
+
+
+
+    //   })
+    // })
+
+
+
+
+
+
+
+
+
+
     console.log("start",
       ClinicImage, etateId,
       BussinesName, registrationNumber,
@@ -71,7 +112,7 @@ class BussinesCatogery extends Component {
     let validate = true
     console.log(validateOpt, "validateOpt")
     for (var key in validateOpt) {
-      if (validateOpt[key] === "") {
+      if (!validateOpt[key]) {
         this.props.loaderCall()
 
         // alert(key + " is required")
@@ -93,6 +134,11 @@ class BussinesCatogery extends Component {
   componentWillReceiveProps(nextProps){
     this.setState({
       myClinicsInComponent:nextProps.myClinics
+    })
+  }
+  componentDidMount(){
+    this.setState({
+      myClinicsInComponent:this.props.myClinics
     })
   }
   render() {
@@ -323,10 +369,10 @@ class BussinesCatogery extends Component {
             </Button> :
             <Button onClick={() => this.createClinic()} variant="primary">Add</Button>
           }
-           <a href="/addDoctor">
+           <Link to="/addDoctor">
 
           <Button variant="primary">Next</Button>
-           </a>
+           </Link>
         </div>
       </div>
     )

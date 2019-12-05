@@ -12,7 +12,12 @@ import Select from 'react-select';
 import { connect } from "react-redux";
 import ActivityIndicator from './common/ActivityIndicator';
 import { errorCall, loaderCall, createAdmininstrator } from '../store/action/action';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import Input from './common/input';
 
 // const { Header, Footer, Sider, Content } = Layout;
@@ -52,11 +57,15 @@ class AddBookingAdmin extends Component {
     })
   }
   componentDidMount() {
-    console.log(this.props.myDoctors,"***///*")
-   
-    // this.setState({
-    //   myDoctorsInComponent: myDoctorsClone,myAdmininstrators
-    // })
+    let myDoctorsClone = this.props.myDoctors
+    let myAdmininstrators = this.props.myAdmininstrators
+    myDoctorsClone&&myDoctorsClone.map((v, i) => {
+      myDoctorsClone[i].label = v.fullName
+      myDoctorsClone[i].value = v.fullName
+    })
+    this.setState({
+      myDoctorsInComponent: myDoctorsClone,myAdmininstrators
+    })
   }
   addDoctor() {
     let selectedDoctorListClone = this.state.selectedDoctorList
@@ -168,24 +177,6 @@ class AddBookingAdmin extends Component {
                       />
                     </Col>
                   </Form.Group>
-
-
-                  {/* <Form.Group as={Row} controlId="formHorizontalEmail">
-                 <Form.Label column sm={5}>
-                  Specialist
-                      </Form.Label>
-                 <Col sm={7}>
-                   <DropdownButton
-                     title={"Catogery"}
-                     variant={"Secondary"}
-                     id={`dropdown-variants-Secondary`}
-                     key={"Secondary"}
-                   >
-                     <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-                     <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                   </DropdownButton>
-                 </Col>
-               </Form.Group> */}
                 </Form>
               </div>
             </div>
@@ -247,7 +238,7 @@ class AddBookingAdmin extends Component {
             </Button> :
             <Button onClick={() => this.createAdmininstrator()} variant="primary">Add</Button>
           }
-        <a href="/pricing"><Button variant="primary">Next</Button></a>
+        <Link to="/pricing"><Button variant="primary">Next</Button></Link>
         </div>
       </div>
     )

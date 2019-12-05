@@ -23,7 +23,8 @@ class Routers extends Component {
         super(props);
         this.state = { initialRoute:LandingPage };
     }
-    componentWillMount() {
+    componentDidMount() {
+        console.log("wwwwwwwwwwwwwwwww")
         const { UserDataGet, loaderCall } = this.props
         firebase.auth().onAuthStateChanged((user) => {
             console.log(user,"uuuuuuuu")

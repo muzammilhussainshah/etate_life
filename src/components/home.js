@@ -5,6 +5,12 @@ import BreadCrum from './common/BreadCrum';
 import { userUpdate } from '../store/action/action';
 import { connect } from "react-redux";
 import Input from './common/input';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +20,23 @@ class Home extends Component {
     componentWillReceiveProps(nextProps) {
         const { currentUser } = this.props
         console.log(nextProps, "componentWillMount")
+     if(currentUser){
+
+        this.setState({
+            fullName: currentUser.fullName,
+            email: currentUser.email,
+            phone: currentUser.phone,
+            // currentPassword: "",
+            CheckCurrPass: currentUser.password,
+            // password: "",
+            // confirmPassword: "",
+        })
+    }
+
+    }
+    componentDidMount() {
+        const { currentUser } = this.props
+        // console.log(nextProps, "componentWillMount")
      if(currentUser){
 
         this.setState({
@@ -70,7 +93,7 @@ class Home extends Component {
                 </div>
                 <div style={{ display: "flex", justifyContent: "flex-end", padding: "5%", paddingRight: "10%" }}>
                     <Button variant="outline-primary" onClick={() => { userUpdate(user) }} >Save Changes</Button>
-                    <a href="/bussinesCatogery"><Button variant="outline-primary"  >Next</Button></a>
+                    <Link to="/bussinesCatogery"><Button variant="outline-primary"  >Next</Button></Link>
                 </div>
             </div>
         )

@@ -3,7 +3,12 @@ import { Button, Form, Row, Col, ListGroup, DropdownButton, Dropdown } from 'rea
 import { MDBIcon, } from 'mdbreact';
 import { connect } from "react-redux";
 import { errorCall,loaderCall, createClinic,deleteClinicOrDoc, } from '../../store/action/action';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 class LargeList extends Component {
   constructor(props) {
     super(props);
@@ -63,7 +68,7 @@ class LargeList extends Component {
           </ListGroup>
         </div>
         <div className style={{}}>
-          <a href="/home"><Button variant="link">Back</Button></a>
+          <Link to="/home"><Button variant="link">Back</Button></Link>
         </div>
       </div>
     )

@@ -4,6 +4,12 @@ import AppHeader from './common/AppHeader';
 import ActivityIndicator from './common/ActivityIndicator';
 import { signinAction } from '../store/action/action';
 import { connect } from "react-redux";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -57,12 +63,12 @@ class Login extends Component {
                                 <Form.Check type="checkbox" label="Remember me" />
                             </Col>
                             <Col>
-                               <a href="/ForgetPassword"> <span>Forget password</span></a>
+                               <Link to="/ForgetPassword"> <span>Forget password</span></Link>
                             </Col>
                         </Row>
                         <hr />
                         <div>
-                            <span>not a member yet? <a href="/signup"> <span>Join now</span></a></span>
+                            <span>not a member yet? <Link to="/signup"> <span>Join now</span></Link></span>
                         </div>
                     {isError && <div><span style={{color:"red",fontSize:13}}>{errorMessage}</span></div>}
 

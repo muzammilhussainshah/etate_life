@@ -11,7 +11,12 @@ import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
 import ActivityIndicator from './common/ActivityIndicator';
 import { connect } from "react-redux";
 import { signUpAction } from '../store/action/action';
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 // const { Header, Footer, Sider, Content } = Layout;
 
 class LandingPage extends Component {
@@ -76,7 +81,7 @@ class LandingPage extends Component {
                                         <Button onClick={() => { this.props.signUpAction(user) }} style={{ width: 255, fontSize: 11, marginTop: "3%" }} variant="primary" > Create your account</Button>
                                     }
                                     <div>
-                                        or<a href="/login"> <span> login?</span></a>
+                                        or<Link to="/login"> <span> login?</span></Link>
                                         {/* <span>Already hav an account? </span> */}
                                     </div>
                                     <div style={{ fontSize: 12 }}>

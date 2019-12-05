@@ -6,6 +6,12 @@ import { Navbar, Nav, Button, Form, Dropdown,DropdownButton } from 'react-bootst
 import *as firebase from 'firebase';
 import { connect } from "react-redux";
 import { logout} from '../../store/action/action';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 class AppHeader extends Component {
   constructor(props) {
@@ -46,19 +52,19 @@ class AppHeader extends Component {
                         <Dropdown.Item eventKey="1" href="/home">My account</Dropdown.Item>
                         <Dropdown.Item eventKey="2" href="/MyClinics">My clinincs</Dropdown.Item>
                         <Dropdown.Item eventKey="3"href="/MyDoctors">My doctors</Dropdown.Item>
-                        <Dropdown.Item eventKey="4"href="/MyClinics">My payment</Dropdown.Item>
+                        <Dropdown.Item eventKey="4"href="/pricing">My payment</Dropdown.Item>
                         <Dropdown.Item eventKey="5" onClick={()=>this.logout()}>Logout</Dropdown.Item>
                       </DropdownButton>}
                 {/* <Nav.Link href={!user ? "Login" : "/"} style={{ color: "blue", fontWeight: "bold" }}>{!user ? "Login" : "Profile"}</Nav.Link> */}
               </Nav>
               {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-              {!currentUser && <a href={"signup"}><Button variant="outline-primary">{button}</Button></a>}
+              {!currentUser && <Link to={"signup"}><Button variant="outline-primary">{button}</Button></Link>}
 
             </Form>
           </Navbar.Collapse>
         </Navbar>
         <div style={{ background: "#F0F3F1", }}>
-          <hr />
+          {/* <hr /> */}
         </div>
       </div>
 

@@ -11,8 +11,14 @@ import { errorCall,loaderCall, createDoctor } from '../store/action/action';
 import styles from './style.css';
 import { FaLevelUpAlt, FaAngleDoubleRight, FaMapMarkerAlt, FaPhone, } from 'react-icons/fa';
 import LargeList from './common/largeList';
+import *as firebase from 'firebase';
 import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 // const { Header, Footer, Sider, Content } = Layout;
 
 const options = [
@@ -28,14 +34,31 @@ class AddDoctor extends Component {
   }
 
   image(file) {
-    var reader = new FileReader();
-    reader.onloadend = () => {
-      this.setState({ doctorImage: reader.result })
-      console.log(reader.result, 'result here')
+    if(file){
+      firebase.storage().ref(`pictures/${file.name}`).put(file).then((res) => {
+        console.log(res, "-------")
+        firebase.storage().ref(`pictures/${file.name}`).getDownloadURL().then((res) => {
+          console.log(res, "9999")
+          this.setState({
+            doctorImage:res
+          })
+        })
+      })
     }
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+
+
+
+
+
+
+    // var reader = new FileReader();
+    // reader.onloadend = () => {
+    //   this.setState({ doctorImage: reader.result })
+    //   console.log(reader.result, 'result here')
+    // }
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
   }
   createDoctor() {
     const { doctorImage, etateId, fullName, otherName, MobileNumber, email, password, bussinesAddress, specialist
@@ -61,12 +84,15 @@ class AddDoctor extends Component {
     if (validate) {
       this.props.createDoctor(validateOpt)
     }
-
-
   }
   componentWillReceiveProps(nextProps){
     this.setState({
       myDoctorsInComponent:nextProps.myDoctors
+    })
+  }
+  componentDidMount(){
+    this.setState({
+      myDoctorsInComponent:this.props.myDoctors
     })
   }
   render() {
@@ -146,15 +172,15 @@ class AddDoctor extends Component {
         <div className="float-right" style={{ justifyContent: "flex-end", display: "flex", padding: "5%" }}>
           {isError && <div><span style={{ color: "red", fontSize: 13 }}>{errorMessage}</span></div>}
           {isLoader ?
-            <Button onClick={() => this.createDoctor()} variant="primary">
+            <Button  variant="primary">
               <ActivityIndicator />
             </Button> :
             <Button onClick={() => this.createDoctor()} variant="primary">Add</Button>
           }
-     <a href="/AddBookingAdmin">
+     <Link to="/AddBookingAdmin">
 
 <Button variant="primary">Next</Button>
- </a>
+ </Link>
         </div>
       </div>
     )

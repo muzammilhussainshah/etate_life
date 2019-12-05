@@ -4,6 +4,12 @@ import AppHeader from './common/AppHeader';
 import ActivityIndicator from './common/ActivityIndicator';
 import { signUpAction } from '../store/action/action';
 import { connect } from "react-redux";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 class Signup extends Component {
     constructor(props) {
@@ -73,14 +79,14 @@ class Signup extends Component {
                                 <Form.Check type="checkbox" label="Remember me" />
                             </Col>
                             <Col>
-                            <a href="/ForgetPassword"> <span>Forget password</span></a>
+                            <Link to="/ForgetPassword"> <span>Forget password</span></Link>
                             </Col>
                             {/* <Form.Group controlId="formBasicCheckbox"> */}
                             {/* </Form.Group> */}
                         </Row>
                         <hr />
                         <div>
-                   <a href="/login"> <span>Already hav an account?</span></a>
+                   <Link to="/login"> <span>Already hav an account?</span></Link>
 
                             {/* <span>Already hav an account? </span> */}
                         </div>
