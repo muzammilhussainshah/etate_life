@@ -2,6 +2,7 @@ import React, { Component, } from 'react';
 // import { Layout, Menu, Breadcrumb,Row, Col, } from 'antd';
 import { Navbar, Nav, Button, Form, FormControl, Row, Col, Container, Layout, NavDropdown, Card, Jumbotron } from 'react-bootstrap';
 import AppHeader from './common/AppHeader';
+import HowItWorks from './HowItWorks';
 // import {} from 'bootstrap';
 // import { ButtonToolbar,DropdownButton,Dropdown , Navbar,Nav,NavDropdown} from 'react-bootstrap';
 import styles from './style.css';
@@ -104,7 +105,7 @@ class LandingPage extends Component {
 
                 {/* </div> */}
                 {/* Why choose us*/}
-                <div style={{ background: "#EEF5FF", padding: "2%" }} >
+                <div style={{  padding: "2%" }} >
                     <center style={{ fontSize: 25, fontWeight: "bold", }} id="whyChooseUs">
                         Why choose us
                      </center>
@@ -136,54 +137,7 @@ class LandingPage extends Component {
                     <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }} id="HowItWorks">
                         How it works
                   </center>
-                    <div style={{ display: "flex", flexBasis: "100%", flexWrap: "wrap", justifyContent: "center", color: "#6D6D6D" }} >
-                        <div style={{ flexBasis: "40%", marginTop: "2%", justifyContent: "flex-end", display: "flex" }}>
-                            <div style={{ width: 400, flexDirection: "row", display: "flex", justifyContent: "space-between" }}>
-                                <div >
-                                    <div>
-                                        <img style={{ width: 170, }} src={require("../assets/patientregister.png")} alt="aaaa" />
-                                    </div>
-                                    <div >
-                                        Step 1
-                                        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage  book.
-                                </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <img style={{ width: 170, }} src={require("../assets/qrcode.png")} alt="aaaa" />
-                                    </div>
-                                    <div>
-                                        Step 2
-                                        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage  book.
-                                </div>
-                                </div>
-                                {/* </div> */}
-                            </div>
-                        </div>
-                        <div style={{ flexBasis: "40%", marginTop: "2%", display: "flex", justifyContent: "flex-start", alignItems: "center", }}>
-                            <div style={{ width: 400, flexDirection: "row", display: "flex", justifyContent: "space-between" }}>
-                                <div style={{}}>
-                                    <div>
-                                        <img style={{ width: 170, }} src={require("../assets/bookatime.png")} alt="aaaa" />
-                                    </div>
-                                    <div >
-                                        Step 3
-                                        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage  book.
-                                </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <img style={{ width: 170, }} src={require("../assets/reminders.png")} alt="aaaa" />
-                                    </div>
-                                    <div>
-                                        Step 4
-                                        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage  book.
-                                </div>
-                                </div>
-                                {/* </div> */}
-                            </div>
-                        </div>
-                    </div>
+                   <HowItWorks/>
 
                     {/* pricing */}
                     <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }} id="Pricing">
