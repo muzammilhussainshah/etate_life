@@ -6,6 +6,7 @@ import home from './components/home';
 import pricing from './components/pricing';
 import OpeningHours from './components/OpeningHours';
 import test from './components/test';
+import test2 from './components/test2';
 import bussinesCatogery from './components/bussinesCatogery';
 import addDoctor from './components/addDoctor';
 import AddBookingAdmin from './components/AddBookingAdmin';
@@ -52,6 +53,7 @@ class Routers extends Component {
                     {/* <Route exact path="/" component={login} /> */}
                     <Route exact path="/" component={this.state.initialRoute} />
                     {/* <Route exact path="/" component={test} /> */}
+                    <Route exact path="/test2" component={test2} />
 
                     <Route exact path="/LandingPage" component={LandingPage} />
                     <Route exact path="/Verify" component={Verify} />

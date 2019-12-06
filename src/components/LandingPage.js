@@ -41,7 +41,7 @@ class LandingPage extends Component {
                 <AppHeader login={true} button="Signup" />
 
                 <div style={{ position: "relative" }}>
-                    <img style={{ width: "100%", height: 550, }} src={require('../assets/image1a.jpg')} alt="aaaa" />
+                    <img style={{ width: "100%", height: 550, }} src={require('../assets/image1b.jpg')} alt="aaaa" />
                     {!currentUser &&
                         <div style={{
                             position: "absolute",
@@ -108,15 +108,15 @@ class LandingPage extends Component {
                     <center style={{ fontSize: 25, fontWeight: "bold", }} id="whyChooseUs">
                         Why choose us
                      </center>
-                    <div style={{ display: "flex", flexBasis: "100%", flexWrap: "wrap", justifyContent: "center" }} >
-                        <div style={{ flexBasis: "40%", marginTop: "2%", justifyContent: "center", display: "flex" }}>
+                    <div style={{ display: "flex",flexWrap: "wrap", justifyContent: "center" }} >
+                        <div style={{ marginRight:25, marginTop: "2%", justifyContent: "center", display: "flex" }}>
 
                             <div style={{ width: 350, }}>
                                 <img style={{ width: 350, }} src={require("../assets/whychooseus.png")} alt="aaaa" />
                                 {/* </div> */}
                             </div>
                         </div>
-                        <div style={{ flexBasis: "40%", marginTop: "2%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
+                        <div style={{ marginLeft:25, marginTop: "2%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
                             {/* <div style={{  background: "blue",  width: 350, }}>
 
                         <div style={{  background: "pink", }}>
