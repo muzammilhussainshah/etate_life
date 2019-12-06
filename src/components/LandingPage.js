@@ -105,7 +105,7 @@ class LandingPage extends Component {
 
                 {/* </div> */}
                 {/* Why choose us*/}
-                <div style={{  padding: "2%" }} >
+                <div style={{  }} >
                     <center style={{ fontSize: 25, fontWeight: "bold", }} id="whyChooseUs">
                         Why choose us
                      </center>

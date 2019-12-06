@@ -23,3 +23,7 @@
   /* font-size: 3em; */
   text-align: center;
 }
+.gradient {
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(#fff, #D7E8FC);
+}
