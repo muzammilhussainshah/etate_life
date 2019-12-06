@@ -55,7 +55,7 @@ export default () => {
       >
         <div  style={{width:200,}}>
           <div>
-            <img style={{ width: 170, }} src={require("../assets/patientregister.png")} alt="aaaa" />
+            <img style={{ width: 170, }} src={require("../assets/doctor.png")} alt="aaaa" />
           </div>
           <div style={{textAlign:"center"}}>
             Step 1

@@ -17,7 +17,7 @@ import {
     Switch,
     Route,
     Link
-  } from "react-router-dom";
+} from "react-router-dom";
 // const { Header, Footer, Sider, Content } = Layout;
 
 class LandingPage extends Component {
@@ -105,19 +105,19 @@ class LandingPage extends Component {
 
                 {/* </div> */}
                 {/* Why choose us*/}
-                <div style={{  }} >
+                <div style={{}} >
                     <center style={{ fontSize: 25, fontWeight: "bold", }} id="whyChooseUs">
                         Why choose us
                      </center>
-                    <div style={{ display: "flex",flexWrap: "wrap", justifyContent: "center" }} >
-                        <div style={{ marginRight:25, marginTop: "2%", justifyContent: "center", display: "flex" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }} >
+                        <div style={{ marginRight: 25, marginTop: "2%", justifyContent: "center", display: "flex" }}>
 
                             <div style={{ width: 350, }}>
                                 <img style={{ width: 350, }} src={require("../assets/whychooseus.png")} alt="aaaa" />
                                 {/* </div> */}
                             </div>
                         </div>
-                        <div style={{ marginLeft:25, marginTop: "2%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
+                        <div style={{ marginLeft: 25, marginTop: "2%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
                             {/* <div style={{  background: "blue",  width: 350, }}>
 
                         <div style={{  background: "pink", }}>
@@ -137,7 +137,7 @@ class LandingPage extends Component {
                     <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }} id="HowItWorks">
                         How it works
                   </center>
-                   <HowItWorks/>
+                    <HowItWorks />
 
                     {/* pricing */}
                     <center style={{ fontSize: 25, fontWeight: "bold", marginTop: "2%" }} id="Pricing">
@@ -146,24 +146,78 @@ class LandingPage extends Component {
                     <center>
                         <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }} id="2">
 
-                            <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
-                                <Card.Body>
-                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>2 months free</Card.Title>
-                                    <Card.Title style={{ color: "blue", fontSize: 17 }}>if you paid anually</Card.Title>
-                                    <Card.Text style={{ marginTop: "10%" }}>
-                                    free trial
-            </Card.Text>
-                                    <Card.Text style={{ marginTop: "5%" }}>
-                                    50% discount
-            </Card.Text>
-                                    <Card.Text style={{ marginTop: "5%" }}>
-                                    number of doctors
-            </Card.Text>
-                                    <Button style={{ background: "#3C6AB3",borderRadius:250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                            <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <div>
+                                    <div style={{ color: "blue", fontSize: 25 }}>2 months free</div>
+                                    <div style={{ color: "blue", fontSize: 17 }}>if you paid anually</div>
+                                    <div style={{ marginTop: "10%" }}>
+                                        free trial
+            </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        50% discount
+            </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        number of doctors
+            </div>
+                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
-                                </Card.Body>
-                            </Card>
-                            <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                </div>
+                            </div>
+
+                            <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <div>
+                                    <div style={{ color: "blue", fontSize: 25 }}>Solo Clinic</div>
+                                    <div style={{ color: "blue", fontSize: 17 }}>$ 75 / month</div>
+                                    <div style={{ marginTop: "10%" }}>
+                                    60 days
+                                 </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                    60 days
+                                    </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                 1
+                                     </div>
+                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+
+                                </div>
+                            </div>
+                            <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <div>
+                                    <div style={{ color: "blue", fontSize: 25 }}>Single Clinic</div>
+                                    <div style={{ color: "blue", fontSize: 17 }}>$ 99 / month</div>
+                                    <div style={{ marginTop: "10%" }}>
+                                    30 days
+                                 </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                    30 days
+                                    </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                    4
+                                     </div>
+                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+
+                                </div>
+                            </div>
+                            <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <div>
+                                    <div style={{ color: "blue", fontSize: 25 }}>Multi Clinic</div>
+                                    <div style={{ color: "blue", fontSize: 17 }}>$ 75 / month</div>
+                                    <div style={{ marginTop: "10%" }}>
+                                    30 days
+                                 </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                    0 days
+                                    </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                    12
+                                     </div>
+                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+
+                                </div>
+                            </div>
+
+                            
+                            {/* <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <Card.Body>
                                     <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
                                     <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
@@ -210,17 +264,17 @@ class LandingPage extends Component {
             </Card.Text>
                                     <Button style={{ background: "#3C6AB3",borderRadius:250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
                                 </Card.Body>
-                            </Card>
+                            </Card> */}
                         </div>
 
                     </center>
                     <div style={{ marginLeft: "12%", color: "#3C6AB3", marginTop: "2%", fontSize: 13, display: "flex", justifyContent: "center" }} >
                         You save 17 %
-        </div>
+                      </div>
                     <div style={{ marginTop: "1%", display: "flex", justifyContent: "center" }}>
                         <div style={{ marginRight: "1%", fontWeight: "bold" }} >
                             Month
-        </div>
+                         </div>
                         <div className='custom-control custom-switch'>
                             {/* <span >
             Year
@@ -239,9 +293,9 @@ class LandingPage extends Component {
                         </div>
                     </div>
                 </div>
-                <center  style={{background:"#EEF5FF"}}>
+                <center style={{ }}>
 
-                    <Button style={{ background: "#3C6AB3",borderRadius:250, borderColor: "#3C6AB3", marginTop: "3%" }} variant="primary" size="lg">Start free trial now!</Button>
+                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "3%" }} variant="primary" size="lg">Start free trial now!</Button>
                     <div style={{ color: "grey", fontSize: 11, marginTop: "1%" }}>
                         No credit card needed!
 </div>

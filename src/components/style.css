@@ -25,5 +25,5 @@
 }
 .gradient {
   background-color: red; /* For browsers that do not support gradients */
-  background-image: linear-gradient(#fff, #D7E8FC);
+  background-image: linear-gradient(#fff, #E6EFF9);
 }
