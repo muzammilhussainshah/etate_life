@@ -131,10 +131,13 @@ export function emailVerify(email) {
             .then(function (response) {
                 dispatch({ type: ActionTypes.LOADER })
                 console.log("response", response.data);
-                history.push({ pathname: '/Verify', state: response.data });
+                let obj = response.data
+                obj.email=email
+                history.push({ pathname: '/Verify', state: obj});
             })
             .catch(function (error) {
-                dispatch({ type: ActionTypes.LOADER })
+                dispatch(errorCall("Invalid tokern"))
+
                 console.log("error", error);
             });
     }
@@ -193,9 +196,7 @@ export function signinAction(user) {
         dispatch({ type: ActionTypes.LOADER })
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
             .then((userData) => {
-                dispatch(UserDataGet(userData.user.uid, user.email, "/home"))
-
-
+                dispatch(UserDataGet(userData.user.uid, user.email, "login"))
                 // history.push('/home');
                 // dispatch({ type: ActionTypes.LOADER })
             })
@@ -217,19 +218,27 @@ export function UserDataGet(uid, email, route) {
     console.log(uid, email, "uid,email", route)
     return dispatch => {
         // for user data
+        
         db.collection("users").where("uid", "==", uid).get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                     let currentUser = doc.data()
-                    dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
                     if (currentUser.status === true) {
                         dispatch({ type: ActionTypes.LOADER })
-                        history.push(route);
+                        dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
+                        history.push("/home");
+                    }
+                    else if(route){
+                        dispatch(emailVerify(currentUser.email))
                     }
                     else {
-                        dispatch(emailVerify(email))
+                        // history.push("/LandingPage");
+
+                        dispatch({ type: ActionTypes.LOADER })
+
                     }
                 });
+                // dispatch({ type: ActionTypes.LOADER })
             })
             .catch(function (error) {
                 dispatch(errorCall("Error getting documents: ", error))

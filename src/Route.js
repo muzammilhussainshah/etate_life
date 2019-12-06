@@ -26,7 +26,7 @@ class Routers extends Component {
     }
     componentDidMount() {
         console.log("wwwwwwwwwwwwwwwww")
-        const { UserDataGet, loaderCall } = this.props
+        const { UserDataGet, loaderCall,currentUser } = this.props
         firebase.auth().onAuthStateChanged((user) => {
             console.log(user,"uuuuuuuu")
             if (user) {
@@ -35,9 +35,11 @@ class Routers extends Component {
                 // User is signed in.
                 console.log(user, "user in route")
                 UserDataGet(user.uid, user.email)
-                this.setState({
-                    initialRoute:home
-                })
+
+                console.log(currentUser,"]]]]]]]]")
+                // this.setState({
+                //     initialRoute:home
+                // })
             } else {
                 // this.setState({
                 //     initialRout:<LandingPage/>
@@ -45,13 +47,17 @@ class Routers extends Component {
             }
         });
     }
+    // componentDidMount(){
+
+    //     console.log("rrrrrrrrrout")
+    // }
     render() {
         return (
             <Router history={history}>
                 <div>
                     {/* <Route exact path="/" component={test} /> */}
                     {/* <Route exact path="/" component={login} /> */}
-                    <Route exact path="/" component={this.state.initialRoute} />
+                    <Route exact path="/" component={LandingPage} />
                     {/* <Route exact path="/" component={test} /> */}
                     <Route exact path="/test2" component={test2} />
 

@@ -2,7 +2,7 @@ import React, { Component, } from 'react';
 import { Button, Form, Row, Col, } from 'react-bootstrap';
 import AppHeader from './common/AppHeader';
 import ActivityIndicator from './common/ActivityIndicator';
-import { UserActivation } from '../store/action/action';
+import { UserActivation,emailVerify,loaderCall } from '../store/action/action';
 import { connect } from "react-redux";
 class Verify extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class Verify extends Component {
                         webkitBoxShadow: "3px 3px 3px #9E9E9E",
                         mozBoxShadow: "3px 3px 3px #9E9E9E",
                         boxShadow: "3px 3px 3px #9E9E9E",
-                        height: 350
+                        height: 360
                     }}>
                         <div style={{}}>
                             <img src={require('../assets/updatedLogo.png')} alt="aaaa" />
@@ -37,7 +37,7 @@ class Verify extends Component {
                             Connect to your patients
                         </div>
                         <div style={{  marginTop: 22, }}>
-                        you have received an email that is conecting you to a etate-life.
+                        Enter verification code
                         </div>
                         <Form style={{ width: "80%", marginTop: "7%" }}>
                             <Form.Group controlId="formBasicEmail">
@@ -51,6 +51,12 @@ class Verify extends Component {
                             </Button> :
                             <Button onClick={() => { this.props.UserActivation(verifyCodeObj) }} style={{ width: 255, fontSize: 11, marginTop: "3%" }} variant="primary" > Verify</Button>
                         }
+                     <a onClick={()=>{
+                         
+                         this.props.loaderCall()
+                         this.props.emailVerify(this.props.history.location.state.email)
+                        }} 
+                         style={{fontSize:13,}}>resend code</a>
                     {isError && <div><span style={{color:"red",fontSize:13}}>{errorMessage}</span></div>}
                     </div>
                 </center>
@@ -71,6 +77,12 @@ function mapDispatchToProps(dispatch) {
     return ({
         UserActivation: (verifyCodeObj) => {
             dispatch(UserActivation(verifyCodeObj))
+        },
+        emailVerify: (email) => {
+            dispatch(emailVerify(email))
+        },
+        loaderCall: () => {
+            dispatch(loaderCall())
         },
     })
 }
