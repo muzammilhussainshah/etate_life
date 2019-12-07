@@ -19,15 +19,16 @@ class Home extends Component {
 
     componentWillReceiveProps(nextProps) {
         const { currentUser } = this.props
-        console.log(nextProps, "componentWillMount")
-     if(currentUser){
+        console.log(nextProps, "--*-*",currentUser)
+        if(nextProps.currentUser){
+            console.log(nextProps, "ifffffff",currentUser)
 
         this.setState({
-            fullName: currentUser.fullName,
-            email: currentUser.email,
-            phone: currentUser.phone,
+            fullName: nextProps.currentUser.fullName,
+            email: nextProps.currentUser.email,
+            phone: nextProps.currentUser.phone,
             // currentPassword: "",
-            CheckCurrPass: currentUser.password,
+            CheckCurrPass: nextProps.currentUser.password,
             // password: "",
             // confirmPassword: "",
         })

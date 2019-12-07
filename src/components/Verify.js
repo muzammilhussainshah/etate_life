@@ -56,7 +56,7 @@ class Verify extends Component {
                          this.props.loaderCall()
                          this.props.emailVerify(this.props.history.location.state.email)
                         }} 
-                         style={{fontSize:13,}}>resend code</a>
+                         style={{fontSize:13,color:"blue"}}>re-send code</a>
                     {isError && <div><span style={{color:"red",fontSize:13}}>{errorMessage}</span></div>}
                     </div>
                 </center>

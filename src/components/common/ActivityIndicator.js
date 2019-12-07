@@ -6,7 +6,7 @@ class ActivityIndicator extends Component {
         this.state = {};
     }
     render() {
-        const {label,type,placeholder,defaultValue } = this.props
+        const {label,type,placeholder,defaultValue,colorOfLoader } = this.props
         return (
             <Spinner
                 as="span"
@@ -14,6 +14,7 @@ class ActivityIndicator extends Component {
                 size="sm"
                 role="status"
                 aria-hidden="true"
+           style={{color:colorOfLoader}}
             />
         )
     }

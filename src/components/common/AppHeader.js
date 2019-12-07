@@ -49,10 +49,12 @@ class AppHeader extends Component {
                         id={`dropdown-variants-Secondary`}
                         key={"Secondary"}
                       >
-                        <Dropdown.Item eventKey="1" href="/home">My account</Dropdown.Item>
-                        <Dropdown.Item eventKey="2" href="/MyClinics">My clinincs</Dropdown.Item>
-                        <Dropdown.Item eventKey="3"href="/MyDoctors">My doctors</Dropdown.Item>
-                        <Dropdown.Item eventKey="4"href="/pricing">My payment</Dropdown.Item>
+                        <Dropdown.Item eventKey="1" ><Link to="/home">My account</Link></Dropdown.Item>
+                        <Dropdown.Item eventKey="2" ><Link to="/MyClinics">My clinincs</Link></Dropdown.Item>
+                        <Dropdown.Item eventKey="3" ><Link to="/MyDoctors">My doctors</Link></Dropdown.Item>
+                        <Dropdown.Item eventKey="4" ><Link to="/pricing">My payment</Link></Dropdown.Item>
+                        {/* <Dropdown.Item eventKey="3"href="/MyDoctors">My doctors</Dropdown.Item>
+                        <Dropdown.Item eventKey="4"href="/pricing">My payment</Dropdown.Item> */}
                         <Dropdown.Item eventKey="5" onClick={()=>this.logout()}>Logout</Dropdown.Item>
                       </DropdownButton>}
                 {/* <Nav.Link href={!user ? "Login" : "/"} style={{ color: "blue", fontWeight: "bold" }}>{!user ? "Login" : "Profile"}</Nav.Link> */}

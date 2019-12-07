@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import AddHours from './AddHours';
 import { MDBIcon, MDBFileInput } from 'mdbreact';
 import Select from 'react-select';
-import { errorCall,loaderCall, createClinic } from '../store/action/action';
+import { errorCall, loaderCall, createClinic } from '../store/action/action';
 import ActivityIndicator from './common/ActivityIndicator';
 import *as firebase from 'firebase';
 import {
@@ -32,7 +32,7 @@ class BussinesCatogery extends Component {
       BussinesAddres: "", MobileNumber: "",
       bussinesCatogery: "", addHours: [],
       arrayOfMorning: [], arrayOfAfternoon: [],
-      arrayOfEvening: [],myClinicsInComponent:""
+      arrayOfEvening: [], myClinicsInComponent: ""
     };
   }
 
@@ -43,15 +43,18 @@ class BussinesCatogery extends Component {
     });
   }
   image(file) {
+    const { loaderCall } = this.props
     // console.log(file[0], "555")
-    if(file){
+    loaderCall()
+    if (file) {
       firebase.storage().ref(`pictures/${file.name}`).put(file).then((res) => {
         console.log(res, "-------")
         firebase.storage().ref(`pictures/${file.name}`).getDownloadURL().then((res) => {
           console.log(res, "9999")
           this.setState({
-            ClinicImage:res
+            ClinicImage: res
           })
+          loaderCall()
         })
       })
     }
@@ -71,30 +74,6 @@ class BussinesCatogery extends Component {
     const { ClinicImage, etateId, BussinesName, registrationNumber, BussinesAddres, MobileNumber,
       bussinesCatogery, addHours, arrayOfMorning, arrayOfAfternoon, arrayOfEvening,
     } = this.state
-  // console.log(file, "filefilefile", file.name)
-    // firebase.storage().ref(`pictures/${file.name}`).put(file).then((res) => {
-    //   console.log(res, "-------")
-    //   firebase.storage().ref(`pictures/${file.name}`).getDownloadURL().then((res) => {
-    //     console.log(res, "9999")
-    //     this.setState({
-    //       ClinicImage:res
-    //     })
-
-
-
-
-    //   })
-    // })
-
-
-
-
-
-
-
-
-
-
     console.log("start",
       ClinicImage, etateId,
       BussinesName, registrationNumber,
@@ -131,34 +110,42 @@ class BussinesCatogery extends Component {
 
 
   }
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setState({
-      myClinicsInComponent:nextProps.myClinics
+      myClinicsInComponent: nextProps.myClinics
     })
   }
-  componentDidMount(){
+  componentDidMount() {
     this.setState({
-      myClinicsInComponent:this.props.myClinics
+      myClinicsInComponent: this.props.myClinics
     })
   }
   render() {
-    const { isLoader, isError, errorMessage,myClinics } = this.props
+    const { isLoader, isError, errorMessage, myClinics } = this.props
     const { myClinicsInComponent } = this.state
     // console.log(myClinics,"myClinicsmyClinics")
-    console.log( this.props.myClinics,"render")
+    console.log(this.props.myClinics, "render")
 
     return (
       <div style={{ backgroundColor: "#fff", }}>
         <AppHeader />
-        <BreadCrum color="Clinic address"/>
+        <BreadCrum color="Clinic address" />
 
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", flexWrap: "wrap", justifyContent: "center" }}>
           <div style={{ flexBasis: "40%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA", }}>
-            <LargeList heading="Clinics name" data={myClinicsInComponent} deleteIcon="trash-alt" collection="clinics"/>
+            <LargeList heading="Clinics name" data={myClinicsInComponent} deleteIcon="trash-alt" collection="clinics" />
           </div>
           <div style={{ flexBasis: "60%", }}>
             <div style={{}}>
-              {
+              {(isLoader)?
+                // <Button  variant="primary">
+                <div style={{ minWidth: 150,padding:50 }}>
+
+                  <ActivityIndicator colorOfLoader="grey" style={{}} />
+                </div>
+                // </Button> :
+                // <Button onClick={() => this.createDoctor()} variant="primary">Add</Button>
+              :
                 this.state.ClinicImage ?
                   <img width="10%" style={{ minWidth: 150 }} src={this.state.ClinicImage} /> :
                   <img width="10%" style={{ minWidth: 150 }} src={require('../assets/default.png')} />
@@ -168,7 +155,7 @@ class BussinesCatogery extends Component {
               display: "flex", justifyContent: "center", borderBottom: "2px solid #F0F0F0",
             }}>
 
-              <Form style={{width:400}}>
+              <Form style={{ width: 400 }}>
                 <Form.Group as={Row} controlId="formHorizontalEmail" style={{ padding: 15 }}>
                   <div className="custom-file" >
                     <input
@@ -364,15 +351,15 @@ class BussinesCatogery extends Component {
         <div className="float-right" style={{ justifyContent: "flex-end", display: "flex", padding: "5%" }}>
           {isError && <div><span style={{ color: "red", fontSize: 13 }}>{errorMessage}</span></div>}
           {isLoader ?
-            <Button  variant="primary">
+            <Button variant="primary">
               <ActivityIndicator />
             </Button> :
             <Button onClick={() => this.createClinic()} variant="primary">Add</Button>
           }
-           <Link to="/addDoctor">
+          <Link to="/addDoctor">
 
-          <Button variant="primary">Next</Button>
-           </Link>
+            <Button variant="primary">Next</Button>
+          </Link>
         </div>
       </div>
     )

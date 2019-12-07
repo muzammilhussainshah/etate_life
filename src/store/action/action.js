@@ -132,8 +132,8 @@ export function emailVerify(email) {
                 dispatch({ type: ActionTypes.LOADER })
                 console.log("response", response.data);
                 let obj = response.data
-                obj.email=email
-                history.push({ pathname: '/Verify', state: obj});
+                obj.email = email
+                history.push({ pathname: '/Verify', state: obj });
             })
             .catch(function (error) {
                 dispatch(errorCall("Invalid tokern"))
@@ -218,17 +218,21 @@ export function UserDataGet(uid, email, route) {
     console.log(uid, email, "uid,email", route)
     return dispatch => {
         // for user data
-        
+
         db.collection("users").where("uid", "==", uid).get()
             .then(function (querySnapshot) {
                 querySnapshot.forEach(function (doc) {
                     let currentUser = doc.data()
                     if (currentUser.status === true) {
+                        console.log("working for re", currentUser)
                         dispatch({ type: ActionTypes.LOADER })
                         dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
-                        history.push("/home");
+                        if (route) {
+                            history.push("/home");
+
+                        }
                     }
-                    else if(route){
+                    else if (route) {
                         dispatch(emailVerify(currentUser.email))
                     }
                     else {
@@ -288,8 +292,17 @@ export function UserDataGet(uid, email, route) {
             .catch(function (error) {
                 dispatch(errorCall("Error getting documents: ", error))
             });
+        // for ip config
+        axios.get('http://api.hostip.info')
+            .then(function (response) {
+                console.log("ip config", response.data);
+             
+            })
+            .catch(function (error) {
+                // dispatch(errorCall("Invalid tokern"))
 
-
+                console.log("error", error);
+            });
 
 
 
@@ -310,7 +323,7 @@ export function userUpdate(user) {
                 (user.password === user.confirmPassword) && (user.password !== "")) {
                 currentUserUid.updatePassword(user.password).then(function () {
                     console.log("succes")
-                    db.collection("users").doc(currentUserUid.uid).update({ fullName: user.fullName, phone: user.phone, password: user.password })
+                    db.collection("users").doc(currentUserUid.uid).update({ fullName: user.fullName, phone: user.phone, password: user.password, confirmPassword: user.password })
                         .then(function () {
                             window.location.reload();
                             dispatch({ type: ActionTypes.LOADER })

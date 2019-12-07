@@ -19,7 +19,7 @@ class LargeList extends Component {
     const { selectedList } = this.state
     console.log(data, "ddddddd")
     return (
-      <div style={{ background: "#F0F0F0", height: '520px', padding: "3%" }}>
+      <div style={{ background: "#F0F0F0", height: '550px',minWidth: 300, padding: "3%" }}>
         <h3 style={{ fontWeight: "bold", display: "flex", justifyContent: "center" }}>
           {heading}:
             </h3>

@@ -109,8 +109,21 @@ class AddDoctor extends Component {
           </div>
           <div style={{ flexBasis: "60%", }}>
             <div style={{}}>
-              {
+              {/* {
                 this.state.doctorImage ?
+                  <img width="10%" style={{ minWidth: 150 }} src={this.state.doctorImage} /> :
+                  <img width="10%" style={{ minWidth: 150 }} src={require('../assets/default.png')} />
+              } */}
+                {(isLoader)?
+                // <Button  variant="primary">
+                <div style={{ minWidth: 150,padding:50 }}>
+
+                  <ActivityIndicator colorOfLoader="grey" style={{}} />
+                </div>
+                // </Button> :
+                // <Button onClick={() => this.createDoctor()} variant="primary">Add</Button>
+              :
+                this.state.ClinicImage ?
                   <img width="10%" style={{ minWidth: 150 }} src={this.state.doctorImage} /> :
                   <img width="10%" style={{ minWidth: 150 }} src={require('../assets/default.png')} />
               }
@@ -130,7 +143,7 @@ class AddDoctor extends Component {
                       aria-describedby="inputGroupFileAddon01"
                     />
                     <label className="custom-file-label" htmlFor="inputGroupFile01">
-                      Upload a photo of the clinic
+                      Upload a photo of the doctor
                     </label>
                   </div>
                 </Form.Group>
