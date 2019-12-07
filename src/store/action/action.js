@@ -17,6 +17,8 @@ var config = {
     measurementId: "G-XM0SFJKWTT"
 };
 firebase.initializeApp(config);
+const xmlToJson = require('xml-to-json-stream');
+const parser = xmlToJson({ attributeMode: false });
 var db = firebase.firestore();
 export function loaderCall() {
     return dispatch => {
@@ -296,7 +298,22 @@ export function UserDataGet(uid, email, route) {
         axios.get('http://api.hostip.info')
             .then(function (response) {
                 console.log("ip config", response.data);
-             
+
+                parser.xmlToJson(response.data, (err, json) => {
+                    if (err) {
+                        //error handling
+                        console.log(err,"jserrerronjsonjson")
+                    }
+                    console.log(json,"jsonjsonjson")
+
+                    //json
+                    //{
+                    //  employee: {
+                    //      name: "Alex"
+                    //  }    
+                    //}
+                });
+
             })
             .catch(function (error) {
                 // dispatch(errorCall("Invalid tokern"))
