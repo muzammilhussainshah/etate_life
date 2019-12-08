@@ -4,6 +4,10 @@ import history from '../../History';
 import *as firebase from 'firebase';
 import { userInfo } from 'os';
 import axios from 'axios';
+
+import 'react-phone-number-input/style.css'
+// import PhoneInput from 'react-phone-number-input'
+import PhoneInput,{ getCountryCallingCode, } from 'react-phone-number-input'
 // import createBrowserHistory from 'history/createBrowserHistory';
 // const history = createBrowserHistory()
 var config = {
@@ -227,8 +231,37 @@ export function UserDataGet(uid, email, route) {
                     let currentUser = doc.data()
                     if (currentUser.status === true) {
                         console.log("working for re", currentUser)
-                        dispatch({ type: ActionTypes.LOADER })
-                        dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
+                        axios.get('http://api.hostip.info')
+                        .then(function (response) {
+                            console.log("ip config", response.data);
+            
+                            parser.xmlToJson(response.data, (err, json) => {
+                                if (err) {
+                                    //error handling
+                                    console.log(err,"jserrerronjsonjson")
+                                }
+                                // console.log("jsonjsonjson",json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev)
+                                // console.log("jsonjsonjson",json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryName)
+                                // let countryCode = 
+                                let country={}
+                                country.country=json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryName
+                                country.abbr=json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev
+                                // country.countryCode=getCountryCallingCode(json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev)
+                                currentUser.country=country
+                                console.log(currentUser,"jserrerroncurrentUserjsonjson")
+
+                                dispatch({ type: ActionTypes.LOADER })
+                                dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
+                            });
+            
+                        })
+                        .catch(function (error) {
+                            // dispatch(errorCall("Invalid tokern"))
+            
+                            console.log("error", error);
+                        });
+
+                      
                         if (route) {
                             history.push("/home");
 

@@ -4,60 +4,72 @@ import AppHeader from './common/AppHeader';
 import BreadCrum from './common/BreadCrum';
 import { userUpdate } from '../store/action/action';
 import { connect } from "react-redux";
+import Select from 'react-select';
+import countryList from './common/countryList';
 import Input from './common/input';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
-  } from "react-router-dom";
+} from "react-router-dom";
+
+import 'react-phone-number-input/style.css'
+// import PhoneInput from 'react-phone-number-input'
+import PhoneInput, { getCountryCallingCode, } from 'react-phone-number-input'
+
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = { fullName: "", email: "", password: "", confirmPassword: "", phone: "", currentPassword: "" };
+        this.state = { fullName: "", email: "", password: "", confirmPassword: "", phone: "", currentPassword: "", value: "",country:"",dd:null };
     }
 
     componentWillReceiveProps(nextProps) {
         const { currentUser } = this.props
-        console.log(nextProps, "--*-*",currentUser)
-        if(nextProps.currentUser){
-            console.log(nextProps, "ifffffff",currentUser)
+        console.log(nextProps, "--*-*", currentUser)
+        if (nextProps.currentUser) {
+            console.log(nextProps, "ifffffff", currentUser)
 
-        this.setState({
-            fullName: nextProps.currentUser.fullName,
-            email: nextProps.currentUser.email,
-            phone: nextProps.currentUser.phone,
-            // currentPassword: "",
-            CheckCurrPass: nextProps.currentUser.password,
-            // password: "",
-            // confirmPassword: "",
-        })
-    }
+            this.setState({
+                fullName: nextProps.currentUser.fullName,
+                email: nextProps.currentUser.email,
+                phone: nextProps.currentUser.phone,
+                // currentPassword: "",
+                CheckCurrPass: nextProps.currentUser.password,
+                // password: "",
+                country: nextProps.currentUser.country,
+
+
+                // confirmPassword: "",
+            })
+        }
 
     }
     componentDidMount() {
         const { currentUser } = this.props
         // console.log(nextProps, "componentWillMount")
-     if(currentUser){
+        if (currentUser) {
 
-        this.setState({
-            fullName: currentUser.fullName,
-            email: currentUser.email,
-            phone: currentUser.phone,
-            // currentPassword: "",
-            CheckCurrPass: currentUser.password,
-            // password: "",
-            // confirmPassword: "",
-        })
-    }
+            this.setState({
+                fullName: currentUser.fullName,
+                email: currentUser.email,
+                phone: currentUser.phone,
+                // currentPassword: "",
+                CheckCurrPass: currentUser.password,
+                value: currentUser.countryCode,
+                country: currentUser.country
+                // password: "",
+                // confirmPassword: "",
+            })
+        }
 
     }
     render() {
         const { isLoader, isError, errorMessage, currentUser, userUpdate } = this.props
-        const { fullName, email, password, confirmPassword, phone, currentPassword, CheckCurrPass } = this.state
+        const { fullName, email, password, confirmPassword, phone, currentPassword, CheckCurrPass,country } = this.state
         let user = { fullName, email, password, confirmPassword, phone, currentPassword, CheckCurrPass }
 
-        console.log(currentUser, "cccc", this.state)
+        console.log(currentUser, "cccc", country)
         let inputs = [
             { state: "fullName", label: "Full Name", type: "text", placeholder: "Full Name", defaultValue: fullName },
             { state: "phone", label: "Phone", type: "number", placeholder: "Mobile Number", defaultValue: phone },
@@ -72,7 +84,7 @@ class Home extends Component {
                 {/* header */}
                 <AppHeader />
                 {/* routes */}
-                <BreadCrum color="Account details"/>
+                <BreadCrum color="Account details" />
                 <div style={{
                     display: "flex", justifyContent: "center"
                 }}>
@@ -80,7 +92,43 @@ class Home extends Component {
                         padding: "1%", marginTop: "5%",
                         borderRadius: 10,
                     }} >
+                        {/* <div>
+                            <PhoneInput
+                            country={currentUser&&currentUser.countryAbbrev}
+                                style={{backgroundColor:"red",width:200}}
+                                onCountryChange={value => console.log(value, "onCountryChange")}
+                                placeholder="Enter phone number"
+                                value={this.state.value}
+                                onChange={value => console.log(value, "value")}
+                            />
+                        </div> */}
                         <Form style={{}}>
+
+                            <Form.Group as={Row} controlId="formHorizontalEmail">
+                                <Form.Label column sm={5}>
+                                    {"phone"}
+                                </Form.Label>
+                                <Col sm={7}>
+                                    {currentUser &&
+                                       <PhoneInput
+
+                                       country={country.abbr}
+                                       placeholder="Enter phone number"
+                                       value={ this.state.value }
+                                       onChange={ value => this.setState({ value }) } />
+
+                                    }
+                                    {/* {country&&
+                                    // console.log(getCountryCallingCode(country.abbr),"getCountryCallingCode(this.state.country.abbr)")&&
+                                        <Form.Control  type="text"  
+                                        defaultValue={ country.abbr} 
+                                        onChange={(e) => { console.log(getCountryCallingCode(country.abbr),"coder") }} />
+
+
+                                    } */}
+                                </Col>
+
+                            </Form.Group>
                             {inputs.map((v, i) => {
                                 return (
                                     <Input label={v.label} type={v.type} placeholder={v.placeholder} disable={i === 2 && true} defaultValue={v.defaultValue}

@@ -1,26 +1,37 @@
-import React from 'react';
-import { Gradient } from 'react-gradient';
-import { Navbar, Nav, Button,ButtonToolbar } from 'react-bootstrap';
- 
-const gradients = [
-    ['#bd19d6', '#ea7d10'],
-    ['#ff2121', '#25c668'],
-];
- 
-export default function App() {
+import React, { Component } from 'react';
+import { Elements, StripeProvider } from 'react-stripe-elements';
+import countryList from './common/countryList';
+import 'react-phone-number-input/style.css'
+// import PhoneInput from 'react-phone-number-input'
+// import PhoneInput,{ getCountryCallingCode, } from 'react-phone-number-input'
+import { getCountries, getCountryCallingCode } from 'react-phone-number-input/input'
+import Select from 'react-select';
+import en from 'react-phone-number-input/locale/en.json'
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value:"",country:"",bussinesAddress:""
+    };
+  }
+  componentWillMount() {
+    let code = getCountryCallingCode("PK")
+  
+  }
+  render() {
+    const { cart} = this.state
+    console.log(cart, "555555555")
     return (
-      <ButtonToolbar>
-       <Button variant="primary">Primary</Button>
-  <Button variant="secondary">Secondary</Button>
-  <Button variant="success">Success</Button>
-  <Button variant="warning">Warning</Button>
-  <Button variant="danger">Danger</Button>
-  <Button variant="info">Info</Button>
-  <Button variant="light">Light</Button>
-  <Button variant="dark">Dark</Button>
-  <Button variant="link">Link</Button>
-    </ButtonToolbar>
-      
+      <div>
+  <Select
+                      value={this.state.bussinesAddress}
+                      onChange={(value) => console.log(value)}
+                      options={countryList}
+                    />
+    </div>
 
     );
+  }
 }
+
+export default App;
