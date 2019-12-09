@@ -10,7 +10,12 @@ import { MdMailOutline} from 'react-icons/md';
 import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
 import { buyPackage,payment } from '../store/action/action';
 import { connect } from "react-redux";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 // const { Header, Footer, Sider, Content } = Layout;
 
 class Pricing extends Component {
@@ -50,108 +55,171 @@ class Pricing extends Component {
           Pricing
         </center>
         <center>
-          <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
-            <Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%" }}>
-              <Card.Body>
-                <Card.Title style={{ color: "blue", fontSize: 25 }}>2 months free </Card.Title>
-                <Card.Title style={{ color: "blue", fontSize: 17 }}>if you paid anually</Card.Title>
-                <Card.Text style={{ marginTop: "10%" }}>
-                  free trial
-            </Card.Text>
-                <Card.Text style={{ marginTop: "5%" }}>
-                  50% discount
-            </Card.Text>
-                <Card.Text style={{ marginTop: "5%" }}>
-                 number of doctors
-            </Card.Text>
-                <Button onClick={()=>{this.props.payment({package:"2 months free", price:"0", duration :"60"})}} style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                        <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }} id="2">
 
-              </Card.Body>
-            </Card>
-            <Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%" }}>
-              <Card.Body>
-                <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
-                <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
-                <Card.Text style={{ marginTop: "10%" }}>
-                  60 days
-            </Card.Text>
-                <Card.Text style={{ marginTop: "5%" }}>
-                  60 days
-            </Card.Text>
-                <Card.Text style={{ marginTop: "5%" }}>
-                  1
-            </Card.Text>
-                <Button onClick={()=>{this.buy({package:"Solo clinic", price:"75", duration :"60"})}} style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                            <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <div>
+                                    <div style={{ color: "#285BAC", fontSize: 25 }}>2 months free</div>
+                                    <div style={{ color: "#285BAC", fontSize: 17 }}>if you paid anually</div>
+                                    <div style={{ marginTop: "10%" }}>
+                                        free trial
+            </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        50% discount
+            </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        number of doctors
+            </div>
+                                    {/* <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" ,fontWeight:"bold"}} variant="primary">Buy Now</Button> */}
 
-              </Card.Body>
-            </Card><Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%" }}>
-              <Card.Body>
-                <Card.Title style={{ color: "blue", fontSize: 25 }}>Single Clinic</Card.Title>
-                <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 99 / month</Card.Title>
-                <Card.Text style={{ marginTop: "10%" }}>
-                  30 days
-            </Card.Text>
-                <Card.Text style={{ marginTop: "5%" }}>
-                  30 days
-            </Card.Text>
-                <Card.Text style={{ marginTop: "5%" }}>
-                  4
-            </Card.Text>
-                <Button onClick={()=>{this.buy({package:"Single Clinic", price:"99", duration :"30"})}}  style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                </div>
+                            </div>
 
-              </Card.Body>
-            </Card><Card style={{ width: '18rem', paddingTop: "2%", paddingBottom: "2%" }}>
-              <Card.Body>
-                <Card.Title style={{ color: "blue", fontSize: 25 }}>Multi Clinic</Card.Title>
-                <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
-                <Card.Text style={{ marginTop: "10%" }}>
-                  30 days
-            </Card.Text>
-                <Card.Text style={{ marginTop: "5%" }}>
-                  0 days
-            </Card.Text>
-                <Card.Text style={{ marginTop: "5%" }}>
-                  12
-            </Card.Text>
-                <Button onClick={()=>{this.buy({package:"Multi Clinic", price:"75", duration :"30"})}} style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                            <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <div>
+                                    <div style={{ color: "#285BAC", fontSize: 25 }}>Solo Clinic</div>
+                                    <div style={{ color: "#285BAC", fontSize: 17 }}>$ 75 / month</div>
+                                    <div style={{ marginTop: "10%" }}>
+                                        60 days
+                                 </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        60 days
+                                    </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        1
+                                     </div>
+                                    <Button
+                                        onClick={() => { this.buy({ package: "Solo clinic", price: "75", duration: "60" }) }}
+                                        style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
 
-              </Card.Body>
-            </Card>
-          </div>
-        </center>
-        {/* switch */}
-        <div style={{ marginLeft: "12%", color: "#3C6AB3", marginTop: "2%", fontSize: 13, display: "flex", justifyContent: "center" }} >
-          You save 17 %
-        </div>
+                                </div>
+                            </div>
+                            <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <div>
+                                    <div style={{ color: "#285BAC", fontSize: 25 }}>Single Clinic</div>
+                                    <div style={{ color: "#285BAC", fontSize: 17 }}>$ 99 / month</div>
+                                    <div style={{ marginTop: "10%" }}>
+                                        30 days
+                                 </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        30 days
+                                    </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        4
+                                     </div>
+                                    <Button 
+                                    onClick={() => { this.buy({ package: "Single clinic", price: "99", duration: "30" }) }}
+                                    style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
+
+                                </div>
+                            </div>
+                            <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <div>
+                                    <div style={{ color: "#285BAC", fontSize: 25 }}>Multi Clinic</div>
+                                    <div style={{ color: "#285BAC", fontSize: 17 }}>$ 75 / month</div>
+                                    <div style={{ marginTop: "10%" }}>
+                                        30 days
+                                 </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        0 days
+                                    </div>
+                                    <div style={{ marginTop: "5%" }}>
+                                        12
+                                     </div>
+                                    <Button 
+                                    onClick={() => { this.buy({ package: "Multi clinic", price: "75", duration: "30" }) }}
+                                    style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
+
+                                </div>
+                            </div>
+
+
+                            {/* <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <Card.Body>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 25 }}>Solo Clinic</Card.Title>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 17 }}>$ 75 / month</Card.Title>
+                                    <Card.Text style={{ marginTop: "10%" }}>
+                                        60 days
+            </Card.Text>
+                                    <Card.Text style={{ marginTop: "5%" }}>
+                                        60 days
+            </Card.Text>
+                                    <Card.Text style={{ marginTop: "5%" }}>
+                                        1
+            </Card.Text>
+                                    <Button style={{ background: "#3C6AB3",borderRadius:250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+
+                                </Card.Body>
+                            </Card><Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <Card.Body>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 25 }}>Single Clinic</Card.Title>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 17 }}>$ 99 / month</Card.Title>
+                                    <Card.Text style={{ marginTop: "10%" }}>
+                                        30 days
+            </Card.Text>
+                                    <Card.Text style={{ marginTop: "5%" }}>
+                                        30 days
+            </Card.Text>
+                                    <Card.Text style={{ marginTop: "5%" }}>
+                                    4
+            </Card.Text>
+                                    <Button style={{ background: "#3C6AB3", borderRadius:250,borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+
+                                </Card.Body>
+                            </Card><Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
+                                <Card.Body>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 25 }}>Multi Clinic</Card.Title>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 17 }}>$ 75 / month</Card.Title>
+                                    <Card.Text style={{ marginTop: "10%" }}>
+                                    30 days
+            </Card.Text>
+                                    <Card.Text style={{ marginTop: "5%" }}>
+                                        0 days
+            </Card.Text>
+                                    <Card.Text style={{ marginTop: "5%" }}>
+                                        12
+            </Card.Text>
+                                    <Button style={{ background: "#3C6AB3",borderRadius:250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                </Card.Body>
+                            </Card> */}
+                        </div>
+
+                    </center>
+                    {/* switch */}
         <div style={{ marginTop: "1%", display: "flex", justifyContent: "center" }}>
-          <div style={{ marginRight: "1%", fontWeight: "bold" }} >
-            Month
-             </div>
-          <div className='custom-control custom-switch'>
-           
-            <input
-              type='checkbox'
-              className='custom-control-input'
-              id='customSwitches'
-              checked={this.state.switch1}
-              onChange={this.handleSwitchChange(1)}
-              readOnly
-            />
-            <label className='custom-control-label' htmlFor='customSwitches'>
-              Year <FaLevelUpAlt style={{ color: "#3C6AB3", fontSize: 22 }} />
-            </label>
-          </div>
+                        <div style={{ marginRight: "1%", fontFamily: "Ink free" }} >
+                            Monthly
+                         </div>
+                        <div className='custom-control custom-switch'>
+                            {/* <span >
+            Year
+        </span> */}
+                            <input
+                                type='checkbox'
+                                className='custom-control-input'
+                                id='customSwitches'
+                                checked={this.state.switch1}
+                                onChange={this.handleSwitchChange(1)}
+                                readOnly
+                            />
+                            <label className='custom-control-label' htmlFor='customSwitches'
+                                style={{ fontFamily: "Ink free" }}>
+                                Annually
+                                {/* <FaLevelUpAlt style={{ color: "#3C6AB3", fontSize: 22 }} /> */}
+                                <span style={{ color: "red" }}> Save 17%</span>
+                            </label>
+                        </div>
 
         </div>
-        <center >
+        <center style={{}}>
 
-          <Button style={{ background: "#3C6AB3", borderColor: "#3C6AB3", marginTop: "3%" }} variant="primary" size="lg">Start free trial now!</Button>
-          <div style={{ color: "grey", fontSize: 11, marginTop: "1%" }}>
-            No credit card needed!
-      </div>
-        </center>
+<Link to="signup"> <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "3%", fontWeight: "bold" }} variant="primary" size="lg">Start free trial now!</Button></Link>
+<div style={{ color: "red", fontFamily: "Ink free", padding: "0.5%" }}>
+    No credit card needed!
+</div>
+</center>
         {/* schedule jomtron */}
-        <div style={{ background: "#EEF5FF", padding: "3%" }}>
+        {/* <div style={{ background: "#EEF5FF", padding: "3%" }}>
           <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", }}>
             <div style={{ display: "flex", alignItems: "center" }}>
               <div>
@@ -163,7 +231,7 @@ class Pricing extends Component {
               <Button style={{ borderColor: "#3C6AB3", }} variant="outline-primary" size="lg">Schedule a Meeting</Button>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* footer jomtron */}
         <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", background: "#1B1B1B" }}>
           <div style={{ flexBasis: "20%",  padding: "2%" }}>

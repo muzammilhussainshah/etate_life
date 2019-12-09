@@ -64,7 +64,7 @@ class LandingPage extends Component {
             });
     }
     buy(cart) {
-        // this.props.buyPackage(cart)
+        this.props.buyPackage(cart)
     }
     render() {
         const { fullName, email, password, confirmPassword, phone, country } = this.state
@@ -200,7 +200,6 @@ class LandingPage extends Component {
                   </center>
                     <center>
                         <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }} id="2">
-
                             <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <div>
                                     <div style={{ color: "#285BAC", fontSize: 25 }}>2 months free</div>
@@ -215,7 +214,6 @@ class LandingPage extends Component {
                                         number of doctors
             </div>
                                     {/* <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" ,fontWeight:"bold"}} variant="primary">Buy Now</Button> */}
-
                                 </div>
                             </div>
 
@@ -235,7 +233,6 @@ class LandingPage extends Component {
                                     <Button
                                         onClick={() => { this.buy({ package: "Solo clinic", price: "75", duration: "60" }) }}
                                         style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
-
                                 </div>
                             </div>
                             <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
@@ -251,7 +248,9 @@ class LandingPage extends Component {
                                     <div style={{ marginTop: "5%" }}>
                                         4
                                      </div>
-                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
+                                    <Button 
+                                    onClick={() => { this.buy({ package: "Single clinic", price: "99", duration: "30" }) }}
+                                    style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
 
                                 </div>
                             </div>
@@ -268,7 +267,9 @@ class LandingPage extends Component {
                                     <div style={{ marginTop: "5%" }}>
                                         12
                                      </div>
-                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
+                                    <Button 
+                                    onClick={() => { this.buy({ package: "Multi clinic", price: "75", duration: "30" }) }}
+                                    style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
 
                                 </div>
                             </div>

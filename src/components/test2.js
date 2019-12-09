@@ -11,24 +11,36 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value:"",country:"",bussinesAddress:""
+      selectedOption: ''
     };
+    this.radioChange = this.radioChange.bind(this);
   }
-  componentWillMount() {
-    let code = getCountryCallingCode("PK")
+
+
   
+  radioChange(e) {
+    this.setState({
+      selectedOption: e.currentTarget.value
+    });
   }
   render() {
     const { cart} = this.state
     console.log(cart, "555555555")
     return (
       <div>
-  <Select
-                      value={this.state.bussinesAddress}
-                      onChange={(value) => console.log(value)}
-                      options={countryList}
-                    />
-    </div>
+        
+        <input type="radio"
+               value="Yes"
+               checked={this.state.selectedOption === "Yes"}
+               onChange={this.radioChange} />Yes
+
+        <input type="radio"
+               value="No"
+               checked={this.state.selectedOption === "No"}
+               onChange={this.radioChange}/>No
+        
+        <h3>this.state.selectedOption: {this.state.selectedOption}</h3>
+      </div> 
 
     );
   }

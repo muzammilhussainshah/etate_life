@@ -60,8 +60,16 @@ export function payment(obj) {
 }
 export function buyPackage(cart) {
     return dispatch => {
+        let currentUserUid = firebase.auth().currentUser;
+
         console.log(cart, "9999999999");
-        history.push({ pathname: '/test', state: cart });
+        if(currentUserUid){
+
+            history.push({ pathname: '/test', state: cart });
+        }
+        else{
+            alert("login first")
+        }
 
 
     }

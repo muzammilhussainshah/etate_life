@@ -70,14 +70,14 @@ class AppHeader extends Component {
                         <Dropdown.Item eventKey="1" ><Link to="/home">My account</Link></Dropdown.Item>
                         <Dropdown.Item eventKey="2" ><Link to="/MyClinics">My clinincs</Link></Dropdown.Item>
                         <Dropdown.Item eventKey="3" ><Link to="/MyDoctors">My doctors</Link></Dropdown.Item>
-                        <Dropdown.Item eventKey="4" ><Link to="/pricing">My payment</Link></Dropdown.Item>
+                        <Dropdown.Item eventKey="4" ><Link to="/test">My payment</Link></Dropdown.Item>
                         {/* <Dropdown.Item eventKey="3"href="/MyDoctors">My doctors</Dropdown.Item>
                         <Dropdown.Item eventKey="4"href="/pricing">My payment</Dropdown.Item> */}
                         <Dropdown.Item eventKey="5" onClick={()=>this.logout()}>Logout</Dropdown.Item>
                       </DropdownButton>}
               </Nav>
               {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-              {(currentUser||user)?null:( <Link to={"signup"}><Button variant="outline-primary">{button}</Button></Link>)}
+              {(currentUser||user)?null:( <Link to={"signup"}><Button variant="outline-primary">{"signup"}</Button></Link>)}
 
             </Form>
           </Navbar.Collapse>

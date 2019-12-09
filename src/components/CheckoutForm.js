@@ -47,6 +47,9 @@ class CheckoutForm extends Component {
           console.log("error", error);
         });
     }
+    // else if(!data){
+    //   alert("First select your package")
+    // }
 
     console.log(token, "Purchase Complete!")
   }
@@ -77,7 +80,7 @@ class CheckoutForm extends Component {
             <Button variant="primary">
               <ActivityIndicator />
             </Button> :
-           <Button variant="primary" onClick={() => this.submit(data)}>Purchase</Button>
+           <Button disabled={data?false:true} variant="primary" onClick={() => this.submit(data)}>Purchase</Button>
           }
         </div>
       </div>
