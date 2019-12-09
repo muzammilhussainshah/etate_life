@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import 'react-phone-number-input/style.css'
 // import PhoneInput from 'react-phone-number-input'
-import PhoneInput,{ getCountryCallingCode, } from 'react-phone-number-input'
+import PhoneInput, { getCountryCallingCode, } from 'react-phone-number-input'
 // import createBrowserHistory from 'history/createBrowserHistory';
 // const history = createBrowserHistory()
 var config = {
@@ -112,7 +112,8 @@ export function UserActivation(verifyCodeObj) {
                 db.collection("users").doc(currentUserUid).update({ status: true })
                     .then(function () {
                         dispatch({ type: ActionTypes.LOADER })
-                        history.push('/login');
+                        dispatch(UserDataGet(currentUserUid, firebase.auth().currentUser.email, "login"))
+                        // history.push('/login');
                     })
                     .catch(function (error) {
                         dispatch({ type: ActionTypes.LOADER })
@@ -232,36 +233,36 @@ export function UserDataGet(uid, email, route) {
                     if (currentUser.status === true) {
                         console.log("working for re", currentUser)
                         axios.get('http://api.hostip.info')
-                        .then(function (response) {
-                            console.log("ip config", response.data);
-            
-                            parser.xmlToJson(response.data, (err, json) => {
-                                if (err) {
-                                    //error handling
-                                    console.log(err,"jserrerronjsonjson")
-                                }
-                                // console.log("jsonjsonjson",json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev)
-                                // console.log("jsonjsonjson",json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryName)
-                                // let countryCode = 
-                                let country={}
-                                country.country=json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryName
-                                country.abbr=json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev
-                                // country.countryCode=getCountryCallingCode(json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev)
-                                currentUser.country=country
-                                console.log(currentUser,"jserrerroncurrentUserjsonjson")
+                            .then(function (response) {
+                                console.log("ip config", response.data);
 
-                                dispatch({ type: ActionTypes.LOADER })
-                                dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
+                                parser.xmlToJson(response.data, (err, json) => {
+                                    if (err) {
+                                        //error handling
+                                        console.log(err, "jserrerronjsonjson")
+                                    }
+                                    // console.log("jsonjsonjson",json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev)
+                                    // console.log("jsonjsonjson",json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryName)
+                                    // let countryCode = 
+                                    let country = {}
+                                    country.country = json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryName
+                                    country.abbr = json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev
+                                    // country.countryCode=getCountryCallingCode(json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev)
+                                    currentUser.country = country
+                                    console.log(currentUser, "jserrerroncurrentUserjsonjson")
+
+                                    dispatch({ type: ActionTypes.LOADER })
+                                    dispatch({ type: ActionTypes.CURRENTUSER, payload: currentUser })
+                                });
+
+                            })
+                            .catch(function (error) {
+                                // dispatch(errorCall("Invalid tokern"))
+
+                                console.log("error", error);
                             });
-            
-                        })
-                        .catch(function (error) {
-                            // dispatch(errorCall("Invalid tokern"))
-            
-                            console.log("error", error);
-                        });
 
-                      
+
                         if (route) {
                             history.push("/home");
 
@@ -335,9 +336,9 @@ export function UserDataGet(uid, email, route) {
                 parser.xmlToJson(response.data, (err, json) => {
                     if (err) {
                         //error handling
-                        console.log(err,"jserrerronjsonjson")
+                        console.log(err, "jserrerronjsonjson")
                     }
-                    console.log(json,"jsonjsonjson")
+                    console.log(json, "jsonjsonjson")
 
                     //json
                     //{

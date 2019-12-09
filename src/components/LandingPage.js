@@ -11,7 +11,10 @@ import { MdMailOutline } from 'react-icons/md';
 import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
 import ActivityIndicator from './common/ActivityIndicator';
 import { connect } from "react-redux";
-import { signUpAction } from '../store/action/action';
+import { buyPackage,payment,signUpAction } from '../store/action/action';
+
+// import { buyPackage,payment } from '../store/action/action';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -38,7 +41,7 @@ class LandingPage extends Component {
     }
     componentWillMount() {
         axios.get('http://api.hostip.info')
-            .then( (response)=> {
+            .then((response) => {
                 console.log("ip config", response.data);
                 parser.xmlToJson(response.data, (err, json) => {
                     if (err) {
@@ -49,10 +52,10 @@ class LandingPage extends Component {
                     let country = {}
                     country.country = json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryName
                     country.abbr = json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev
-                    console.log( country,"ney",country.abbr)
+                    console.log(country, "ney", country.abbr)
                     this.setState({
-                        country:country.abbr,
-                        abbr:country,
+                        country: country.abbr,
+                        abbr: country,
                     })
                 });
             })
@@ -60,11 +63,14 @@ class LandingPage extends Component {
                 console.log("error", error);
             });
     }
+    buy(cart) {
+        // this.props.buyPackage(cart)
+    }
     render() {
-        const { fullName, email, password, confirmPassword, phone,country } = this.state
+        const { fullName, email, password, confirmPassword, phone, country } = this.state
         const { isLoader, isError, errorMessage, currentUser } = this.props
         let user = { fullName, email, phone, password, confirmPassword, status: false }
-        console.log(country,"countrycountrycountry")
+        console.log(country, "countrycountrycountry")
         return (
             <div style={{ backgroundColor: "#fff", }}>
                 <AppHeader login={true} button="Signup" />
@@ -92,14 +98,14 @@ class LandingPage extends Component {
                                         Register in second
                                     </div>
                                     <Form style={{ width: "80%", marginTop: "2%" }}>
-                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={fullName} onChange={(e) => { this.setState({ fullName: e.target.value }) }}
+                                        <Form.Control style={{ marginTop: 10, height: 35 }} defaultValue={fullName} onChange={(e) => { this.setState({ fullName: e.target.value }) }}
                                             type="text" placeholder="Full name" />
-                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={email} onChange={(e) => { this.setState({ email: e.target.value }) }}
+                                        <Form.Control style={{ marginTop: 10, height: 35 }} defaultValue={email} onChange={(e) => { this.setState({ email: e.target.value }) }}
                                             type="email" placeholder="Enter email" />
 
 
                                         {country &&
-                                            <select style={{ width: 245,padding:5,borderRadius:5,marginTop:10 }}
+                                            <select style={{ width: 245, padding: 5, borderRadius: 5, marginTop: 10 }}
                                                 value={country}
                                                 onChange={event => this.setState({ country: event.target.value })}>
                                                 <option value="">
@@ -114,14 +120,14 @@ class LandingPage extends Component {
 
                                         }
 
-                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={phone} 
-                                        // onChange={(e) => { this.setState({ phone: e.target.value }) }}
-                                        onChange={(e) => {this.setState({phone:"+"+getCountryCallingCode(this.state.country)+e.target.value})}} 
+                                        <Form.Control style={{ marginTop: 10, height: 35 }} defaultValue={phone}
+                                            // onChange={(e) => { this.setState({ phone: e.target.value }) }}
+                                            onChange={(e) => { this.setState({ phone: "+" + getCountryCallingCode(this.state.country) + e.target.value }) }}
 
                                             type="number" placeholder="Enter phone" />
-                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={password} onChange={(e) => { this.setState({ password: e.target.value }) }}
+                                        <Form.Control style={{ marginTop: 10, height: 35 }} defaultValue={password} onChange={(e) => { this.setState({ password: e.target.value }) }}
                                             type="password" placeholder="Enter password" />
-                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={confirmPassword} onChange={(e) => { this.setState({ confirmPassword: e.target.value }) }}
+                                        <Form.Control style={{ marginTop: 10, height: 35 }} defaultValue={confirmPassword} onChange={(e) => { this.setState({ confirmPassword: e.target.value }) }}
                                             type="password" placeholder="Confirm password" />
                                     </Form>
                                     {isLoader ?
@@ -167,7 +173,7 @@ class LandingPage extends Component {
                             </div>
                         </div>
                         <div style={{ marginLeft: 25, marginTop: "2%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
-                            {/* <div style={{  background: "blue",  width: 350, }}>
+                            {/* <div style={{  background: "#285BAC",  width: 350, }}>
 
                         <div style={{  background: "pink", }}>
                             Why choos us
@@ -197,8 +203,8 @@ class LandingPage extends Component {
 
                             <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <div>
-                                    <div style={{ color: "blue", fontSize: 25 }}>2 months free</div>
-                                    <div style={{ color: "blue", fontSize: 17 }}>if you paid anually</div>
+                                    <div style={{ color: "#285BAC", fontSize: 25 }}>2 months free</div>
+                                    <div style={{ color: "#285BAC", fontSize: 17 }}>if you paid anually</div>
                                     <div style={{ marginTop: "10%" }}>
                                         free trial
             </div>
@@ -208,15 +214,15 @@ class LandingPage extends Component {
                                     <div style={{ marginTop: "5%" }}>
                                         number of doctors
             </div>
-                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                    {/* <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" ,fontWeight:"bold"}} variant="primary">Buy Now</Button> */}
 
                                 </div>
                             </div>
 
                             <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <div>
-                                    <div style={{ color: "blue", fontSize: 25 }}>Solo Clinic</div>
-                                    <div style={{ color: "blue", fontSize: 17 }}>$ 75 / month</div>
+                                    <div style={{ color: "#285BAC", fontSize: 25 }}>Solo Clinic</div>
+                                    <div style={{ color: "#285BAC", fontSize: 17 }}>$ 75 / month</div>
                                     <div style={{ marginTop: "10%" }}>
                                         60 days
                                  </div>
@@ -226,14 +232,16 @@ class LandingPage extends Component {
                                     <div style={{ marginTop: "5%" }}>
                                         1
                                      </div>
-                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                    <Button
+                                        onClick={() => { this.buy({ package: "Solo clinic", price: "75", duration: "60" }) }}
+                                        style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
 
                                 </div>
                             </div>
                             <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <div>
-                                    <div style={{ color: "blue", fontSize: 25 }}>Single Clinic</div>
-                                    <div style={{ color: "blue", fontSize: 17 }}>$ 99 / month</div>
+                                    <div style={{ color: "#285BAC", fontSize: 25 }}>Single Clinic</div>
+                                    <div style={{ color: "#285BAC", fontSize: 17 }}>$ 99 / month</div>
                                     <div style={{ marginTop: "10%" }}>
                                         30 days
                                  </div>
@@ -243,14 +251,14 @@ class LandingPage extends Component {
                                     <div style={{ marginTop: "5%" }}>
                                         4
                                      </div>
-                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
 
                                 </div>
                             </div>
                             <div style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <div>
-                                    <div style={{ color: "blue", fontSize: 25 }}>Multi Clinic</div>
-                                    <div style={{ color: "blue", fontSize: 17 }}>$ 75 / month</div>
+                                    <div style={{ color: "#285BAC", fontSize: 25 }}>Multi Clinic</div>
+                                    <div style={{ color: "#285BAC", fontSize: 17 }}>$ 75 / month</div>
                                     <div style={{ marginTop: "10%" }}>
                                         30 days
                                  </div>
@@ -260,7 +268,7 @@ class LandingPage extends Component {
                                     <div style={{ marginTop: "5%" }}>
                                         12
                                      </div>
-                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
+                                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%", fontWeight: "bold" }} variant="primary">Buy Now</Button>
 
                                 </div>
                             </div>
@@ -268,8 +276,8 @@ class LandingPage extends Component {
 
                             {/* <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <Card.Body>
-                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
-                                    <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 25 }}>Solo Clinic</Card.Title>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 17 }}>$ 75 / month</Card.Title>
                                     <Card.Text style={{ marginTop: "10%" }}>
                                         60 days
             </Card.Text>
@@ -284,8 +292,8 @@ class LandingPage extends Component {
                                 </Card.Body>
                             </Card><Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <Card.Body>
-                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>Single Clinic</Card.Title>
-                                    <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 99 / month</Card.Title>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 25 }}>Single Clinic</Card.Title>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 17 }}>$ 99 / month</Card.Title>
                                     <Card.Text style={{ marginTop: "10%" }}>
                                         30 days
             </Card.Text>
@@ -300,8 +308,8 @@ class LandingPage extends Component {
                                 </Card.Body>
                             </Card><Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <Card.Body>
-                                    <Card.Title style={{ color: "blue", fontSize: 25 }}>Multi Clinic</Card.Title>
-                                    <Card.Title style={{ color: "blue", fontSize: 17 }}>$ 75 / month</Card.Title>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 25 }}>Multi Clinic</Card.Title>
+                                    <Card.Title style={{ color: "#285BAC", fontSize: 17 }}>$ 75 / month</Card.Title>
                                     <Card.Text style={{ marginTop: "10%" }}>
                                     30 days
             </Card.Text>
@@ -317,12 +325,12 @@ class LandingPage extends Component {
                         </div>
 
                     </center>
-                    <div style={{ marginLeft: "12%", color: "#3C6AB3", marginTop: "2%", fontSize: 13, display: "flex", justifyContent: "center" }} >
+                    {/* <div style={{ marginLeft: "12%", color: "#3C6AB3", marginTop: "2%", fontSize: 13, display: "flex", justifyContent: "center" }} >
                         You save 17 %
-                      </div>
+                      </div> */}
                     <div style={{ marginTop: "1%", display: "flex", justifyContent: "center" }}>
-                        <div style={{ marginRight: "1%", fontWeight: "bold" }} >
-                            Month
+                        <div style={{ marginRight: "1%", fontFamily: "Ink free" }} >
+                            Monthly
                          </div>
                         <div className='custom-control custom-switch'>
                             {/* <span >
@@ -336,21 +344,24 @@ class LandingPage extends Component {
                                 onChange={this.handleSwitchChange(1)}
                                 readOnly
                             />
-                            <label className='custom-control-label' htmlFor='customSwitches'>
-                                Year <FaLevelUpAlt style={{ color: "#3C6AB3", fontSize: 22 }} />
+                            <label className='custom-control-label' htmlFor='customSwitches'
+                                style={{ fontFamily: "Ink free" }}>
+                                Annually
+                                {/* <FaLevelUpAlt style={{ color: "#3C6AB3", fontSize: 22 }} /> */}
+                                <span style={{ color: "red" }}> Save 17%</span>
                             </label>
                         </div>
                     </div>
                 </div>
                 <center style={{}}>
 
-                    <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "3%" }} variant="primary" size="lg">Start free trial now!</Button>
-                    <div style={{ color: "grey", fontSize: 11, marginTop: "1%" }}>
+                    <Link to="signup"> <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "3%", fontWeight: "bold" }} variant="primary" size="lg">Start free trial now!</Button></Link>
+                    <div style={{ color: "red", fontFamily: "Ink free", padding: "0.5%" }}>
                         No credit card needed!
 </div>
                 </center>
                 {/* schedule jomtron */}
-                <div style={{ background: "#EEF5FF", padding: "3%" }}>
+                {/* <div style={{ background: "#EEF5FF", padding: "3%" }}>
                     <div style={{ display: "flex", flexBasis: "100%", justifyContent: "center", }}>
                         <div style={{ display: "flex", alignItems: "center" }}>
                             <div>
@@ -362,7 +373,7 @@ class LandingPage extends Component {
                             <Button style={{ borderColor: "#3C6AB3", }} variant="outline-primary" size="lg">Schedule a Meeting</Button>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 {/* footer jomtron */}
 
                 {/* footer jomtron */}
@@ -492,6 +503,12 @@ function mapDispatchToProps(dispatch) {
         signUpAction: (user) => {
             dispatch(signUpAction(user))
         },
+        buyPackage: (cart) => {
+            dispatch(buyPackage(cart))
+        },
+        payment: (obj) => {
+          dispatch(payment(obj))
+      },
     })
 }
 
