@@ -18,25 +18,53 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import axios from 'axios';
+import en from 'react-phone-number-input/locale/en.json'
+import PhoneInput, { getCountryCallingCode, getCountries } from 'react-phone-number-input'
+const xmlToJson = require('xml-to-json-stream');
+const parser = xmlToJson({ attributeMode: false });
 // const { Header, Footer, Sider, Content } = Layout;
 
 class LandingPage extends Component {
     constructor(props) {
         super(props);
-        this.state = { fullName: "", email: "", password: "", confirmPassword: "", phone: "" };
+        this.state = { fullName: "", email: "", password: "", confirmPassword: "", phone: "", country: "" };
     }
-
-
     handleSwitchChange = nr => () => {
         let switchNumber = `switch${nr}`;
         this.setState({
             [switchNumber]: !this.state[switchNumber]
         });
     }
+    componentWillMount() {
+        axios.get('http://api.hostip.info')
+            .then( (response)=> {
+                console.log("ip config", response.data);
+                parser.xmlToJson(response.data, (err, json) => {
+                    if (err) {
+                        console.log(err, "jserrerroerrnjsonjson")
+                    }
+                    console.log(json, "jserrerronjsonjson")
+
+                    let country = {}
+                    country.country = json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryName
+                    country.abbr = json.HostipLookupResultSet[`gml:featureMember`].Hostip.countryAbbrev
+                    console.log( country,"ney",country.abbr)
+                    this.setState({
+                        country:country.abbr,
+                        abbr:country,
+                    })
+                });
+            })
+            .catch(function (error) {
+                console.log("error", error);
+            });
+    }
     render() {
-        const { fullName, email, password, confirmPassword, phone } = this.state
+        const { fullName, email, password, confirmPassword, phone,country } = this.state
         const { isLoader, isError, errorMessage, currentUser } = this.props
         let user = { fullName, email, phone, password, confirmPassword, status: false }
+        console.log(country,"countrycountrycountry")
         return (
             <div style={{ backgroundColor: "#fff", }}>
                 <AppHeader login={true} button="Signup" />
@@ -64,15 +92,36 @@ class LandingPage extends Component {
                                         Register in second
                                     </div>
                                     <Form style={{ width: "80%", marginTop: "2%" }}>
-                                        <Form.Control style={{ marginTop: 10 }} defaultValue={fullName} onChange={(e) => { this.setState({ fullName: e.target.value }) }}
+                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={fullName} onChange={(e) => { this.setState({ fullName: e.target.value }) }}
                                             type="text" placeholder="Full name" />
-                                        <Form.Control style={{ marginTop: 10 }} defaultValue={email} onChange={(e) => { this.setState({ email: e.target.value }) }}
+                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={email} onChange={(e) => { this.setState({ email: e.target.value }) }}
                                             type="email" placeholder="Enter email" />
-                                        <Form.Control style={{ marginTop: 10 }} defaultValue={phone} onChange={(e) => { this.setState({ phone: e.target.value }) }}
+
+
+                                        {country &&
+                                            <select style={{ width: 245,padding:5,borderRadius:5,marginTop:10 }}
+                                                value={country}
+                                                onChange={event => this.setState({ country: event.target.value })}>
+                                                <option value="">
+                                                    {en[this.state.abbr.abbr]} +{getCountryCallingCode(this.state.abbr.abbr)}
+                                                </option>
+                                                {getCountries().map((country) => (
+                                                    <option key={country} value={country}>
+                                                        {en[country]} +{getCountryCallingCode(country)}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                        }
+
+                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={phone} 
+                                        // onChange={(e) => { this.setState({ phone: e.target.value }) }}
+                                        onChange={(e) => {this.setState({phone:"+"+getCountryCallingCode(this.state.country)+e.target.value})}} 
+
                                             type="number" placeholder="Enter phone" />
-                                        <Form.Control style={{ marginTop: 10 }} defaultValue={password} onChange={(e) => { this.setState({ password: e.target.value }) }}
+                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={password} onChange={(e) => { this.setState({ password: e.target.value }) }}
                                             type="password" placeholder="Enter password" />
-                                        <Form.Control style={{ marginTop: 10 }} defaultValue={confirmPassword} onChange={(e) => { this.setState({ confirmPassword: e.target.value }) }}
+                                        <Form.Control style={{ marginTop: 10,height:35 }} defaultValue={confirmPassword} onChange={(e) => { this.setState({ confirmPassword: e.target.value }) }}
                                             type="password" placeholder="Confirm password" />
                                     </Form>
                                     {isLoader ?
@@ -169,13 +218,13 @@ class LandingPage extends Component {
                                     <div style={{ color: "blue", fontSize: 25 }}>Solo Clinic</div>
                                     <div style={{ color: "blue", fontSize: 17 }}>$ 75 / month</div>
                                     <div style={{ marginTop: "10%" }}>
-                                    60 days
+                                        60 days
                                  </div>
                                     <div style={{ marginTop: "5%" }}>
-                                    60 days
+                                        60 days
                                     </div>
                                     <div style={{ marginTop: "5%" }}>
-                                 1
+                                        1
                                      </div>
                                     <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
@@ -186,13 +235,13 @@ class LandingPage extends Component {
                                     <div style={{ color: "blue", fontSize: 25 }}>Single Clinic</div>
                                     <div style={{ color: "blue", fontSize: 17 }}>$ 99 / month</div>
                                     <div style={{ marginTop: "10%" }}>
-                                    30 days
+                                        30 days
                                  </div>
                                     <div style={{ marginTop: "5%" }}>
-                                    30 days
+                                        30 days
                                     </div>
                                     <div style={{ marginTop: "5%" }}>
-                                    4
+                                        4
                                      </div>
                                     <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
@@ -203,20 +252,20 @@ class LandingPage extends Component {
                                     <div style={{ color: "blue", fontSize: 25 }}>Multi Clinic</div>
                                     <div style={{ color: "blue", fontSize: 17 }}>$ 75 / month</div>
                                     <div style={{ marginTop: "10%" }}>
-                                    30 days
+                                        30 days
                                  </div>
                                     <div style={{ marginTop: "5%" }}>
-                                    0 days
+                                        0 days
                                     </div>
                                     <div style={{ marginTop: "5%" }}>
-                                    12
+                                        12
                                      </div>
                                     <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "10%" }} variant="primary">Buy Now</Button>
 
                                 </div>
                             </div>
 
-                            
+
                             {/* <Card style={{ width: '15rem', paddingTop: "2%", paddingBottom: "2%", marginLeft: "2%", marginTop: "2%" }}>
                                 <Card.Body>
                                     <Card.Title style={{ color: "blue", fontSize: 25 }}>Solo Clinic</Card.Title>
@@ -293,7 +342,7 @@ class LandingPage extends Component {
                         </div>
                     </div>
                 </div>
-                <center style={{ }}>
+                <center style={{}}>
 
                     <Button style={{ background: "#3C6AB3", borderRadius: 250, borderColor: "#3C6AB3", marginTop: "3%" }} variant="primary" size="lg">Start free trial now!</Button>
                     <div style={{ color: "grey", fontSize: 11, marginTop: "1%" }}>

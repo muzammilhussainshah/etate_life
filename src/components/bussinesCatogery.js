@@ -18,6 +18,9 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import en from 'react-phone-number-input/locale/en.json'
+import PhoneInput, { getCountryCallingCode, getCountries } from 'react-phone-number-input'
+
 const options = [
   { value: 'action', label: 'action' },
   { value: 'another action', label: 'another action' },
@@ -32,7 +35,8 @@ class BussinesCatogery extends Component {
       BussinesAddres: "", MobileNumber: "",
       bussinesCatogery: "", addHours: [],
       arrayOfMorning: [], arrayOfAfternoon: [],
-      arrayOfEvening: [], myClinicsInComponent: ""
+      arrayOfEvening: [], myClinicsInComponent: "",
+      country: ""
     };
   }
 
@@ -107,21 +111,29 @@ class BussinesCatogery extends Component {
       validateOpt.arrayOfEvening = arrayOfEvening
       this.props.createClinic(validateOpt)
     }
-
-
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      myClinicsInComponent: nextProps.myClinics
-    })
+    if (nextProps.currentUser) {
+
+      this.setState({
+        myClinicsInComponent: nextProps.myClinics,
+        abbr: nextProps.currentUser.country,
+        country: nextProps.currentUser.country.abbr,
+      })
+    }
   }
   componentDidMount() {
-    this.setState({
-      myClinicsInComponent: this.props.myClinics
-    })
+    const { currentUser } = this.props
+    if (currentUser) {
+      this.setState({
+        myClinicsInComponent: this.props.myClinics,
+        abbr: this.props.currentUser.country,
+        country: this.props.currentUser.country.abbr,
+      })
+    }
   }
   render() {
-    const { isLoader, isError, errorMessage, myClinics } = this.props
+    const { isLoader, isError, errorMessage, myClinics, currentUser } = this.props
     const { myClinicsInComponent } = this.state
     // console.log(myClinics,"myClinicsmyClinics")
     console.log(this.props.myClinics, "render")
@@ -137,15 +149,15 @@ class BussinesCatogery extends Component {
           </div>
           <div style={{ flexBasis: "60%", }}>
             <div style={{}}>
-              {(isLoader)?
+              {(isLoader) ?
                 // <Button  variant="primary">
-                <div style={{ minWidth: 150,padding:50 }}>
+                <div style={{ minWidth: 150, padding: 50 }}>
 
                   <ActivityIndicator colorOfLoader="grey" style={{}} />
                 </div>
                 // </Button> :
                 // <Button onClick={() => this.createDoctor()} variant="primary">Add</Button>
-              :
+                :
                 this.state.ClinicImage ?
                   <img width="10%" style={{ minWidth: 150 }} src={this.state.ClinicImage} /> :
                   <img width="10%" style={{ minWidth: 150 }} src={require('../assets/default.png')} />
@@ -175,13 +187,49 @@ class BussinesCatogery extends Component {
                 <Input label="Business name" type="text" placeholder="Business name" func={(v) => { this.setState({ BussinesName: v }) }} />
                 <Input label="Business registration number" type="text" placeholder="Business registration number" func={(v) => { this.setState({ registrationNumber: v }) }} />
                 <Input label="Business address" type="text" placeholder="Business address" func={(v) => { this.setState({ BussinesAddres: v }) }} />
-                <Input label="Mobile number" type="number" placeholder="Mobile number" func={(v) => { this.setState({ MobileNumber: v }) }} />
+                <Form.Group as={Row} controlId="formHorizontalEmail">
+                  <Form.Label column sm={4} style={{ display: "flex", alignItems: "center", fontSize: 13, fontWeight: "bold" }}>
+                    {"Mobile number"}
+                  </Form.Label>
+                  <Col sm={8}>
+                    {
+                      currentUser && this.state.abbr &&
+                      <select
+                        style={{ width: 255, padding: 7, borderRadius: 5, marginTop: 10 }}
+                        value={this.state.country}
+                        onChange={event => this.setState({ country: event.target.value })}>
+                        <option value="">
+                          {en[this.state.abbr.abbr]} +{getCountryCallingCode(this.state.abbr.abbr)}
+                        </option>
+                        {getCountries().map((country) => (
+                          <option key={country} value={country}>
+                            {en[country]} +{getCountryCallingCode(country)}
+                          </option>
+                        ))}
+                      </select>
+                    }
+                    <Form.Control
+                      type="number" placeholder="Mobile number"
+                      style={{ marginTop: 15 }}
+                      onChange={(e) => { this.setState({ MobileNumber: "+" + getCountryCallingCode(this.state.country) + e.target.value }) }} />
+                    {/* {country&&
+                                    // console.log(getCountryCallingCode(country.abbr),"getCountryCallingCode(this.state.country.abbr)")&&
+                                        <Form.Control  type="text"  
+                                        defaultValue={ country.abbr} 
+                                        onChange={(e) => { console.log(getCountryCallingCode(country.abbr),"coder") }} />
+
+
+                                    } */}
+                  </Col>
+
+                </Form.Group>
+                {/* <Input label="Mobile number" type="number" placeholder="Mobile number" func={(v) => { this.setState({ MobileNumber: v }) }} /> */}
 
                 <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={5}>
+                  <Form.Label column sm={4} style={{fontSize:13,fontWeight:"bold"}} >
                     Bussines catogery
                          </Form.Label>
-                  <Col sm={7}>
+                  <Col sm={8}>
                     <Select
                       value={this.state.bussinesCatogery}
                       onChange={(value) => this.setState({ bussinesCatogery: value })}
@@ -372,6 +420,8 @@ let mapStateToProps = state => {
     isError: state.root.isError,
     errorMessage: state.root.errorMessage,
     myClinics: state.root.myClinics,
+    currentUser: state.root.currentUser,
+
     //   errorInStore: state.root.error,
   };
 };

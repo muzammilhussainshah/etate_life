@@ -7,7 +7,7 @@ import Input from './common/input';
 import Select from 'react-select';
 import { connect } from "react-redux";
 import ActivityIndicator from './common/ActivityIndicator';
-import { errorCall,loaderCall, createDoctor } from '../store/action/action';
+import { errorCall, loaderCall, createDoctor } from '../store/action/action';
 import styles from './style.css';
 import { FaLevelUpAlt, FaAngleDoubleRight, FaMapMarkerAlt, FaPhone, } from 'react-icons/fa';
 import LargeList from './common/largeList';
@@ -19,6 +19,9 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import en from 'react-phone-number-input/locale/en.json'
+import PhoneInput, { getCountryCallingCode, getCountries } from 'react-phone-number-input'
+
 // const { Header, Footer, Sider, Content } = Layout;
 
 const options = [
@@ -29,19 +32,27 @@ class AddDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      switch1: true, doctorImage: "", etateId: "", fullName: "", otherName: "", MobileNumber: "", email: "", password: "", bussinesAddress: "", specialist: ""
+      switch1: true, doctorImage: "", etateId: "", fullName: "", otherName: "", MobileNumber: "", email: "", password: "", bussinesAddress: "", specialist: "",
+      country: ""
+
     };
   }
 
   image(file) {
-    if(file){
+    const { loaderCall } = this.props
+
+    loaderCall()
+
+    if (file) {
       firebase.storage().ref(`pictures/${file.name}`).put(file).then((res) => {
         console.log(res, "-------")
         firebase.storage().ref(`pictures/${file.name}`).getDownloadURL().then((res) => {
           console.log(res, "9999")
           this.setState({
-            doctorImage:res
+            doctorImage: res
           })
+          loaderCall()
+
         })
       })
     }
@@ -64,11 +75,11 @@ class AddDoctor extends Component {
     const { doctorImage, etateId, fullName, otherName, MobileNumber, email, password, bussinesAddress, specialist
     } = this.state
     console.log("start",
-    doctorImage, etateId, fullName, otherName, MobileNumber, email, password, bussinesAddress, specialist,"close",
+      doctorImage, etateId, fullName, otherName, MobileNumber, email, password, bussinesAddress, specialist, "close",
     )
     let validateOpt = {
-      doctorImage, etateId, fullName, otherName, MobileNumber, email, password, 
-      bussinesAddress:bussinesAddress.value, specialist:specialist.value,
+      doctorImage, etateId, fullName, otherName, MobileNumber, email, password,
+      bussinesAddress: bussinesAddress.value, specialist: specialist.value,
     }
     let validate = true
     console.log(validateOpt, "validateOpt")
@@ -85,23 +96,34 @@ class AddDoctor extends Component {
       this.props.createDoctor(validateOpt)
     }
   }
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      myDoctorsInComponent:nextProps.myDoctors
-    })
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentUser) {
+      this.setState({
+        myDoctorsInComponent: nextProps.myDoctors,
+        abbr: nextProps.currentUser.country,
+        country: nextProps.currentUser.country.abbr,
+      })
+    }
+
+
   }
-  componentDidMount(){
-    this.setState({
-      myDoctorsInComponent:this.props.myDoctors
-    })
+  componentDidMount() {
+    const { currentUser } = this.props
+    if (currentUser) {
+      this.setState({
+        myDoctorsInComponent: this.props.myDoctors,
+        abbr: this.props.currentUser.country,
+        country: this.props.currentUser.country.abbr,
+      })
+    }
   }
   render() {
-    const { isLoader, isError, errorMessage } = this.props
+    const { isLoader, isError, errorMessage,currentUser } = this.props
     const { myDoctorsInComponent } = this.state
     return (
       <div>
         <AppHeader />
-        <BreadCrum color="Doctors"/>
+        <BreadCrum color="Doctors" />
 
         <div style={{ display: "flex", flexBasis: "100%", marginTop: "3%", flexWrap: "wrap", justifyContent: "center" }}>
           <div style={{ flexBasis: "40%", justifyContent: "center", display: "flex", borderRight: "2px solid", borderRightColor: "#F4F6FA", }}>
@@ -114,16 +136,16 @@ class AddDoctor extends Component {
                   <img width="10%" style={{ minWidth: 150 }} src={this.state.doctorImage} /> :
                   <img width="10%" style={{ minWidth: 150 }} src={require('../assets/default.png')} />
               } */}
-                {(isLoader)?
+              {(isLoader) ?
                 // <Button  variant="primary">
-                <div style={{ minWidth: 150,padding:50 }}>
+                <div style={{ minWidth: 150, padding: 50 }}>
 
                   <ActivityIndicator colorOfLoader="grey" style={{}} />
                 </div>
                 // </Button> :
                 // <Button onClick={() => this.createDoctor()} variant="primary">Add</Button>
-              :
-                this.state.ClinicImage ?
+                :
+                this.state.doctorImage ?
                   <img width="10%" style={{ minWidth: 150 }} src={this.state.doctorImage} /> :
                   <img width="10%" style={{ minWidth: 150 }} src={require('../assets/default.png')} />
               }
@@ -151,14 +173,45 @@ class AddDoctor extends Component {
                 <Input label="Etat ID" type="text" placeholder="Etat ID" func={(v) => { this.setState({ etateId: v }) }} />
                 <Input label="Full name" type="text" placeholder="Full name" func={(v) => { this.setState({ fullName: v }) }} />
                 <Input label="Other name" type="text" placeholder="Other name" func={(v) => { this.setState({ otherName: v }) }} />
-                <Input label="Mobile number" type="number" placeholder="Mobile number" func={(v) => { this.setState({ MobileNumber: v }) }} />
+                <Form.Group as={Row} controlId="formHorizontalEmail">
+                
+                  <Form.Label column sm={4} style={{ display: "flex", alignItems: "center", fontSize: 13, fontWeight: "bold" }}>
+                    {"Mobile number"}
+                  </Form.Label>
+                  <Col sm={8}>
+                    {
+                      currentUser && this.state.abbr &&
+                      <select
+                        style={{ width: 255, padding: 7, borderRadius: 5, marginTop: 10 }}
+                        value={this.state.country}
+                        onChange={event => this.setState({ country: event.target.value })}>
+                        <option value="">
+                          {en[this.state.abbr.abbr]} +{getCountryCallingCode(this.state.abbr.abbr)}
+                        </option>
+                        {getCountries().map((country) => (
+                          <option key={country} value={country}>
+                            {en[country]} +{getCountryCallingCode(country)}
+                          </option>
+                        ))}
+                      </select>
+                    }
+                    <Form.Control
+                      type="number" placeholder="Mobile number"
+                      style={{ marginTop: 15 }}
+                      onChange={(e) => { this.setState({ MobileNumber: "+" + getCountryCallingCode(this.state.country) + e.target.value }) }} />
+                  </Col>
+                </Form.Group>
+
+
+
+                {/* <Input label="Mobile number" type="number" placeholder="Mobile number" func={(v) => { this.setState({ MobileNumber: v }) }} /> */}
                 <Input label="Email" type="email" placeholder="Email" func={(v) => { this.setState({ email: v }) }} />
                 <Input label="Password" type="password" placeholder="password" func={(v) => { this.setState({ password: v }) }} />
                 <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={5}>
+                  <Form.Label column sm={4} style={{fontSize:13,fontWeight:"bold"}}>
                     Bussines address
                          </Form.Label>
-                  <Col sm={7}>
+                  <Col sm={8}>
                     <Select
                       value={this.state.bussinesAddress}
                       onChange={(value) => this.setState({ bussinesAddress: value })}
@@ -167,10 +220,10 @@ class AddDoctor extends Component {
                   </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="formHorizontalEmail">
-                  <Form.Label column sm={5}>
+                  <Form.Label column sm={4} style={{fontSize:13,fontWeight:"bold"}}>
                     Specialist
                          </Form.Label>
-                  <Col sm={7}>
+                  <Col sm={8}>
                     <Select
                       value={this.state.specialist}
                       onChange={(value) => this.setState({ specialist: value })}
@@ -185,15 +238,15 @@ class AddDoctor extends Component {
         <div className="float-right" style={{ justifyContent: "flex-end", display: "flex", padding: "5%" }}>
           {isError && <div><span style={{ color: "red", fontSize: 13 }}>{errorMessage}</span></div>}
           {isLoader ?
-            <Button  variant="primary">
+            <Button variant="primary">
               <ActivityIndicator />
             </Button> :
             <Button onClick={() => this.createDoctor()} variant="primary">Add</Button>
           }
-     <Link to="/AddBookingAdmin">
+          <Link to="/AddBookingAdmin">
 
-<Button variant="primary">Next</Button>
- </Link>
+            <Button variant="primary">Next</Button>
+          </Link>
         </div>
       </div>
     )
@@ -204,6 +257,7 @@ let mapStateToProps = state => {
     isLoader: state.root.isLoader,
     isError: state.root.isError,
     errorMessage: state.root.errorMessage,
+    currentUser: state.root.currentUser,
     myDoctors: state.root.myDoctors,
     //   errorInStore: state.root.error,
   };

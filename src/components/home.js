@@ -16,12 +16,12 @@ import {
 
 import 'react-phone-number-input/style.css'
 // import PhoneInput from 'react-phone-number-input'
-import PhoneInput, { getCountryCallingCode, } from 'react-phone-number-input'
-
+import PhoneInput, { getCountryCallingCode, getCountries } from 'react-phone-number-input'
+import en from 'react-phone-number-input/locale/en.json'
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = { fullName: "", email: "", password: "", confirmPassword: "", phone: "", currentPassword: "", value: "",country:"",dd:null };
+        this.state = { fullName: "", email: "", password: "", confirmPassword: "", phone: "", currentPassword: "", country: "", };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -33,11 +33,12 @@ class Home extends Component {
             this.setState({
                 fullName: nextProps.currentUser.fullName,
                 email: nextProps.currentUser.email,
-                phone: nextProps.currentUser.phone,
+                phone: Number(nextProps.currentUser.phone),
                 // currentPassword: "",
                 CheckCurrPass: nextProps.currentUser.password,
                 // password: "",
-                country: nextProps.currentUser.country,
+                abbr: nextProps.currentUser.country,
+                country: nextProps.currentUser.country.abbr,
 
 
                 // confirmPassword: "",
@@ -53,26 +54,24 @@ class Home extends Component {
             this.setState({
                 fullName: currentUser.fullName,
                 email: currentUser.email,
-                phone: currentUser.phone,
+                phone: Number(currentUser.phone),
                 // currentPassword: "",
                 CheckCurrPass: currentUser.password,
-                value: currentUser.countryCode,
-                country: currentUser.country
-                // password: "",
-                // confirmPassword: "",
+                abbr: currentUser.country,
+                country: currentUser.country.abbr,
             })
         }
 
     }
     render() {
         const { isLoader, isError, errorMessage, currentUser, userUpdate } = this.props
-        const { fullName, email, password, confirmPassword, phone, currentPassword, CheckCurrPass,country } = this.state
+        const { fullName, email, password, confirmPassword, phone, currentPassword, CheckCurrPass, country } = this.state
         let user = { fullName, email, password, confirmPassword, phone, currentPassword, CheckCurrPass }
 
         console.log(currentUser, "cccc", country)
         let inputs = [
             { state: "fullName", label: "Full Name", type: "text", placeholder: "Full Name", defaultValue: fullName },
-            { state: "phone", label: "Phone", type: "number", placeholder: "Mobile Number", defaultValue: phone },
+            // { state: "phone", label: "Phone", type: "number", placeholder: "Mobile Number", defaultValue: phone },
             { state: "email", label: "Email", type: "email", placeholder: "Email", defaultValue: email },
             { state: "currentPassword", label: "Current Password", type: "text", placeholder: "Current Password", },
             { state: "password", label: "New Password", type: "text", placeholder: "New Password", },
@@ -102,22 +101,34 @@ class Home extends Component {
                                 onChange={value => console.log(value, "value")}
                             />
                         </div> */}
-                        <Form style={{}}>
+                        <Form style={{ width: 390 }}>
 
                             <Form.Group as={Row} controlId="formHorizontalEmail">
-                                <Form.Label column sm={5}>
-                                    {"phone"}
+                                <Form.Label column sm={4} style={{ display: "flex", alignItems: "center", fontSize: 13, fontWeight: "bold" }}>
+                                    {"Mobile number"}
                                 </Form.Label>
-                                <Col sm={7}>
-                                    {currentUser &&
-                                       <PhoneInput
-
-                                       country={country.abbr}
-                                       placeholder="Enter phone number"
-                                       value={ this.state.value }
-                                       onChange={ value => this.setState({ value }) } />
-
+                                <Col sm={8}>
+                                    {
+                                        currentUser && this.state.abbr &&
+                                        <select
+                                            style={{ width: 248, padding: 7, borderRadius: 5, marginTop: 10 }}
+                                            value={country}
+                                            onChange={event => this.setState({ country: event.target.value })}>
+                                            <option value="">
+                                                {en[this.state.abbr.abbr]} +{getCountryCallingCode(this.state.abbr.abbr)}
+                                            </option>
+                                            {getCountries().map((country) => (
+                                                <option key={country} value={country}>
+                                                    {en[country]} +{getCountryCallingCode(country)}
+                                                </option>
+                                            ))}
+                                        </select>
                                     }
+                                    <Form.Control
+                                        defaultValue={phone}
+                                        type="number" placeholder="phone number"
+                                        style={{ marginTop: 15 }}
+                                        onChange={(e) => { this.setState({ phone: "+" + getCountryCallingCode(this.state.country) + e.target.value }) }} />
                                     {/* {country&&
                                     // console.log(getCountryCallingCode(country.abbr),"getCountryCallingCode(this.state.country.abbr)")&&
                                         <Form.Control  type="text"  
@@ -131,7 +142,7 @@ class Home extends Component {
                             </Form.Group>
                             {inputs.map((v, i) => {
                                 return (
-                                    <Input label={v.label} type={v.type} placeholder={v.placeholder} disable={i === 2 && true} defaultValue={v.defaultValue}
+                                    <Input label={v.label} type={v.type} placeholder={v.placeholder} disable={i === 1 && true} defaultValue={v.defaultValue}
                                         func={(text) => this.setState({ [v.state]: text })} />
                                 )
                             })}

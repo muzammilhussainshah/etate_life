@@ -9,10 +9,10 @@ class Input extends Component {
         const {label,type,placeholder,defaultValue,func,disable } = this.props
         return (
             <Form.Group as={Row} controlId="formHorizontalEmail">
-                <Form.Label column sm={5}>
+                <Form.Label column sm={4} style={{fontSize:13,fontWeight:"bold"}}>
                     {label}
                 </Form.Label>
-                <Col sm={7}>
+                <Col sm={8}>
                     <Form.Control disabled={disable}  type={type} placeholder={placeholder} defaultValue={defaultValue} onChange={(e) => { func(e.target.value)}} />
                 </Col>
             </Form.Group>

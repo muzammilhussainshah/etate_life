@@ -19,6 +19,8 @@ import {
   Link
 } from "react-router-dom";
 import Input from './common/input';
+import en from 'react-phone-number-input/locale/en.json'
+import PhoneInput, { getCountryCallingCode, getCountries } from 'react-phone-number-input'
 
 // const { Header, Footer, Sider, Content } = Layout;
 
@@ -33,7 +35,7 @@ class AddBookingAdmin extends Component {
       switch1: true,
       // options: [],
       myDoctorsInComponent: "", selectedDoctorList: [], selectedDoctor: "",
-      fullName: "", MobileNumber: "", email: "", password: "",
+      fullName: "", MobileNumber: "", email: "", password: "", country: ""
     };
   }
 
@@ -52,20 +54,35 @@ class AddBookingAdmin extends Component {
       myDoctorsClone[i].label = v.fullName
       myDoctorsClone[i].value = v.fullName
     })
-    this.setState({
-      myDoctorsInComponent: myDoctorsClone,myAdmininstrators
-    })
+    // this.setState({
+    //   myDoctorsInComponent: myDoctorsClone,myAdmininstrators
+    // })
+    if (nextProps.currentUser) {
+      this.setState({
+        myDoctorsInComponent: myDoctorsClone,myAdmininstrators,
+        abbr: nextProps.currentUser.country,
+        country: nextProps.currentUser.country.abbr,
+      })
+    }
   }
   componentDidMount() {
+    const { currentUser } = this.props
     let myDoctorsClone = this.props.myDoctors
     let myAdmininstrators = this.props.myAdmininstrators
     myDoctorsClone&&myDoctorsClone.map((v, i) => {
       myDoctorsClone[i].label = v.fullName
       myDoctorsClone[i].value = v.fullName
     })
-    this.setState({
-      myDoctorsInComponent: myDoctorsClone,myAdmininstrators
-    })
+    // this.setState({
+    //   myDoctorsInComponent: myDoctorsClone,myAdmininstrators
+    // })
+    if (currentUser) {
+      this.setState({
+        myDoctorsInComponent: myDoctorsClone,myAdmininstrators,
+        abbr: this.props.currentUser.country,
+        country: this.props.currentUser.country.abbr,
+      })
+    }
   }
   addDoctor() {
     let selectedDoctorListClone = this.state.selectedDoctorList
@@ -130,7 +147,7 @@ class AddBookingAdmin extends Component {
     }
   }
   render() {
-    const { isLoader, isError, errorMessage, myDoctors } = this.props
+    const { isLoader, isError, errorMessage, myDoctors,currentUser } = this.props
     const { myDoctorsInComponent, selectedDoctorList, selectedDoctor,myAdmininstrators } = this.state
     // console.log(myClinics,"myClinicsmyClinics")
     console.log(myDoctors, "render")
@@ -159,16 +176,44 @@ class AddBookingAdmin extends Component {
                 <Form style={{}}>
 
                   <Input label="Full name" type="text" placeholder="Full name" func={(v) => { this.setState({ fullName: v }) }} />
-                  <Input label="Mobile number" type="number" placeholder="Mobile number" func={(v) => { this.setState({ MobileNumber: v }) }} />
+                  
+                  <Form.Group as={Row} controlId="formHorizontalEmail">
+                  <Form.Label column sm={4} style={{ display: "flex", alignItems: "center", fontSize: 13, fontWeight: "bold" }}>
+                    {"Mobile number"}
+                  </Form.Label>
+                  <Col sm={8}>
+                    {
+                      currentUser && this.state.abbr &&
+                      <select
+                        style={{ width: 210, padding: 7, borderRadius: 5, marginTop: 10 }}
+                        value={this.state.country}
+                        onChange={event => this.setState({ country: event.target.value })}>
+                        <option value="">
+                          {en[this.state.abbr.abbr]} +{getCountryCallingCode(this.state.abbr.abbr)}
+                        </option>
+                        {getCountries().map((country) => (
+                          <option key={country} value={country}>
+                            {en[country]} +{getCountryCallingCode(country)}
+                          </option>
+                        ))}
+                      </select>
+                    }
+                    <Form.Control
+                      type="number" placeholder="Mobile number"
+                      style={{ marginTop: 15 }}
+                      onChange={(e) => { this.setState({ MobileNumber: "+" + getCountryCallingCode(this.state.country) + e.target.value }) }} />
+                  </Col>
+                </Form.Group>
+                  {/* <Input label="Mobile number" type="number" placeholder="Mobile number" func={(v) => { this.setState({ MobileNumber: v }) }} /> */}
                   <Input label="Email" type="text" placeholder="Email" func={(v) => { this.setState({ email: v }) }} />
                   <Input label="Password" type="password" placeholder="Password" func={(v) => { this.setState({ password: v }) }} />
                   <Form.Group as={Row} controlId="formHorizontalEmail">
-                    <Form.Label column sm={5}>
+                    <Form.Label column sm={4}>
                       <MDBIcon icon="plus" style={{ color: "#3D69B2" }}
                         onClick={() => this.addDoctor()}
                       />
                     </Form.Label>
-                    <Col sm={7}>
+                    <Col sm={8}>
                       <Select
                         placeholder="Add doctor"
                         value={selectedDoctor}
@@ -251,6 +296,7 @@ let mapStateToProps = state => {
     isError: state.root.isError,
     errorMessage: state.root.errorMessage,
     myAdmininstrators: state.root.myAdmininstrators,
+    currentUser: state.root.currentUser,
     myDoctors: state.root.myDoctors,
 
   };

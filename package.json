@@ -25,6 +25,7 @@
     "react-scripts": "3.2.0",
     "react-select": "^3.0.8",
     "react-stripe-elements": "^6.0.1",
+    "react-telephone-input": "^4.73.4",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "resolve-url-loader": "^3.1.1",
