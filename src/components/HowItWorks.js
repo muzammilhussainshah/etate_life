@@ -91,10 +91,19 @@ export default () => {
         </div>
         <div style={{width:200,}}>
           <div>
-            <img style={{ width: 170, }} src={require("../assets/reminders.png")} alt="aaaa" />
+            <img style={{ width: 170, }} src={require("../assets/step5.png")} alt="aaaa" />
           </div>
           <div style={{textAlign:"center"}}>
             Step 5
+            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage  book.
+                                </div>
+        </div>
+        <div style={{width:200,}}>
+          <div>
+            <img style={{ width: 170, }} src={require("../assets/step6.png")} alt="aaaa" />
+          </div>
+          <div style={{textAlign:"center"}}>
+            Step 6
             Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage  book.
                                 </div>
         </div>
